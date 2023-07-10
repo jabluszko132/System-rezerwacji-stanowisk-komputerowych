@@ -7,6 +7,7 @@ header {
 
 h1 {
   width: 50%;
+  user-select: none;
 }
 
 a {
@@ -16,8 +17,12 @@ a {
   padding: 5px;
   border-radius: 10px 5px 10px 5px;
   border: 2px solid #96cadb;
+  user-select: none;
 }
 
 a:focus {
   border: 2px solid #6b8f9b;
+}
+a:hover {
+  cursor: pointer;
 }
