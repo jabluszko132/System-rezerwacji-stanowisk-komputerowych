@@ -4,6 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BasicComponentsModule } from './basic-components/basic-components.module';
 import { PagesModule } from './pages/pages.module';
+import 'zone.js';
+import { PreloadAllModules } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,7 +15,7 @@ import { PagesModule } from './pages/pages.module';
     BasicComponentsModule,
     PagesModule,
   ],
-  providers: [],
+  providers: [PreloadAllModules],
   bootstrap: [AppComponent],
   exports: [AppRoutingModule],
 })

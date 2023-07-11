@@ -7,7 +7,7 @@ import { ReservationPageComponent } from './pages/reservation-page/reservation-p
 const routes: Routes = [
   { path: 'home', component: MainPageComponent },
   { path: 'reservation', component: ReservationPageComponent },
-  { path: '', redirectTo: 'home' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: Error404Component },
 ];
 

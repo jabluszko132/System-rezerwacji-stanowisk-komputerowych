@@ -18,11 +18,12 @@ a {
   border-radius: 10px 5px 10px 5px;
   border: 2px solid #96cadb;
   user-select: none;
+  margin: 5px;
 }
 
 a:focus {
   border: 2px solid #6b8f9b;
 }
-a:hover {
+/* a:hover {
   cursor: pointer;
-}
+} */
