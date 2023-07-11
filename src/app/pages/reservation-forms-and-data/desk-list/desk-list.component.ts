@@ -7,7 +7,7 @@ const deskList = new Observable(function subsribe(subscriber) {
     setTimeout(() => {
       value = localStorage.getItem('deskList');
       subscriber.next(value == null ? null : JSON.parse(value));
-    },1000);
+    }, 1000);
   }
 });
 
@@ -34,8 +34,6 @@ export class DeskListComponent implements OnInit {
     if (localStorage['deskList'] == null)
       localStorage.setItem('deskList', JSON.stringify(this.deskList));
     else this.deskList = JSON.parse(localStorage['deskList']);
-    while (true) {
-      console.log(this.x);
-    }
+    console.log(this.x);
   }
 }
