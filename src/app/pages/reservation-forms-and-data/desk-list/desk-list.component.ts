@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const deskList = new Observable(function subsribe(subscriber) {
+const DdeskList = new Observable(function subsribe(subscriber) {
   let value: any = null;
-  while (true) {
-    setTimeout(() => {
-      value = localStorage.getItem('deskList');
-      subscriber.next(value == null ? null : JSON.parse(value));
-    }, 1000);
-  }
+  console.log('trying');
+  setTimeout(() => {
+    value = localStorage.getItem('deskList');
+    subscriber.next(JSON.parse(value));
+  }, 1000);
 });
 
 @Component({
@@ -18,7 +17,7 @@ const deskList = new Observable(function subsribe(subscriber) {
 })
 export class DeskListComponent implements OnInit {
   constructor() {}
-  x: any = deskList.subscribe();
+
   deskList: any = [
     {
       deskID: 1,
@@ -34,6 +33,18 @@ export class DeskListComponent implements OnInit {
     if (localStorage['deskList'] == null)
       localStorage.setItem('deskList', JSON.stringify(this.deskList));
     else this.deskList = JSON.parse(localStorage['deskList']);
-    console.log(this.x);
+  }
+  logx() {
+    DdeskList.subscribe({
+      next(x) {
+        console.log(x);
+      },
+      error(err) {
+        console.error('something wrong occurred: ' + err);
+      },
+      complete() {
+        console.log('done');
+      },
+    });
   }
 }
