@@ -1,0 +1,41 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #54bfe3;
+  min-height: 7em;
+}
+
+header > h1 {
+  width: 53%;
+  user-select: none;
+  text-align: center;
+}
+
+nav > a {
+  text-decoration: none;
+  color: black;
+  background: #add8e6;
+  padding: 5px;
+  border-radius: 10px 5px 10px 5px;
+  border: 2px solid #96cadb;
+  user-select: none;
+  margin: 5px;
+}
+nav > a:hover {
+  border: 2px solid #6b8f9b;
+}
+nav > a:focus {
+  background: #9cc7d5;
+}
+
+/* nav > a:hover {
+  cursor: pointer;
+} */
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  width: 45%;
+  margin: 1%;
+}

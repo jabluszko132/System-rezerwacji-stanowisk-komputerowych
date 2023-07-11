@@ -5,9 +5,13 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ReservationPageComponent } from './pages/reservation-page/reservation-page.component';
 
 const routes: Routes = [
+  //----------------pages--------------------
   { path: 'home', component: MainPageComponent },
-  { path: 'reservation', component: ReservationPageComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  { path: 'reservation', component: ReservationPageComponent },
+
+  //--------------error pages-------------------
   { path: '**', component: Error404Component },
 ];
 
