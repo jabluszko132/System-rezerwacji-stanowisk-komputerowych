@@ -4,9 +4,10 @@ import { DeskReservationFormComponent } from './desk-reservation-form/desk-reser
 import { LoginFormComponent } from './login-form/login-form.component';
 import { DeskAdditionFormComponent } from './desk-addition-form/desk-addition-form.component';
 import { DeskListComponent } from './desk-list/desk-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   declarations: [
     DeskReservationFormComponent,
     LoginFormComponent,

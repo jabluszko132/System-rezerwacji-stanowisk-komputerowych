@@ -3,10 +3,8 @@
     <td>Numer stanowiska</td>
     <td>Zarezerwowane przez</td>
   </tr>
-  <ng-template *ngFor="let item of deskList">
-    <tr>
-      <td>{{ item.deskID }}</td>
-      <td>{{ item.reservedBy }}</td>
-    </tr>
-  </ng-template>
+  <tr *ngFor="let item of deskList">
+    <td>{{ item.deskID }}</td>
+    <td>{{ item.reservedBy }}</td>
+  </tr>
 </table>

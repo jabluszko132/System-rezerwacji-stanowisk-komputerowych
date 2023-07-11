@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import 'zone.js';
 import { PreloadAllModules } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,8 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     PagesModule,
-    FormsModule,
-    ReactiveFormsModule,
   ],
   //^adding new modules to these imports (except for the ones already in depenencies) breakes routing -
   //router-outlet doesnt even load the home page
