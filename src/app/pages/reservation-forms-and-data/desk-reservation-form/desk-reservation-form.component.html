@@ -1,12 +1,16 @@
 <form>
   <label
     >Numer stanowiska:
-    <input type="number" [(ngModel)]="this.reserveObj.deskID" />
+    <input name="deskID" type="number" [(ngModel)]="this.reserveObj.deskID" />
   </label>
   <br />
   <label>
     Kto rezerwuje:
-    <input type="text" [(ngModel)]="this.reserveObj.reservedBy" />
+    <input
+      name="reservedBy"
+      type="text"
+      [(ngModel)]="this.reserveObj.reservedBy"
+    />
   </label>
   <button (click)="reserveDesk()">Rezerwuj</button>
 </form>
