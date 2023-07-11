@@ -7,15 +7,5 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeskReservationFormComponent implements OnInit {
   constructor() {}
-  deskList: any = [
-    {
-      deskID: 1,
-      reservedBy: '',
-    },
-    {
-      deskID: 2,
-      reservedBy: 'Adam Kowalski',
-    },
-  ];
   ngOnInit() {}
 }
