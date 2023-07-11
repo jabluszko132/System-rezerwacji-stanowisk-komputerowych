@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservationDataHandlerService } from '../reservation-data-handler.service';
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -7,7 +6,16 @@ import { ReservationDataHandlerService } from '../reservation-data-handler.servi
   styleUrls: ['./desk-reservation-form.component.css'],
 })
 export class DeskReservationFormComponent implements OnInit {
-  constructor(private service: ReservationDataHandlerService) {}
-
+  constructor() {}
+  deskList: any = [
+    {
+      deskID: 1,
+      reservedBy: '',
+    },
+    {
+      deskID: 2,
+      reservedBy: 'Adam Kowalski',
+    },
+  ];
   ngOnInit() {}
 }
