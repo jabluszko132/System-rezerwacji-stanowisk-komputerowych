@@ -5,6 +5,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { DeskAdditionFormComponent } from './desk-addition-form/desk-addition-form.component';
 import { DeskListComponent } from './desk-list/desk-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LocalstorageDeskListService } from './localstorage-desk-list.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
