@@ -44,17 +44,4 @@ export class DeskListComponent implements OnInit {
       this.service.setDeskList(this.deskList);
     this.updateDeskList.subscribe(() => {});
   }
-  logx() {
-    this.service.deskListObs.subscribe({
-      next(x) {
-        console.log(x);
-      },
-      error(err) {
-        console.error('something wrong occurred: ' + err);
-      },
-      complete() {
-        console.log('done');
-      },
-    });
-  }
 }
