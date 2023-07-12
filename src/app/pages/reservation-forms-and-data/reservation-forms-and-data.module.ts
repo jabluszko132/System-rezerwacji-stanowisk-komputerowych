@@ -21,5 +21,6 @@ import { LocalstorageDeskListService } from './localstorage-desk-list.service';
     DeskAdditionFormComponent,
     DeskListComponent,
   ],
+  providers: [LocalstorageDeskListService],
 })
 export class ReservationFormsAndDataModule {}
