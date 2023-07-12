@@ -32,6 +32,9 @@ h6 {
   font-family: 'Geologica', sans-serif;
   font-weight: 500;
 }
+button {
+  user-select: none;
+}
 
 app-root {
   width: 100%;
