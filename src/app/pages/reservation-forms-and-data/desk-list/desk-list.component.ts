@@ -36,7 +36,7 @@ export class DeskListComponent implements OnInit {
       value = localStorage.getItem('deskList');
       if (value != null) this.deskList = JSON.parse(value);
       else this.deskList = null;
-    }, 100);
+    }, 300);
   });
 
   ngOnInit() {

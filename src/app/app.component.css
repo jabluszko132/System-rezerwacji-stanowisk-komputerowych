@@ -6,7 +6,7 @@ header {
   min-height: 7em;
 }
 
-header > h1 {
+header > p {
   width: 53%;
   user-select: none;
   text-align: center;
