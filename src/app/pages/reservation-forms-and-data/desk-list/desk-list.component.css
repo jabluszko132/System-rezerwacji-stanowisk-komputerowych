@@ -1,19 +1,16 @@
-tr,
-td {
-  border: 1px solid;
-  border-collapse: collapse;
-  background-color: #4eb0d1;
-}
-
-table {
+/* table {
   border: 5px solid;
-  border-radius: 5px 5px;
+  border-radius: 15px 15px;
+} */
+tr {
+  outline: 1px solid;
+  border-collapse: collapse;
 }
 
-td:hover {
+/* td:hover {
   transform: scaleX(1.01);
   z-index: 1;
-}
+} */
 
 :host {
   display: flex;
