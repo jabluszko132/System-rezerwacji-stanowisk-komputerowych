@@ -1,1 +1,7 @@
-<p>desk-addition-form-component</p>
+<form>
+  <label
+    >Numer nowego stanowiska:
+    <input name="deskID" type="number" [(ngModel)]="newDeskId" />
+  </label>
+  <button (click)=addDesk()>Dodaj</button>
+</form>

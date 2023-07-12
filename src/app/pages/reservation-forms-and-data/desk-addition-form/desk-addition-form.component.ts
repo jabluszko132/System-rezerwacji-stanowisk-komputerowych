@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
 @Component({
   selector: 'app-desk-addition-form',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./desk-addition-form.component.css'],
 })
 export class DeskAdditionFormComponent implements OnInit {
-  constructor() {}
+  constructor(private service: LocalstorageDeskListService) {}
+
+  newDeskId: number = 0;
+
   ngOnInit() {}
+
+  addDesk() {
+    this.service.addDesk(this.newDeskId);
+  }
 }

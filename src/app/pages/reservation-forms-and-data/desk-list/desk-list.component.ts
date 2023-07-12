@@ -1,5 +1,6 @@
 import { Component, NgIterable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DeskObj } from '../desk-obj';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class DeskListComponent implements OnInit {
   //   }, 1000);
   // });
 
-  deskList: any = [
+  deskList: DeskObj[] = [
     {
       deskID: 1,
       reservedBy: '',
@@ -35,7 +36,7 @@ export class DeskListComponent implements OnInit {
     const getDeskList = setInterval(() => {
       value = localStorage.getItem('deskList');
       if (value != null) this.deskList = JSON.parse(value);
-      else this.deskList = null;
+      else this.deskList = [];
     }, 300);
   });
 

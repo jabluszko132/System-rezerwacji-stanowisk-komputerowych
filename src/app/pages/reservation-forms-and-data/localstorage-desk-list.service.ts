@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DeskObj } from './desk-obj';
 
 @Injectable()
 export class LocalstorageDeskListService {
@@ -14,7 +15,32 @@ export class LocalstorageDeskListService {
     }, 1000);
   });
 
-  setDeskList(newValue: object) {
+  setDeskList(newValue: DeskObj[]) {
     localStorage.setItem('deskList', JSON.stringify(newValue));
+  }
+
+  addDesk(newDeskId: number) {
+    let deskList = localStorage.getItem('deskList');
+    let newDeskList: DeskObj[];
+    if (deskList != null) {
+      newDeskList = JSON.parse(deskList);
+      if (newDeskList.find((m: any) => m.deskID == newDeskId)) {
+        alert('stanowisko już istnieje');
+        return;
+      } else {
+        newDeskList.push({
+          deskID: newDeskId,
+          reservedBy: '',
+        });
+      }
+    } else {
+      newDeskList = [
+        {
+          deskID: newDeskId,
+          reservedBy: '',
+        },
+      ];
+    }
+    this.setDeskList(newDeskList);
   }
 }

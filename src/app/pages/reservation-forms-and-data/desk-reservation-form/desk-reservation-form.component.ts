@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeskObj } from '../desk-obj';
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -17,7 +18,7 @@ import { Component, OnInit } from '@angular/core';
 //
 export class DeskReservationFormComponent implements OnInit {
   constructor() {}
-  reserveObj: any = {
+  reserveObj: DeskObj = {
     deskID: 1,
     reservedBy: '',
   };
