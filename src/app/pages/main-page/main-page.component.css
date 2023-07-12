@@ -1,4 +1,16 @@
-article {
-  background: #fff;
-  min-height: 35em;
+h1 {
+  text-align: center;
+  font-size: 3em;
+  width: 100%;
+}
+div {
+  max-width: 600px;
+  text-indent: 1em;
+  padding: 1.5em;
+  line-height: 1.7em;
+}
+:host {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }

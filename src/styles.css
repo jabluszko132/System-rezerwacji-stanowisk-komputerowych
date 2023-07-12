@@ -1,6 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@300&display=swap'); /*Geologica*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); /*Roboto*/
+/*
+    Geologica for text with higher font weight/bigger text
+    Roboto for the rest
+
+    ICE: sans serif (ouch)
+*/
+* {
+  font-family: 'Roboto', 'sans-serif';
+}
 body {
   margin: 0;
   padding: 0;
   background: rgb(35, 40, 45);
   color: white;
+  display: flex;
+  justify-content: center;
+}
+
+header > p {
+  font-size: 30px;
+}
+
+.bigTxtFont,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Geologica', sans-serif;
+  font-weight: 500;
+}
+
+app-root {
+  width: 100%;
 }

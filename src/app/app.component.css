@@ -2,8 +2,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: #54bfe3;
-  min-height: 7em;
+  background-color: #4eb0d1;
+  min-height: 5em;
 }
 
 header > p {
@@ -14,8 +14,8 @@ header > p {
 
 nav > a {
   text-decoration: none;
-  color: black;
-  background: #add8e6;
+  color: inherit;
+  background: #9cc7d5;
   padding: 5px;
   border-radius: 10px 5px 10px 5px;
   border: 2px solid #96cadb;
@@ -26,9 +26,13 @@ nav > a:hover {
   border: 2px solid #6b8f9b;
 }
 nav > a:focus {
-  background: #9cc7d5;
+  background: #617c85;
+  border: 2px solid #6b8f9b;
 }
 
+nav > a:focus-visible {
+  outline: none;
+}
 /* nav > a:hover {
   cursor: pointer;
 } */
