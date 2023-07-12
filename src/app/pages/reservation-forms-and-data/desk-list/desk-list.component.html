@@ -3,9 +3,9 @@
     <td>Numer stanowiska</td>
     <td>Zarezerwowane przez</td>
   </tr>
-  <tr *ngFor="let item of deskList">
-    <td>{{ item.deskID }}</td>
-    <td>{{ item.reservedBy }}</td>
+  <tr *ngFor="let desk of deskList">
+    <td>{{ desk.deskID }}</td>
+    <td>{{ desk.reservedBy }}</td>
   </tr>
 </table>
 <button (click)="logx()">x</button>
