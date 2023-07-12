@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 export class LocalstorageDeskListService {
   constructor() {}
 
-  deskListObs: Observable<string | null> = new Observable((subscriber) => {
+  deskListObs: Observable<string> = new Observable((subscriber) => {
     let value: any = null;
     const getDeskList = setInterval(() => {
       value = localStorage.getItem('deskList');
-      if (value != null) subscriber.next(JSON.parse(value));
-      else subscriber.next(null);
+      if (value != null) subscriber.next(value);
+      else subscriber.next('');
     }, 1000);
   });
 

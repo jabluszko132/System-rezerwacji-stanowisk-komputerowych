@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgIterable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
@@ -8,7 +8,16 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
   styleUrls: ['./desk-list.component.css'],
 })
 export class DeskListComponent implements OnInit {
-  constructor(private deskListAccess: LocalstorageDeskListService) {}
+  constructor(private service: LocalstorageDeskListService) {}
+
+  // deskList: Observable<Array<string>> = new Observable((subscriber) => {
+  //   let value: any = null;
+  //   const getDeskList = setInterval(() => {
+  //     value = localStorage.getItem('deskList');
+  //     if (value != null) subscriber.next(JSON.parse(value));
+  //     else subscriber.next(['']);
+  //   }, 1000);
+  // });
 
   deskList: any = [
     {
@@ -21,13 +30,22 @@ export class DeskListComponent implements OnInit {
     },
   ];
 
+  updateDeskList: Observable<any> = new Observable((subscriber) => {
+    let value: any = null;
+    const getDeskList = setInterval(() => {
+      value = localStorage.getItem('deskList');
+      if (value != null) this.deskList = JSON.parse(value);
+      else this.deskList = null;
+    }, 100);
+  });
+
   ngOnInit() {
     if (localStorage['deskList'] == null)
-      this.deskListAccess.setDeskList(this.deskList);
-    else this.deskList = JSON.parse(localStorage['deskList']);
+      this.service.setDeskList(this.deskList);
+    this.updateDeskList.subscribe(() => {});
   }
   logx() {
-    this.deskListAccess.deskListObs.subscribe({
+    this.service.deskListObs.subscribe({
       next(x) {
         console.log(x);
       },
