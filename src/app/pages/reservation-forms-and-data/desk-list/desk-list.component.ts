@@ -18,6 +18,15 @@ const DdeskList = new Observable(function subsribe(subscriber) {
 export class DeskListComponent implements OnInit {
   constructor() {}
 
+  deskListObs: Observable<string | null> = new Observable((subscriber) => {
+    let value: any = null;
+    const getDeskList = setInterval(() => {
+      value = localStorage.getItem('deskList');
+      if (value != null) this.deskList = JSON.parse(value);
+      else this.deskList = null;
+    }, 1000);
+  });
+
   deskList: any = [
     {
       deskID: 1,
@@ -33,6 +42,7 @@ export class DeskListComponent implements OnInit {
     if (localStorage['deskList'] == null)
       localStorage.setItem('deskList', JSON.stringify(this.deskList));
     else this.deskList = JSON.parse(localStorage['deskList']);
+    this.deskListObs.subscribe({});
   }
   logx() {
     DdeskList.subscribe({
