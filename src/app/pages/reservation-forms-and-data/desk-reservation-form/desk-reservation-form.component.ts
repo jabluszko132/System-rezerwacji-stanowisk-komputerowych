@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeskObj } from '../desk-obj';
+import { ReservationObj } from '../reservation-obj';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
 @Component({
@@ -20,7 +20,7 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 export class DeskReservationFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
   date = new Date();
-  reserveObj: DeskObj = {
+  reserveObj: ReservationObj = {
     deskID: 1,
     reservedBy: '',
     reservationDate: '',

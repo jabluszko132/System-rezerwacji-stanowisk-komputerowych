@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DeskObj } from './desk-obj';
+import { ReservationObj } from './reservation-obj';
 
 @Injectable()
 export class LocalstorageDeskListService {
@@ -15,21 +15,21 @@ export class LocalstorageDeskListService {
   //   }, 1000);
   // });
   value: any;
-  getDeskList(): Observable<DeskObj[]> {
+  getReservationList(): Observable<ReservationObj[]> {
     return new Observable((subscriber) => {
-      this.value = localStorage.getItem('deskList');
+      this.value = localStorage.getItem('reservationList');
       if (this.value != null) subscriber.next(JSON.parse(this.value));
       else subscriber.next([]);
     });
   }
 
-  setDeskList(newValue: DeskObj[]): void {
-    localStorage.setItem('deskList', JSON.stringify(newValue));
+  setReservationList(newValue: ReservationObj[]): void {
+    localStorage.setItem('reservationList', JSON.stringify(newValue));
   }
 
   addDesk(newDeskId: number): void {
-    let deskList = localStorage.getItem('deskList');
-    let newDeskList: DeskObj[];
+    let deskList: string | null = localStorage.getItem('deskList');
+    let newDeskList: any;
     if (deskList != null) {
       newDeskList = JSON.parse(deskList);
       if (newDeskList.find((m: any) => m.deskID == newDeskId)) {
@@ -38,23 +38,26 @@ export class LocalstorageDeskListService {
       } else {
         newDeskList.push({
           deskID: newDeskId,
-          reservedBy: '',
-          reservationDate: '',
         });
       }
-    } else {
-      newDeskList = [
-        {
-          deskID: newDeskId,
-          reservedBy: '',
-          reservationDate: '',
-        },
-      ];
     }
-    this.setDeskList(newDeskList);
+    //       reservedBy: '',
+    //       reservationDate: '',
+    //     });
+    //   }
+    // } else {
+    //   newDeskList = [
+    //     {
+    //       deskID: newDeskId,
+    //       reservedBy: '',
+    //       reservationDate: '',
+    //     },
+    //   ];
+    // }
+    this.setReservationList(newDeskList);
   }
 
-  reserveDesk(reserveObj: DeskObj): void {
+  reserveDesk(reserveObj: ReservationObj): void {
     let currentDate =
       this.date.getFullYear().toString() +
       this.date.getMonth.toString() +
