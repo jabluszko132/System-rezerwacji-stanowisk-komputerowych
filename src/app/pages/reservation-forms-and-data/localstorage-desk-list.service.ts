@@ -134,7 +134,6 @@ export class LocalstorageDeskListService {
     }
 
     //todo
-    //reactive forms
-    //onDestroy -> unsubscribe/.complete() in every script that uses obesrvables
+    //onDestroy -> unsubscribe/.complete() in every script that uses obeservables
   }
 }
