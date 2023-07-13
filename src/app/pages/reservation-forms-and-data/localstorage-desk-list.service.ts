@@ -93,7 +93,7 @@ export class LocalstorageDeskListService {
       deskList = JSON.parse(deskList);
       if (!deskList.find((m: any) => m.deskID == reserveObj.deskID)) {
         alert('Nie ma takiego stanowiska');
-        return;
+        return of(false);
       }
       if (this.reservationList != null) {
         this.reservationList = JSON.parse(this.reservationList);
@@ -112,6 +112,7 @@ export class LocalstorageDeskListService {
             JSON.stringify(this.reservationList)
           );
           reservationList$.next(this.reservationList);
+          return of(true);
         } else if (
           !this.reservationList.find(
             (m: any) =>
@@ -120,20 +121,21 @@ export class LocalstorageDeskListService {
           )
         ) {
           this.addReservationOnNewDate(reserveObj);
+          return of(true);
         } else {
           alert('nie można zarezerwować tego stanowiska');
         }
       } else {
         this.reservationList = [];
         this.addReservationOnNewDate(reserveObj);
-        return;
+        return of(true);
       }
     } else {
       alert(
         'Lista stanowisk jest pusta. Dodaj stanowisko aby móc je zarezerwować'
       );
     }
-
+    return of(false);
     //todo
     //onDestroy -> unsubscribe/.complete() in every script that uses obeservables
   }
