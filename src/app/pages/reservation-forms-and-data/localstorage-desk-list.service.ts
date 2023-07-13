@@ -80,6 +80,15 @@ export class LocalstorageDeskListService {
     localStorage.setItem('deskList', JSON.stringify(newDeskList));
   }
 
+  reservationList: any;
+  addReservationOnNewDate(reserveObj: ReservationObj): void {
+    this.reservationList.push(reserveObj);
+    localStorage.setItem(
+      'reservationList',
+      JSON.stringify(this.reservationList)
+    );
+  }
+
   reserveDesk(reserveObj: ReservationObj): void {
     console.log(this.currentDateString());
     if (reserveObj.reservationDate < this.currentDateString()) {
@@ -87,56 +96,59 @@ export class LocalstorageDeskListService {
       return;
     }
     let deskList: any = localStorage.getItem('deskList');
-    let reservationList: any = localStorage.getItem('reservationList');
+    this.reservationList = localStorage.getItem('reservationList');
     if (deskList != null) {
       deskList = JSON.parse(deskList);
       if (!deskList.find((m: any) => m.deskID == reserveObj.deskID)) {
         alert('Nie ma takiego stanowiska');
         return;
       }
-      if (reservationList != null) JSON.parse(reservationList);
-      else reservationList = [];
-      reservationList as Object[];
-      console.log(typeof reservationList);
-      console.log(reservationList);
-      if (
-        reservationList.find(
-          (m: any) =>
-            m.deskID == reserveObj.deskID &&
-            m.reservedBy == '' &&
-            m.reservationDate == reserveObj.reservationDate
-        ) //||
-        // !deskList.find(
-        //   (m: any) =>
-        //     m.deskID == reserveObj.deskID &&
-        //     m.reservationDate == reserveObj.reservationDate
-        // )
-      ) {
-        reservationList[reserveObj.deskID - 1].reservedBy =
-          reserveObj.reservedBy;
-        localStorage.setItem(
-          'reservationList',
-          JSON.stringify(reservationList)
-        );
-      } else if (
-        !reservationList.find(
-          (m: any) =>
-            m.deskID == reserveObj.deskID &&
-            m.reservationDate == reserveObj.reservationDate
-        )
-      ) {
-        reservationList.push(reserveObj);
-        localStorage.setItem(
-          'reservationList',
-          JSON.stringify(reservationList)
-        );
+      if (this.reservationList != null) {
+        this.reservationList = JSON.parse(this.reservationList);
+        if (
+          this.reservationList.find(
+            (m: any) =>
+              m.deskID == reserveObj.deskID &&
+              m.reservedBy == '' &&
+              m.reservationDate == reserveObj.reservationDate
+          ) //||
+          // !deskList.find(
+          //   (m: any) =>
+          //     m.deskID == reserveObj.deskID &&
+          //     m.reservationDate == reserveObj.reservationDate
+          // )
+        ) {
+          this.reservationList[reserveObj.deskID - 1].reservedBy =
+            reserveObj.reservedBy;
+          localStorage.setItem(
+            'reservationList',
+            JSON.stringify(this.reservationList)
+          );
+        } else if (
+          !this.reservationList.find(
+            (m: any) =>
+              m.deskID == reserveObj.deskID &&
+              m.reservationDate == reserveObj.reservationDate
+          )
+        ) {
+          this.addReservationOnNewDate(reserveObj);
+          // reservationList.push(reserveObj);
+          // localStorage.setItem(
+          //   'reservationList',
+          //   JSON.stringify(reservationList)
+          // );
+        } else {
+          alert('nie można zarezerwować tego stanowiska');
+        }
       } else {
-        alert('nie można zarezerwować tego stanowiska');
+        alert(
+          'Lista stanowisk jest pusta. Dodaj stanowisko aby móc je zarezerwować'
+        );
       }
     } else {
-      alert(
-        'Lista stanowisk jest pusta. Dodaj stanowisko aby móc je zarezerwować'
-      );
+      this.reservationList = [];
+      this.addReservationOnNewDate(reserveObj);
+      return;
     }
 
     //todo
