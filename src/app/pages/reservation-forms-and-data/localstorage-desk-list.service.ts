@@ -122,18 +122,20 @@ export class LocalstorageDeskListService {
         } else {
           alert('nie można zarezerwować tego stanowiska');
         }
-      } else {
-        alert(
-          'Lista stanowisk jest pusta. Dodaj stanowisko aby móc je zarezerwować'
-        );
-      }
-    } else {
-      this.reservationList = [];
-      this.addReservationOnNewDate(reserveObj);
-      return;
-    }
+      }else {
+        this.reservationList = [];
+        this.addReservationOnNewDate(reserveObj);
+        return;
+      } 
+    }else {
+      alert(
+        'Lista stanowisk jest pusta. Dodaj stanowisko aby móc je zarezerwować'
+      );
+    } 
+    
 
     //todo
-    //reaktywne formsy
+    //reactive forms
+    //onDestroy -> unsubscribe/.complete() in every script that uses obesrvables
   }
 }

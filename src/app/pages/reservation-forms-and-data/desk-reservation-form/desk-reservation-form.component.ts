@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationObj } from '../reservation-obj';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -9,13 +10,16 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 })
 export class DeskReservationFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
-  reserveObj: ReservationObj = {
-    deskID: 1,
-    reservedBy: '',
-    reservationDate: '',
-  };
+  deskID: FormControl = new FormControl();
+  reservedBy: FormControl = new FormControl();
+  reservationDate: FormControl = new FormControl();
+
   ngOnInit() {}
   reserveDesk(): void {
-    this.service.reserveDesk(this.reserveObj);
+    this.service.reserveDesk({
+      deskID: this.deskID.value,
+      reservedBy: this.reservedBy.value,
+      reservationDate: this.reservationDate.value,
+    });
   }
 }
