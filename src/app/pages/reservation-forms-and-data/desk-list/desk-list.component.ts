@@ -20,7 +20,7 @@ export class DeskListComponent implements OnInit, OnDestroy {
   //   }, 1000);
   // });
 
-  deskList: DeskObj[] = [];
+  // deskList: DeskObj[] = [];
   //   {
   //     deskID: 1,
   //     reservedBy: '',
@@ -32,22 +32,23 @@ export class DeskListComponent implements OnInit, OnDestroy {
   // ];
   tstobs$: Observable<number[]> = of([1, 2, 3, 4]);
   destr$: Subject<void> = new Subject<void>();
-  updateDeskList: Observable<any> = new Observable((subscriber) => {
-    let value: any = null;
-    const getDeskList = setInterval(() => {
-      value = localStorage.getItem('deskList');
-      if (value != null) this.deskList = JSON.parse(value);
-      else this.deskList = [];
-    }, 300);
-  });
+  deskList: Observable<any> = this.service.getDeskList();
+  // new Observable((subscriber) => {
+  //   let value: any = null;
+  //   const getDeskList = setInterval(() => {
+  //     value = localStorage.getItem('deskList');
+  //     if (value != null) this.deskList = JSON.parse(value);
+  //     else this.deskList = [];
+  //   }, 300);
+  // });
   ngOnDestroy() {
     this.destr$.next();
     this.destr$.complete();
   }
   ngOnInit() {
     this.tstobs$.pipe(takeUntil(this.destr$)).subscribe((i) => {});
-    if (localStorage['deskList'] == null)
-      this.service.setDeskList(this.deskList);
-    this.updateDeskList.subscribe(() => {});
+    // if (localStorage['deskList'] == null)
+    //   this.service.setDeskList(this.deskList);
+    // this.updateDeskList.subscribe(() => {});
   }
 }
