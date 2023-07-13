@@ -6,6 +6,7 @@ import { DeskAdditionFormComponent } from './desk-addition-form/desk-addition-fo
 import { DeskListComponent } from './desk-list/desk-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocalstorageDeskListService } from './localstorage-desk-list.service';
+import { ReservationListComponent } from './reservation-list/reservation-list.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
@@ -14,12 +15,14 @@ import { LocalstorageDeskListService } from './localstorage-desk-list.service';
     LoginFormComponent,
     DeskAdditionFormComponent,
     DeskListComponent,
+    ReservationListComponent,
   ],
   exports: [
     DeskReservationFormComponent,
     LoginFormComponent,
     DeskAdditionFormComponent,
     DeskListComponent,
+    ReservationListComponent,
   ],
   providers: [LocalstorageDeskListService],
 })

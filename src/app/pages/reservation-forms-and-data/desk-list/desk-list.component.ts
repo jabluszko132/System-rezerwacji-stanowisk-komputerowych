@@ -1,4 +1,4 @@
-import { Component, NgIterable, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, Subject, takeUntil } from 'rxjs';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
@@ -31,7 +31,7 @@ export class DeskListComponent implements OnInit, OnDestroy {
   // ];
   tstobs$: Observable<number[]> = of([1, 2, 3, 4]);
   destr$: Subject<void> = new Subject<void>();
-  reservationList: Observable<any> = this.service.getReservationList();
+  deskList: Observable<any> = this.service.getDeskList();
   // new Observable((subscriber) => {
   //   let value: any = null;
   //   const getDeskList = setInterval(() => {
@@ -45,7 +45,7 @@ export class DeskListComponent implements OnInit, OnDestroy {
     this.destr$.complete();
   }
   ngOnInit() {
-    this.reservationList.subscribe(() => {});
+    this.deskList.subscribe(() => {});
     this.tstobs$.pipe(takeUntil(this.destr$)).subscribe((i) => {});
     // if (localStorage['deskList'] == null)
     //   this.service.setDeskList(this.deskList);

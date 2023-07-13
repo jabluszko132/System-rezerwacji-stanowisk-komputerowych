@@ -7,10 +7,6 @@ tr {
   border-collapse: collapse;
 }
 
-td {
-  text-align: center;
-}
-
 /* td:hover {
   transform: scaleX(1.01);
   z-index: 1;

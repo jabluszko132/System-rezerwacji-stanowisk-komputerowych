@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <td>Numer stanowiska</td>
+    <td>Zarezerwowane przez</td>
+    <td>Rezerwacja na dzień:</td>
+  </tr>
+  <tr *ngFor="let desk of reservationList | async">
+    <td>{{ desk.deskID }}</td>
+    <td>{{ desk.reservedBy }}</td>
+    <td>{{ desk.reservationDate }}</td>
+  </tr>
+</table>
