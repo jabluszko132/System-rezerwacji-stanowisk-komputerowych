@@ -5,23 +5,26 @@
 tr {
   outline: 1px solid;
   border-collapse: collapse;
+  overflow: hidden;
 }
 table > tr:first-of-type {
   border-radius: 10px 10px 0 0;
 }
 
 table > tr:last-of-type {
-  border-radius: 10px 10px 0 0;
+  border-radius: 0 0 10px 10px;
 }
 td {
   text-align: center;
   padding: 0.4em;
 }
 
-/* td:hover {
-  transform: scaleX(1.01);
+td:hover {
+  transform: scale(1.06);
+  background-color: #4eb0d1;
+  outline: 1px solid;
   z-index: 1;
-} */
+}
 
 :host {
   display: flex;
