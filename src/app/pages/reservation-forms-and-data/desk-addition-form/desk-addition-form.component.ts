@@ -10,7 +10,6 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 export class DeskAdditionFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
 
-  newDeskId: number = 0;
   newDeskID: FormControl = new FormControl();
   ngOnInit() {}
 
