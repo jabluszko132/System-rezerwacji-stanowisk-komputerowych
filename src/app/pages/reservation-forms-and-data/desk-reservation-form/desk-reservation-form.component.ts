@@ -9,15 +9,12 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 })
 export class DeskReservationFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
-  date = new Date();
   reserveObj: ReservationObj = {
     deskID: 1,
     reservedBy: '',
     reservationDate: '',
   };
-  ngOnInit() {
-    console.log(this.date.getDate());
-  }
+  ngOnInit() {}
   reserveDesk(): void {
     this.service.reserveDesk(this.reserveObj);
   }
