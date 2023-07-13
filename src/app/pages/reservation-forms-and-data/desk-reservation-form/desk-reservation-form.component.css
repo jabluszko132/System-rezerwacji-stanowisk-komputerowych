@@ -1,0 +1,75 @@
+/* table {
+  border: 5px solid;
+  border-radius: 15px 15px;
+} 
+ tr {
+  outline: 1px solid;
+  border-collapse: collapse;
+}
+
+ td:hover {
+  transform: scaleX(1.01);
+  z-index: 1;
+} 
+
+:host {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+} */
+tr {
+  outline: 1px solid;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+table > tr:first-of-type {
+  border-radius: 10px 10px 0 0;
+}
+
+table > tr:last-of-type {
+  border-radius: 0 0 10px 10px;
+}
+td {
+  text-align: center;
+  padding: 0.4em;
+}
+tr > td:not(:first-of-type):not(:last-of-type) {
+  outline: 1px solid;
+}
+tr > td:hover {
+  transform: scale(1.06);
+  background: #45b6db;
+  outline: 1px solid;
+}
+
+/* making the corners round even while hover */
+
+table > tr:first-of-type > td:first-of-type {
+  border-radius: 10px 0 0 0;
+}
+table > tr:first-of-type > td:last-of-type {
+  border-radius: 0 10px 0 0;
+}
+table > tr:last-of-type > td:first-of-type {
+  border-radius: 0 0 0 10px;
+}
+table > tr:last-of-type > td:last-of-type {
+  border-radius: 0 0 10px 0;
+}
+
+/* end of corners styling */
+
+tr:hover {
+  background: #aaa;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+table {
+  background: #4eb0d1;
+  border-radius: 10px 10px;
+}
