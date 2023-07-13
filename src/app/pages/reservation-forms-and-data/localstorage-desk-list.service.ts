@@ -3,8 +3,10 @@ import { Observable, Subject } from 'rxjs';
 import { ReservationObj } from './reservation-obj';
 const date = new Date();
 
-const reservationList$: Subject<ReservationObj[]> = new Subject();
-const deskList$: Subject<Object[]> = new Subject();
+const reservationList$: Subject<ReservationObj[]> = new Subject<
+  ReservationObj[]
+>();
+const deskList$: Subject<Object[]> = new Subject<Object[]>();
 
 @Injectable()
 export class LocalstorageDeskListService {
@@ -18,32 +20,14 @@ export class LocalstorageDeskListService {
       date.getDate().toString().padStart(2, '0')
     );
   }
-  // deskListObs: Observable<string> = new Observable((subscriber) => {
-  //   let value: any = null;
-  //   const getDeskList = setInterval(() => {
-  //     value = localStorage.getItem('deskList');
-  //     if (value != null) subscriber.next(value);
-  //     else subscriber.next('');
-  //   }, 1000);
-  // });
   value: any;
 
   getReservationList(): Subject<ReservationObj[]> {
     return reservationList$;
-    // new Observable((subscriber) => {
-    //   this.value = localStorage.getItem('reservationList');
-    //   if (this.value != null) subscriber.next(JSON.parse(this.value));
-    //   else subscriber.next([]);
-    // });
   }
 
   getDeskList(): Subject<Object[]> {
     return deskList$;
-    // new Observable((subscriber) => {
-    //   this.value = localStorage.getItem('deskList');
-    //   if (this.value != null) subscriber.next(JSON.parse(this.value));
-    //   else subscriber.next([]);
-    // });
   }
 
   refreshReservationList(): void {
@@ -83,19 +67,6 @@ export class LocalstorageDeskListService {
         },
       ];
     }
-    //       reservedBy: '',
-    //       reservationDate: '',
-    //     });
-    //   }
-    // } else {
-    //   newDeskList = [
-    //     {
-    //       deskID: newDeskId,
-    //       reservedBy: '',
-    //       reservationDate: '',
-    //     },
-    //   ];
-    // }
     console.log(newDeskList);
     localStorage.setItem('deskList', JSON.stringify(newDeskList));
     deskList$.next(newDeskList);
@@ -133,12 +104,7 @@ export class LocalstorageDeskListService {
               m.deskID == reserveObj.deskID &&
               m.reservedBy == '' &&
               m.reservationDate == reserveObj.reservationDate
-          ) //||
-          // !deskList.find(
-          //   (m: any) =>
-          //     m.deskID == reserveObj.deskID &&
-          //     m.reservationDate == reserveObj.reservationDate
-          // )
+          )
         ) {
           this.reservationList[reserveObj.deskID - 1].reservedBy =
             reserveObj.reservedBy;
@@ -155,11 +121,6 @@ export class LocalstorageDeskListService {
           )
         ) {
           this.addReservationOnNewDate(reserveObj);
-          // reservationList.push(reserveObj);
-          // localStorage.setItem(
-          //   'reservationList',
-          //   JSON.stringify(reservationList)
-          // );
         } else {
           alert('nie można zarezerwować tego stanowiska');
         }
