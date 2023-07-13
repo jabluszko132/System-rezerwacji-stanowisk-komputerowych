@@ -81,7 +81,8 @@ export class LocalstorageDeskListService {
   }
 
   reserveDesk(reserveObj: ReservationObj): void {
-    if (reserveObj.reservationDate > this.currentDateString()) {
+    console.log(this.currentDateString());
+    if (reserveObj.reservationDate < this.currentDateString()) {
       alert('Data rezerwacji jest wcześniejsza niż obecna');
       return;
     }
