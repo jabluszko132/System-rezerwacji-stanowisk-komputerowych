@@ -67,7 +67,6 @@ export class LocalstorageDeskListService {
         },
       ];
     }
-    console.log(newDeskList);
     localStorage.setItem('deskList', JSON.stringify(newDeskList));
     deskList$.next(newDeskList);
   }
@@ -83,7 +82,6 @@ export class LocalstorageDeskListService {
   }
 
   reserveDesk(reserveObj: ReservationObj): void {
-    console.log(this.currentDateString());
     if (reserveObj.reservationDate < this.currentDateString()) {
       alert('Data rezerwacji jest wcześniejsza niż obecna');
       return;
