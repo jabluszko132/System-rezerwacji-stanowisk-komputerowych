@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { ReservationObj } from './reservation-obj';
 const date = new Date();
 
@@ -82,10 +82,10 @@ export class LocalstorageDeskListService {
     reservationList$.next(this.reservationList);
   }
 
-  reserveDesk(reserveObj: ReservationObj): void {
+  reserveDesk(reserveObj: ReservationObj): Observable<boolean> {
     if (reserveObj.reservationDate < this.currentDateString()) {
       alert('Data rezerwacji jest wcześniejsza niż obecna');
-      return;
+      return of(false);
     }
     let deskList: any = localStorage.getItem('deskList');
     this.reservationList = localStorage.getItem('reservationList');
