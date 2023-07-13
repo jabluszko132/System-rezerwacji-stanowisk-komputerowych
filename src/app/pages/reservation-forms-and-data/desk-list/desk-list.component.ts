@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Observable, of, Subject, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
 @Component({
