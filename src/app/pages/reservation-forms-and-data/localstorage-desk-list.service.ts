@@ -31,6 +31,8 @@ export class LocalstorageDeskListService {
         newDeskList.push({
           deskID: newDeskId,
           reservedBy: '',
+          reservationDate: '',
+          reservationEnd: '',
         });
       }
     } else {
@@ -38,6 +40,8 @@ export class LocalstorageDeskListService {
         {
           deskID: newDeskId,
           reservedBy: '',
+          reservationDate: '',
+          reservationEnd: '',
         },
       ];
     }

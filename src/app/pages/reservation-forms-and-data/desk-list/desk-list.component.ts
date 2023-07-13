@@ -20,16 +20,16 @@ export class DeskListComponent implements OnInit {
   //   }, 1000);
   // });
 
-  deskList: DeskObj[] = [
-    {
-      deskID: 1,
-      reservedBy: '',
-    },
-    {
-      deskID: 2,
-      reservedBy: 'Adam Kowalski',
-    },
-  ];
+  deskList: DeskObj[] = [];
+  //   {
+  //     deskID: 1,
+  //     reservedBy: '',
+  //   },
+  //   {
+  //     deskID: 2,
+  //     reservedBy: 'Adam Kowalski',
+  //   },
+  // ];
 
   updateDeskList: Observable<any> = new Observable((subscriber) => {
     let value: any = null;

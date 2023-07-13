@@ -21,6 +21,8 @@ export class DeskReservationFormComponent implements OnInit {
   reserveObj: DeskObj = {
     deskID: 1,
     reservedBy: '',
+    reservationDate: '',
+    reservationEnd: '',
   };
   deskList: any = [];
   ngOnInit() {}
