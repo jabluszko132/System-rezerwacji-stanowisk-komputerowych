@@ -37,7 +37,7 @@ export class LocalstorageDeskListService {
   }
 
   refreshDeskList(): void {
-    this.value = localStorage.getItem('reservationList');
+    this.value = localStorage.getItem('deskList');
     if (this.value != null) deskList$.next(JSON.parse(this.value));
     else deskList$.next([]);
   }

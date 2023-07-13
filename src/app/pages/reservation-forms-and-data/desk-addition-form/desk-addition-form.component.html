@@ -1,7 +1,7 @@
 <form>
   <label
     >Numer nowego stanowiska:
-    <input name="deskID" type="number" [(ngModel)]="newDeskId" />
+    <input name="deskID" type="number" [formControl]="newDeskID" />
   </label>
   <button (click)="addDesk()">Dodaj</button>
 </form>
