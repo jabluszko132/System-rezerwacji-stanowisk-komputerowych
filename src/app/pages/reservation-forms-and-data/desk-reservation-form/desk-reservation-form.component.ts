@@ -1,4 +1,3 @@
-import { getLocaleDayNames } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DeskObj } from '../desk-obj';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
