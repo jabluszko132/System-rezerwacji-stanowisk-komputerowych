@@ -13,7 +13,7 @@ export class DeskAdditionFormComponent implements OnInit {
 
   ngOnInit() {}
 
-  addDesk() {
+  addDesk(): void {
     this.service.addDesk(this.newDeskId);
   }
 }

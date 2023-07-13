@@ -1,5 +1,5 @@
-import { Component, NgIterable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, NgIterable, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of, Subject, takeUntil } from 'rxjs';
 import { DeskObj } from '../desk-obj';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
@@ -8,7 +8,7 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
   templateUrl: './desk-list.component.html',
   styleUrls: ['./desk-list.component.css'],
 })
-export class DeskListComponent implements OnInit {
+export class DeskListComponent implements OnInit, OnDestroy {
   constructor(private service: LocalstorageDeskListService) {}
 
   // deskList: Observable<Array<string>> = new Observable((subscriber) => {
@@ -30,7 +30,8 @@ export class DeskListComponent implements OnInit {
   //     reservedBy: 'Adam Kowalski',
   //   },
   // ];
-
+  tstobs$: Observable<number[]> = of([1, 2, 3, 4]);
+  destr$: Subject<void> = new Subject<void>();
   updateDeskList: Observable<any> = new Observable((subscriber) => {
     let value: any = null;
     const getDeskList = setInterval(() => {
@@ -39,8 +40,12 @@ export class DeskListComponent implements OnInit {
       else this.deskList = [];
     }, 300);
   });
-
+  ngOnDestroy() {
+    this.destr$.next();
+    this.destr$.complete();
+  }
   ngOnInit() {
+    this.tstobs$.pipe(takeUntil(this.destr$)).subscribe((i) => {});
     if (localStorage['deskList'] == null)
       this.service.setDeskList(this.deskList);
     this.updateDeskList.subscribe(() => {});

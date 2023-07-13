@@ -16,16 +16,8 @@
     Na kiedy rezerwacja:
     <input
       name="reservationDate"
-      type="datetime"
+      type="date"
       [(ngModel)]="this.reserveObj.reservationDate"
-    />
-  </label>
-  <label>
-    Do kiedy rezerwacja:
-    <input
-      name="reservationEnd"
-      type="datetime"
-      [(ngModel)]="this.reserveObj.reservationEnd"
     />
   </label>
   <button (click)="reserveDesk()">Rezerwuj</button>
