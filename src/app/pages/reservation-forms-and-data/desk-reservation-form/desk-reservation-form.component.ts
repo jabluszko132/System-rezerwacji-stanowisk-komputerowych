@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReservationObj } from '../reservation-obj';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
@@ -7,9 +7,7 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
   templateUrl: './desk-reservation-form.component.html',
   styleUrls: ['./desk-reservation-form.component.css'],
 })
-
-
-export class DeskReservationFormComponent implements OnInit, AfterViewInit {
+export class DeskReservationFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
   date = new Date();
   reserveObj: ReservationObj = {
@@ -22,8 +20,5 @@ export class DeskReservationFormComponent implements OnInit, AfterViewInit {
   }
   reserveDesk(): void {
     this.service.reserveDesk(this.reserveObj);
-  }
-  ngAfterViewInit() {
-    this.service.refreshReservationList();
   }
 }
