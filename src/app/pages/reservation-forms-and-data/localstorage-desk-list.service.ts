@@ -122,17 +122,16 @@ export class LocalstorageDeskListService {
         } else {
           alert('nie można zarezerwować tego stanowiska');
         }
-      }else {
+      } else {
         this.reservationList = [];
         this.addReservationOnNewDate(reserveObj);
         return;
-      } 
-    }else {
+      }
+    } else {
       alert(
         'Lista stanowisk jest pusta. Dodaj stanowisko aby móc je zarezerwować'
       );
-    } 
-    
+    }
 
     //todo
     //reactive forms

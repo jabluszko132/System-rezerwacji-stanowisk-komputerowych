@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservationObj } from '../reservation-obj';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import { FormControl } from '@angular/forms';
 
