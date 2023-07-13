@@ -8,15 +8,7 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
   styleUrls: ['./desk-reservation-form.component.css'],
 })
 
-//TODO HERE
-//
-//change deskList into an observable (do it in other components to) so they dinamically refresh themselves
-//
-//
-//
-//
-//
-//
+
 export class DeskReservationFormComponent implements OnInit, AfterViewInit {
   constructor(private service: LocalstorageDeskListService) {}
   date = new Date();
@@ -34,19 +26,4 @@ export class DeskReservationFormComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.service.refreshReservationList();
   }
-  // reserveDesk() {
-  //   this.deskList = localStorage.getItem('deskList');
-  //   if (this.deskList != null) this.deskList = JSON.parse(this.deskList);
-  //   if (
-  //     this.deskList.find(
-  //       (m: any) => m.deskID == this.reserveObj.deskID && m.reservedBy == ''
-  //     )
-  //   ) {
-  //     this.deskList[this.reserveObj.deskID - 1].reservedBy =
-  //       this.reserveObj.reservedBy;
-  //     localStorage.setItem('deskList', JSON.stringify(this.deskList));
-  //   } else {
-  //     alert('nie można zarezerwować tego stanowiska');
-  //   }
-  // }
 }
