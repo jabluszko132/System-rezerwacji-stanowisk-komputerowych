@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { Observable, of, Subject, takeUntil } from 'rxjs';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
@@ -7,7 +7,7 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
   templateUrl: './desk-list.component.html',
   styleUrls: ['./desk-list.component.css'],
 })
-export class DeskListComponent implements OnInit, OnDestroy {
+export class DeskListComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private service: LocalstorageDeskListService) {}
 
   // deskList: Observable<Array<string>> = new Observable((subscriber) => {
@@ -50,5 +50,8 @@ export class DeskListComponent implements OnInit, OnDestroy {
     // if (localStorage['deskList'] == null)
     //   this.service.setDeskList(this.deskList);
     // this.updateDeskList.subscribe(() => {});
+  }
+  ngAfterViewInit() {
+    this.service.refreshDeskList();
   }
 }

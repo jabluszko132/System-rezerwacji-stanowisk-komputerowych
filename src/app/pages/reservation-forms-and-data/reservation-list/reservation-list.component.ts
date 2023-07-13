@@ -13,5 +13,6 @@ export class ReservationListComponent implements OnInit {
 
   ngOnInit() {
     this.reservationList.subscribe(() => {});
+    this.service.refreshReservationList();
   }
 }

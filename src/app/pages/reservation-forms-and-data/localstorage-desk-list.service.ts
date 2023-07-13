@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ReservationObj } from './reservation-obj';
 const date = new Date();
+
+const reservationList$: Subject<ReservationObj[]> = new Subject();
+const deskList$: Subject<Object[]> = new Subject();
+
 @Injectable()
 export class LocalstorageDeskListService {
   constructor() {}
@@ -23,24 +27,40 @@ export class LocalstorageDeskListService {
   //   }, 1000);
   // });
   value: any;
-  getReservationList(): Observable<ReservationObj[]> {
-    return new Observable((subscriber) => {
-      this.value = localStorage.getItem('reservationList');
-      if (this.value != null) subscriber.next(JSON.parse(this.value));
-      else subscriber.next([]);
-    });
+
+  getReservationList(): Subject<ReservationObj[]> {
+    return reservationList$;
+    // new Observable((subscriber) => {
+    //   this.value = localStorage.getItem('reservationList');
+    //   if (this.value != null) subscriber.next(JSON.parse(this.value));
+    //   else subscriber.next([]);
+    // });
   }
 
-  getDeskList(): Observable<Object[]> {
-    return new Observable((subscriber) => {
-      this.value = localStorage.getItem('deskList');
-      if (this.value != null) subscriber.next(JSON.parse(this.value));
-      else subscriber.next([]);
-    });
+  getDeskList(): Subject<Object[]> {
+    return deskList$;
+    // new Observable((subscriber) => {
+    //   this.value = localStorage.getItem('deskList');
+    //   if (this.value != null) subscriber.next(JSON.parse(this.value));
+    //   else subscriber.next([]);
+    // });
+  }
+
+  refreshReservationList(): void {
+    this.value = localStorage.getItem('reservationList');
+    if (this.value != null) reservationList$.next(JSON.parse(this.value));
+    else reservationList$.next([]);
+  }
+
+  refreshDeskList(): void {
+    this.value = localStorage.getItem('reservationList');
+    if (this.value != null) deskList$.next(JSON.parse(this.value));
+    else deskList$.next([]);
   }
 
   setReservationList(newValue: ReservationObj[]): void {
     localStorage.setItem('reservationList', JSON.stringify(newValue));
+    reservationList$.next(newValue);
   }
 
   addDesk(newDeskId: number): void {
@@ -78,6 +98,7 @@ export class LocalstorageDeskListService {
     // }
     console.log(newDeskList);
     localStorage.setItem('deskList', JSON.stringify(newDeskList));
+    deskList$.next(newDeskList);
   }
 
   reservationList: any;
@@ -87,6 +108,7 @@ export class LocalstorageDeskListService {
       'reservationList',
       JSON.stringify(this.reservationList)
     );
+    reservationList$.next(this.reservationList);
   }
 
   reserveDesk(reserveObj: ReservationObj): void {
@@ -124,6 +146,7 @@ export class LocalstorageDeskListService {
             'reservationList',
             JSON.stringify(this.reservationList)
           );
+          reservationList$.next(this.reservationList);
         } else if (
           !this.reservationList.find(
             (m: any) =>
@@ -153,6 +176,5 @@ export class LocalstorageDeskListService {
 
     //todo
     //reaktywne formsy
-    //dynamiczna aktualizacja obu list
   }
 }
