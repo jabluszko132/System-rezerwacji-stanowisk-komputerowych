@@ -152,7 +152,7 @@ export class LocalstorageDeskListService {
     }
 
     //todo
-    //reaktywny form
-    //napraw sprawdzanie daty w reserveDesk
+    //reaktywne formsy
+    //dynamiczna aktualizacja obu list
   }
 }
