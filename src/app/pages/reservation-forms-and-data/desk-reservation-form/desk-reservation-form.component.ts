@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
-import { ReservationObj } from '../reservation-obj';
+import { Reservation } from '../reservation';
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -25,6 +25,6 @@ export class DeskReservationFormComponent implements OnInit {
 
   ngOnInit() {}
   reserveDesk(): void {
-    this.service.reserveDesk(this.reservationForm.value as ReservationObj);
+    this.service.reserveDesk(this.reservationForm.value as Reservation);
   }
 }
