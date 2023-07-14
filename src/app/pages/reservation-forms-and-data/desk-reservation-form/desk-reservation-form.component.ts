@@ -28,7 +28,7 @@ export class DeskReservationFormComponent implements OnInit {
 
   ngOnInit() {
     action$.pipe(filter(d => {
-      return typeof d == typeof this.reservationForm.value
+      return d == this.reservationForm.value
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
   reserveDesk(): void {
