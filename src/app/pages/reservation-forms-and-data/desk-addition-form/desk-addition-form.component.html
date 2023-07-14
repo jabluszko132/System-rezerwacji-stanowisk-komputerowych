@@ -1,7 +1,9 @@
 <form>
+  <h3 class="bigTxtFont">Dodaj nowe stanowisko</h3>
   <label
-    >Numer nowego stanowiska:
+    >Identyfikator nowego stanowiska:
     <input name="deskID" type="number" [formControl]="newDeskID" />
   </label>
+  <br />
   <button (click)="addDesk()">Dodaj</button>
 </form>

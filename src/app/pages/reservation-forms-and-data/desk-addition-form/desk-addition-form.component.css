@@ -3,3 +3,39 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+label > input {
+  width: 40%;
+  border: none;
+  padding: 2px;
+  max-height: 1.5em;
+}
+
+form {
+  padding: 1em 1em 2.5em 1em;
+  margin: 1em;
+  background-color: #4eb0d1;
+  border-radius: 10px;
+  max-width: fit-content;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  border-radius: 15px;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: 'Geologica';
+}
