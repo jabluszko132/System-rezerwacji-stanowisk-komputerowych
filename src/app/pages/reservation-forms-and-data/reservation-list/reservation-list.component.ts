@@ -12,10 +12,10 @@ export class ReservationListComponent implements OnInit, AfterViewInit {
   reservationList: Observable<any> = this.service.getReservationList();
 
   ngAfterViewInit() {
-    this.service.refreshReservationList();
+    // this.service.refreshReservationList();
   }
   ngOnInit() {
     this.reservationList.subscribe(() => {});
-    this.service.refreshReservationList();
+    // this.service.refreshReservationList();
   }
 }

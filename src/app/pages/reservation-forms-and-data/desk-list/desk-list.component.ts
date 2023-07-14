@@ -19,10 +19,10 @@ export class DeskListComponent implements OnInit, AfterViewInit {
   //   this.destr$.complete();
   // }
   ngOnInit() {
-    this.deskList.subscribe(() => {});
+    this.deskList.subscribe();
     // this.tstobs$.pipe(takeUntil(this.destr$)).subscribe((i) => {});
   }
   ngAfterViewInit() {
-    this.service.refreshDeskList();
+    // this.service.refreshDeskList();
   }
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
+import {Subject} from 'rxjs';
+
+const action$ = new Subject<any>;
+
 
 @Component({
   selector: 'app-desk-addition-form',
