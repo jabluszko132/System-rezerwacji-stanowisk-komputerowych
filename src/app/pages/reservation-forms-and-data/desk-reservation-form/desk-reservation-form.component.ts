@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import {  FormBuilder } from '@angular/forms';
-import {Subject} from 'rxjs';
+import {filter, Subject, switchMap} from 'rxjs';
+import { Reservation } from '../reservation';
 
-const action$ = new Subject<any>
+const action$ = new Subject<Reservation>
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -26,10 +27,13 @@ export class DeskReservationFormComponent implements OnInit {
   // reservationDate: FormControl = new FormControl();
 
   ngOnInit() {
-    console.log(typeof this.reservationForm);
+    action$.pipe(filter(d => {
+      return typeof d == typeof this.reservationForm.value
+    }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
   reserveDesk(): void {
-
+    console.log(this.reservationForm.value);
+    action$.next(this.reservationForm.value as Reservation);
     // this.service.reserveDesk(this.reservationForm.value as Reservation);
   }
 }
