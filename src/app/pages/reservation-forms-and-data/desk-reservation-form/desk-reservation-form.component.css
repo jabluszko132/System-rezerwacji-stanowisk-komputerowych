@@ -3,6 +3,9 @@ label {
   justify-content: space-between;
   align-items: center;
 }
+form > label:last-of-type {
+  margin-bottom: 1.5em;
+}
 label > input {
   width: 40%;
   border: none;
@@ -13,6 +16,7 @@ label > input {
 form {
   padding: 3.5em;
   padding-top: 1em;
+  padding-bottom: 2.5em;
   margin: 1em;
   background-color: #4eb0d1;
   border-radius: 10px;
@@ -29,10 +33,17 @@ h3 {
   justify-content: center;
 }
 
-button {
+a {
   border-radius: 15px;
   font-size: 1em;
-  font-weight: 600;
+  font-weight: 100;
   font-family: 'Geologica';
-  padding: 0.25em;
+  background: rgb(167, 172, 177);
+  outline: 1px solid;
+  padding: 0.4em;
+  user-select: none;
+}
+
+a:hover {
+  outline: 2px solid;
 }
