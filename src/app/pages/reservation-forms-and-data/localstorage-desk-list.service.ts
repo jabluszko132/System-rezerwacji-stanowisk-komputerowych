@@ -84,6 +84,10 @@ export class LocalstorageDeskListService {
   }
 
   reserveDesk(reserveObj: Reservation): Observable<boolean> {
+    if (reserveObj.reservedBy === '') {
+      alert('Musi istnieć osoba dokonująca rezerwacji');
+      return of(false);
+    }
     if (reserveObj.reservationDate < this.currentDateString()) {
       alert('Data rezerwacji jest wcześniejsza niż obecna');
       return of(false);
@@ -98,22 +102,22 @@ export class LocalstorageDeskListService {
       }
       if (reservationListInLS != null) {
         reservationListInLS = JSON.parse(reservationListInLS);
-        if (
-          reservationListInLS.find(
-            (m: any) =>
-              m.deskID == reserveObj.deskID &&
-              m.reservedBy == '' &&
-              m.reservationDate == reserveObj.reservationDate
-          )
-        ) {
-          this.reservationList[reserveObj.deskID - 1].reservedBy =
-            reserveObj.reservedBy; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!napraw to
-          localStorage.setItem(
-            'reservationList',
-            JSON.stringify(this.reservationList)
-          );
-          return of(true);
-        } else if (
+        // if (
+        //   reservationListInLS.find(
+        //     (m: any) =>
+        //       m.deskID == reserveObj.deskID &&
+        //       m.reservedBy == '' &&
+        //       m.reservationDate == reserveObj.reservationDate
+        //   )
+        // ) {
+        //   this.reservationList[reserveObj.deskID - 1].reservedBy =
+        //     reserveObj.reservedBy; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!napraw to
+        //   localStorage.setItem(
+        //     'reservationList',
+        //     JSON.stringify(this.reservationList)
+        //   );
+        //   return of(true);}else
+         if (
           !reservationListInLS.find(
             (m: any) =>
               m.deskID == reserveObj.deskID &&
