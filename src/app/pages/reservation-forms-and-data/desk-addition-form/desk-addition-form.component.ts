@@ -14,7 +14,7 @@ const action$ = new Subject<any>;
 export class DeskAdditionFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
 
-  newDeskID: FormControl = new FormControl();
+  newDeskID: FormControl = new FormControl(1);
   // numbers1$ = from([1,2,3,4,5, 6, 7, 8, 9]);
   // numbers2(x:number) {return of(2*x)}
 
@@ -22,7 +22,7 @@ export class DeskAdditionFormComponent implements OnInit {
     // this.numbers1$.pipe(switchMap((d)=>{ return this.numbers2(d)})).subscribe((d) => {
     //   console.log(d);
     // })
-    action$.pipe(switchMap(d => {
+    action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
       console.log(d);
       return this.service.addDesk(d)})).subscribe();
   }
