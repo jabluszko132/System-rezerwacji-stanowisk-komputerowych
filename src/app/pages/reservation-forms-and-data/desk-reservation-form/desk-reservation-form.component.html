@@ -1,4 +1,5 @@
 <form [formGroup]="reservationForm">
+  <h3 class="bigTxtFont">Formularz rezerwacji</h3>
   <label
     >Numer stanowiska:
     <input name="deskID" type="number" formControlName="deskID" />
@@ -6,15 +7,15 @@
   <br />
   <label>
     Kto rezerwuje:
-    <input name="reservedBy" type="text" formControlName="reservedBy" />
-  </label>
+    <input name="reservedBy" type="text" formControlName="reservedBy" /> </label
+  ><br />
   <label>
     Na kiedy rezerwacja:
     <input
       name="reservationDate"
       type="date"
       formControlName="reservationDate"
-    />
-  </label>
+    /> </label
+  ><br />
   <button (click)="reserveDesk()">Rezerwuj</button>
 </form>
