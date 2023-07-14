@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import {filter, Subject, switchMap, of, from} from 'rxjs';
 
-const action$ = new Subject<any>;
+const action$ = new Subject<number>;
 
 
 @Component({
