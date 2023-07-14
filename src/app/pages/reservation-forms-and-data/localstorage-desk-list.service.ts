@@ -117,7 +117,7 @@ export class LocalstorageDeskListService {
         //     JSON.stringify(this.reservationList)
         //   );
         //   return of(true);}else
-         if (
+        if (
           !reservationListInLS.find(
             (m: any) =>
               m.deskID == reserveObj.deskID &&
