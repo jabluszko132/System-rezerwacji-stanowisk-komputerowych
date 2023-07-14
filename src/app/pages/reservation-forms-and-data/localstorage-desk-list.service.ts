@@ -136,6 +136,6 @@ export class LocalstorageDeskListService {
     }
     return of(false);
     //todo
-    //onDestroy -> unsubscribe/.complete() in every script that uses obeservables
+    //endings of subscriptions in reasonable moments in every script that uses obeservables
   }
 }
