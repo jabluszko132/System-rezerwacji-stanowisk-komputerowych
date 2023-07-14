@@ -32,7 +32,6 @@ export class DeskReservationFormComponent implements OnInit {
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
   reserveDesk(): void {
-    console.log(this.reservationForm.value);
     action$.next(this.reservationForm.value as Reservation);
     // this.service.reserveDesk(this.reservationForm.value as Reservation);
   }
