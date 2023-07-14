@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { ReservationObj } from '../reservation-obj';
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -8,17 +9,22 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./desk-reservation-form.component.css'],
 })
 export class DeskReservationFormComponent implements OnInit {
-  constructor(private service: LocalstorageDeskListService) {}
-  deskID: FormControl = new FormControl();
-  reservedBy: FormControl = new FormControl();
-  reservationDate: FormControl = new FormControl();
+  constructor(
+    private service: LocalstorageDeskListService,
+    private fb: FormBuilder
+  ) {}
+  reservationForm = this.fb.nonNullable.group({
+    deskID: 1,
+    reservedBy: '',
+    reservationDate: '',
+  });
+
+  // deskID: FormControl = new FormControl();
+  // reservedBy: FormControl = new FormControl();
+  // reservationDate: FormControl = new FormControl();
 
   ngOnInit() {}
   reserveDesk(): void {
-    this.service.reserveDesk({
-      deskID: this.deskID.value,
-      reservedBy: this.reservedBy.value,
-      reservationDate: this.reservationDate.value,
-    });
+    this.service.reserveDesk(this.reservationForm.value as ReservationObj);
   }
 }

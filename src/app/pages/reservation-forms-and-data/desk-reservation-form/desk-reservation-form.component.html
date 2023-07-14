@@ -1,16 +1,16 @@
-<form>
+<form [formGroup]="reservationForm">
   <label
     >Numer stanowiska:
-    <input name="deskID" type="number" [formControl]="deskID" />
+    <input name="deskID" type="number" />
   </label>
   <br />
   <label>
     Kto rezerwuje:
-    <input name="reservedBy" type="text" [formControl]="reservedBy" />
+    <input name="reservedBy" type="text" />
   </label>
   <label>
     Na kiedy rezerwacja:
-    <input name="reservationDate" type="date" [formControl]="reservationDate" />
+    <input name="reservationDate" type="date" />
   </label>
   <button (click)="reserveDesk()">Rezerwuj</button>
 </form>

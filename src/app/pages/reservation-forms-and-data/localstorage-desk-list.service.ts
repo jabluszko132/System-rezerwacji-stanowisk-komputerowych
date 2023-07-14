@@ -43,10 +43,10 @@ export class LocalstorageDeskListService {
     else deskList$.next([]);
   }
 
-  setReservationList(newValue: ReservationObj[]): void {
-    localStorage.setItem('reservationList', JSON.stringify(newValue));
-    reservationList$.next(newValue);
-  }
+  // setReservationList(newValue: ReservationObj[]): void {
+  //   localStorage.setItem('reservationList', JSON.stringify(newValue));
+  //   reservationList$.next(newValue);
+  // }
 
   addDesk(newDeskId: number): void {
     let deskList: string | null = localStorage.getItem('deskList');
@@ -73,7 +73,7 @@ export class LocalstorageDeskListService {
   }
 
   reservationList: any;
-  addReservationOnNewDate(reserveObj: ReservationObj): void {
+  private addReservationOnNewDate(reserveObj: ReservationObj): void {
     this.reservationList.push(reserveObj);
     localStorage.setItem(
       'reservationList',
