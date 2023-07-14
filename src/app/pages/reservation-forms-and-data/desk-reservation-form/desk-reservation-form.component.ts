@@ -16,7 +16,7 @@ export class DeskReservationFormComponent implements OnInit {
     private service: LocalstorageDeskListService,
     private fb: FormBuilder
   ) {}
-  reservationForm = this.fb.nonNullable.group({
+  reservationForm = this.fb.group({
     deskID: 1,
     reservedBy: '',
     reservationDate: '',

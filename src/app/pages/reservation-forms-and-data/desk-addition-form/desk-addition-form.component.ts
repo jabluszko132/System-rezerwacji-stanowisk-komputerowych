@@ -23,7 +23,6 @@ export class DeskAdditionFormComponent implements OnInit {
     //   console.log(d);
     // })
     action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
-      console.log(d);
       return this.service.addDesk(d)})).subscribe();
   }
 
