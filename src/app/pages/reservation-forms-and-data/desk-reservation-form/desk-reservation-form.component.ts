@@ -15,25 +15,28 @@ export class DeskReservationFormComponent implements OnInit {
   constructor(
     private service: LocalstorageDeskListService,
     private fb: FormBuilder,
-    private validators: Validators
   ) {}
+
   reservationForm = this.fb.group({
     deskID: [1,Validators.required],
-    reservedBy: ['', Validators.pattern('.{1,}')],
-    reservationDate: ['', Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}')],
+    reservedBy: ['', Validators.required],
+    reservationDate: ['', [Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),Validators.required]],
   });
-  // deskID: FormControl = new FormControl();
-  // reservedBy: FormControl = new FormControl();
-  // reservationDate: FormControl = new FormControl();
-
+  deskID = this.reservationForm.controls.deskID;
+  reservedBy = this.reservationForm.controls.reservedBy;
+  reservationDate = this.reservationForm.controls.reservationDate;
   ngOnInit() {
     action$.pipe(filter(d => {
       return d == this.reservationForm.value
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
   reserveDesk(): void {
-    console.log(this.reservationForm.errors)
-    action$.next(this.reservationForm.value as Reservation);
+    if(this.deskID.errors||this.reservedBy.errors || this.reservationDate.errors)
+    {
+      //add error handling later
+      console.log(false)
+      return;
+    }else action$.next(this.reservationForm.value as Reservation);
     // this.service.reserveDesk(this.reservationForm.value as Reservation);
   }
 }
