@@ -25,4 +25,8 @@ export class DeskListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // this.service.refreshDeskList();
   }
+
+  deleteDesk(deskID: number): void {
+    this.service.deleteDesk(deskID);
+  }
 }
