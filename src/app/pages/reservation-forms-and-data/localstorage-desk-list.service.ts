@@ -145,7 +145,7 @@ export class LocalstorageDeskListService {
     let deskToDeleteIndex: number | null | undefined = this.deskList.indexOf({
       deskID: deskId,
     });
-    if (!deskToDeleteIndex) {
+    if (deskToDeleteIndex == -1) {
       alert('Nie ma takiego stanowiska');
       return of(false);
     }
@@ -161,7 +161,7 @@ export class LocalstorageDeskListService {
   deleteReservation(reservation: Reservation): Observable<Boolean> {
     let reservationToDeleteIndex: number =
       this.reservationList.indexOf(reservation);
-    if (reservationToDeleteIndex == null) {
+    if (reservationToDeleteIndex == -1) {
       alert('Nie ma takiej rezerwacji');
       return of(false);
     }

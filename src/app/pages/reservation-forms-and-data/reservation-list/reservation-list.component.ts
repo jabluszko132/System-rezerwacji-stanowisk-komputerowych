@@ -17,6 +17,7 @@ export class ReservationListComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     this.reservationList.subscribe(() => {});
+
     // this.service.refreshReservationList();
   }
 
