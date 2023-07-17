@@ -23,11 +23,13 @@ tr {
   overflow: hidden;
 }
 table > tr:first-of-type {
-  border-radius: 10px 10px 0 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 table > tr:last-of-type {
-  border-radius: 0 0 10px 10px;
+  border-end-start-radius: 10px;
+  border-end-end-radius: 10px;
 }
 td {
   text-align: center;
@@ -57,3 +59,20 @@ table {
   background: #4eb0d1;
   border-radius: 10px 10px;
 }
+
+/* td border start */
+
+table > tr:first-of-type > td:first-of-type {
+  border-top-left-radius: 10px;
+}
+table > tr:first-of-type > td:last-of-type {
+  border-top-right-radius: 10px;
+}
+table > tr:last-of-type > td:first-of-type {
+  border-end-start-radius: 10px;
+}
+table > tr:last-of-type > td:last-of-type {
+  border-end-end-radius: 10px;
+}
+
+/* td border end */
