@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { observable, Observable, of } from 'rxjs';
 import { Reservation } from './reservation';
 import { Desk } from './desk';
 const date = new Date();
@@ -139,6 +139,25 @@ export class LocalstorageDeskListService {
       );
     }
     return of(false);
+
+    
+    }
+
+    deleteDesk(deskId:number) :Observable<Boolean> {
+      let deskToDeleteIndex: number | null | undefined = this.deskList.indexOf({deskID: deskId});
+      if(!deskToDeleteIndex) {
+        alert('Nie ma takiego stanowiska');
+        return of(false);
+      }
+      if(this.reservationList.find((m: any) => m.deskID == deskId))
+      {
+        alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji')
+        return of(false);
+      }
+      this.deskList.splice(deskToDeleteIndex);
+      localStorage.setItem('deskList',JSON.stringify(this.deskList));
+      return of(true);
+    }
     //todo
     //endings of subscriptions in reasonable moments in every script that uses obeservables
   }
