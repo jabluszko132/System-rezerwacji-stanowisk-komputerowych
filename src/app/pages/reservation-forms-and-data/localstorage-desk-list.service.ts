@@ -122,7 +122,7 @@ export class LocalstorageDeskListService {
       alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
       return of(false);
     }
-    this.deskList.splice(deskToDeleteIndex);
+    this.deskList.splice(deskToDeleteIndex, 1);
     this.pushDeskListToLS();
     return of(true);
   }
@@ -134,7 +134,7 @@ export class LocalstorageDeskListService {
       alert('Nie ma takiej rezerwacji');
       return of(false);
     }
-    this.reservationList.splice(reservationToDeleteIndex);
+    this.reservationList.splice(reservationToDeleteIndex, 1);
     this.pushReservationListToLS();
     return of(true);
   }
