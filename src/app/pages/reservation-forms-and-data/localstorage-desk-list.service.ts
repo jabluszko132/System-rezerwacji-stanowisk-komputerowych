@@ -22,8 +22,8 @@ export class LocalstorageDeskListService {
       date.getDate().toString().padStart(2, '0')
     );
   }
-  value: any;
-
+  reservationList: Reservation[] = [];
+  deskList: Desk[] = [];
   getReservationList(): Observable<Reservation[]> {
     return of(this.reservationList);
   }
@@ -71,9 +71,6 @@ export class LocalstorageDeskListService {
     localStorage.setItem('deskList', JSON.stringify(this.deskList));
     return of(true);
   }
-
-  reservationList: Reservation[] = [];
-  deskList: Desk[] = [];
 
   private addReservationOnNewDate(reserveObj: Reservation): void {
     this.reservationList.push(reserveObj);
