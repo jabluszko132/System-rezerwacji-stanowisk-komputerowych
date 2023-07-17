@@ -19,8 +19,8 @@ export class DeskReservationFormComponent implements OnInit {
   ) {}
   reservationForm = this.fb.group({
     deskID: [1,Validators.required],
-    reservedBy: ['', Validators.required],
-    reservationDate: ['', Validators.required],
+    reservedBy: ['', Validators.pattern('.{1,}')],
+    reservationDate: ['', Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}')],
   });
   // deskID: FormControl = new FormControl();
   // reservedBy: FormControl = new FormControl();
@@ -32,6 +32,7 @@ export class DeskReservationFormComponent implements OnInit {
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
   reserveDesk(): void {
+    console.log(this.reservationForm.errors)
     action$.next(this.reservationForm.value as Reservation);
     // this.service.reserveDesk(this.reservationForm.value as Reservation);
   }
