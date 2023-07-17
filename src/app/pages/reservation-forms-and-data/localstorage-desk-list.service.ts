@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { observable, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Reservation } from './reservation';
 import { Desk } from './desk';
 const date = new Date();
