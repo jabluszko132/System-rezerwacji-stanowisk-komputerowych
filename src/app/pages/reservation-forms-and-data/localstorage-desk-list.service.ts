@@ -4,12 +4,6 @@ import { Reservation } from './reservation';
 import { Desk } from './desk';
 const date = new Date();
 
-// const reservationList$: Subject<Reservation[]> = new Subject<
-//   Reservation[]
-// >();
-
-// const deskList$: Subject<Object[]> = new Subject<Object[]>();
-
 @Injectable()
 export class LocalstorageDeskListService {
   constructor() {}
@@ -45,23 +39,6 @@ export class LocalstorageDeskListService {
     );
   }
 
-  // refreshReservationList(): void {
-  //   this.value = localStorage.getItem('reservationList');
-  //   if (this.value != null) reservationList$.next(JSON.parse(this.value));
-  //   else reservationList$.next([]);
-  // }
-
-  // refreshDeskList(): void {
-  //   this.value = localStorage.getItem('deskList');
-  //   if (this.value != null) deskList$.next(JSON.parse(this.value));
-  //   else deskList$.next([]);
-  // }
-
-  // setReservationList(newValue: Reservation[]): void {
-  //   localStorage.setItem('reservationList', JSON.stringify(newValue));
-  //   reservationList$.next(newValue);
-  // }
-
   addDesk(newDeskId: number): Observable<boolean> {
     let deskListInLS: string | null = localStorage.getItem('deskList');
     if (deskListInLS != null) {
@@ -82,17 +59,12 @@ export class LocalstorageDeskListService {
       ];
     }
     this.pushDeskListToLS();
-    // localStorage.setItem('deskList', JSON.stringify(this.deskList));
     return of(true);
   }
 
   private addReservationOnNewDate(reserveObj: Reservation): void {
     this.reservationList.push(reserveObj);
     this.pushReservationListToLS();
-    // localStorage.setItem(
-    //   'reservationList',
-    //   JSON.stringify(this.reservationList)
-    // );
   }
 
   reserveDesk(reserveObj: Reservation): Observable<boolean> {
@@ -114,21 +86,6 @@ export class LocalstorageDeskListService {
       }
       if (reservationListInLS != null) {
         reservationListInLS = JSON.parse(reservationListInLS);
-        // if (
-        //   reservationListInLS.find(
-        //     (m: any) =>
-        //       m.deskID == reserveObj.deskID &&
-        //       m.reservedBy == '' &&
-        //       m.reservationDate == reserveObj.reservationDate
-        //   )
-        // ) {
-        //   this.reservationList[reserveObj.deskID - 1].reservedBy =
-        //     reserveObj.reservedBy; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!napraw to
-        //   localStorage.setItem(
-        //     'reservationList',
-        //     JSON.stringify(this.reservationList)
-        //   );
-        //   return of(true);}else
         if (
           !reservationListInLS.find(
             (m: any) =>
@@ -167,7 +124,6 @@ export class LocalstorageDeskListService {
     }
     this.deskList.splice(deskToDeleteIndex);
     this.pushDeskListToLS();
-    // localStorage.setItem('deskList', JSON.stringify(this.deskList));
     return of(true);
   }
 
@@ -180,10 +136,6 @@ export class LocalstorageDeskListService {
     }
     this.reservationList.splice(reservationToDeleteIndex);
     this.pushReservationListToLS();
-    // localStorage.setItem(
-    //   'reservationList',
-    //   JSON.stringify(this.reservationList)
-    // );
     return of(true);
   }
 
