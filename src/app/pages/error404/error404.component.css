@@ -6,3 +6,7 @@ a {
 h1 {
   color: #f00;
 }
+
+:host > div {
+  padding: 2em;
+}
