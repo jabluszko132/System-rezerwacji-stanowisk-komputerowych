@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
+import { Reservation } from '../reservation';
 
 @Component({
   selector: 'app-reservation-list',
@@ -17,5 +18,10 @@ export class ReservationListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.reservationList.subscribe(() => {});
     // this.service.refreshReservationList();
+  }
+
+  deleteReservation(reservation: Reservation): void {
+    console.log(reservation);
+    this.service.deleteReservation(reservation);
   }
 }
