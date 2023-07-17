@@ -157,6 +157,18 @@ export class LocalstorageDeskListService {
     localStorage.setItem('deskList', JSON.stringify(this.deskList));
     return of(true);
   }
+
+  deleteReservation(reservation: Reservation): Observable<Boolean> {
+    let reservationToDeleteIndex: number =
+      this.reservationList.indexOf(reservation);
+    if (!reservationToDeleteIndex) {
+      alert('Nie ma takiej rezerwacji');
+      return of(false);
+    }
+    this.reservationList.splice(reservationToDeleteIndex);
+    return of(true);
+  }
+
   //todo
   //endings of subscriptions in reasonable moments in every script that uses obeservables
 }
