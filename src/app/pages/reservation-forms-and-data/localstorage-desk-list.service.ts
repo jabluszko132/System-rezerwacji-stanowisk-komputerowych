@@ -22,14 +22,27 @@ export class LocalstorageDeskListService {
       date.getDate().toString().padStart(2, '0')
     );
   }
+
   reservationList: Reservation[] = [];
   deskList: Desk[] = [];
+
   getReservationList(): Observable<Reservation[]> {
     return of(this.reservationList);
   }
 
   getDeskList(): Observable<Desk[]> {
     return of(this.deskList);
+  }
+
+  private pushDeskListToLS(): void {
+    localStorage.setItem('deskList', JSON.stringify(this.deskList));
+  }
+
+  private pushReservationListToLS(): void {
+    localStorage.setItem(
+      'reservationList',
+      JSON.stringify(this.reservationList)
+    );
   }
 
   // refreshReservationList(): void {
@@ -68,16 +81,18 @@ export class LocalstorageDeskListService {
         },
       ];
     }
-    localStorage.setItem('deskList', JSON.stringify(this.deskList));
+    this.pushDeskListToLS();
+    // localStorage.setItem('deskList', JSON.stringify(this.deskList));
     return of(true);
   }
 
   private addReservationOnNewDate(reserveObj: Reservation): void {
     this.reservationList.push(reserveObj);
-    localStorage.setItem(
-      'reservationList',
-      JSON.stringify(this.reservationList)
-    );
+    this.pushReservationListToLS();
+    // localStorage.setItem(
+    //   'reservationList',
+    //   JSON.stringify(this.reservationList)
+    // );
   }
 
   reserveDesk(reserveObj: Reservation): Observable<boolean> {
@@ -151,7 +166,8 @@ export class LocalstorageDeskListService {
       return of(false);
     }
     this.deskList.splice(deskToDeleteIndex);
-    localStorage.setItem('deskList', JSON.stringify(this.deskList));
+    this.pushDeskListToLS();
+    // localStorage.setItem('deskList', JSON.stringify(this.deskList));
     return of(true);
   }
 
@@ -163,6 +179,11 @@ export class LocalstorageDeskListService {
       return of(false);
     }
     this.reservationList.splice(reservationToDeleteIndex);
+    this.pushReservationListToLS();
+    // localStorage.setItem(
+    //   'reservationList',
+    //   JSON.stringify(this.reservationList)
+    // );
     return of(true);
   }
 
