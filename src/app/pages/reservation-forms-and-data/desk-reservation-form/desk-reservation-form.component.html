@@ -3,6 +3,9 @@
   <label
     >Numer stanowiska:
     <input name="deskID" type="number" formControlName="deskID" />
+    <div *ngIf="deskID.invalid" class="inputErrors">
+      To pole nie może być puste
+    </div>
     <!-- <select *ngFor="let desk of deskList">
       <option value=[desk.deskID]>{{desk.deskID}}</option>
     </select> -->
@@ -10,8 +13,9 @@
   <br />
   <label>
     Kto rezerwuje:
-    <input name="reservedBy" type="text" formControlName="reservedBy" /> </label
-  ><br />
+    <input name="reservedBy" type="text" formControlName="reservedBy" />
+  </label>
+  <br />
   <label>
     Na kiedy rezerwacja:
     <input

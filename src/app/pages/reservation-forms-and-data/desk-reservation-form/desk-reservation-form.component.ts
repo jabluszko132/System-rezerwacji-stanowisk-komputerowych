@@ -22,16 +22,18 @@ export class DeskReservationFormComponent implements OnInit {
     reservedBy: ['', Validators.required],
     reservationDate: ['', [Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),Validators.required]],
   });
+
   deskID = this.reservationForm.controls.deskID;
   reservedBy = this.reservationForm.controls.reservedBy;
   reservationDate = this.reservationForm.controls.reservationDate;
+
   ngOnInit() {
     action$.pipe(filter(d => {
       return d == this.reservationForm.value
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
   reserveDesk(): void {
-    if(this.deskID.errors||this.reservedBy.errors || this.reservationDate.errors)
+    if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors)
     {
       //add error handling later
       console.log(false)

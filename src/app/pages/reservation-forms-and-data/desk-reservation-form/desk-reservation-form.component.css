@@ -1,7 +1,9 @@
 label {
-  display: flex;
+  display: grid;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
 }
 form > label:last-of-type {
   margin-bottom: 1.5em;
@@ -46,4 +48,11 @@ input[type='submit'] {
 
 input[type='submit']:hover {
   outline: 2px solid;
+}
+
+.inputErrors {
+  color: red;
+  position: relative;
+  left: 59%;
+  font-size: 0.7em;
 }
