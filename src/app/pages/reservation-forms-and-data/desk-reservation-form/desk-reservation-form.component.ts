@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
-import {  FormBuilder } from '@angular/forms';
+import {  FormBuilder, Validators } from '@angular/forms';
 import {filter, Subject, switchMap} from 'rxjs';
 import { Reservation } from '../reservation';
 
@@ -14,14 +14,14 @@ const action$ = new Subject<Reservation>
 export class DeskReservationFormComponent implements OnInit {
   constructor(
     private service: LocalstorageDeskListService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private validators: Validators
   ) {}
   reservationForm = this.fb.group({
-    deskID: 1,
-    reservedBy: '',
-    reservationDate: '',
+    deskID: [1,Validators.required],
+    reservedBy: ['', Validators.required],
+    reservationDate: ['', Validators.required],
   });
-
   // deskID: FormControl = new FormControl();
   // reservedBy: FormControl = new FormControl();
   // reservationDate: FormControl = new FormControl();

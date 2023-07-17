@@ -4,7 +4,7 @@ import { DeskReservationFormComponent } from './desk-reservation-form/desk-reser
 import { LoginFormComponent } from './login-form/login-form.component';
 import { DeskAdditionFormComponent } from './desk-addition-form/desk-addition-form.component';
 import { DeskListComponent } from './desk-list/desk-list.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LocalstorageDeskListService } from './localstorage-desk-list.service';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 
@@ -24,6 +24,6 @@ import { ReservationListComponent } from './reservation-list/reservation-list.co
     DeskListComponent,
     ReservationListComponent,
   ],
-  providers: [LocalstorageDeskListService],
+  providers: [LocalstorageDeskListService, Validators],
 })
 export class ReservationFormsAndDataModule {}

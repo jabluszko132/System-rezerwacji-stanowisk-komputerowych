@@ -1,4 +1,4 @@
-<form [formGroup]="reservationForm">
+<form [formGroup]="reservationForm" (ngSubmit)="reserveDesk()">
   <h3 class="bigTxtFont">Formularz rezerwacji</h3>
   <label
     >Numer stanowiska:
@@ -20,5 +20,5 @@
       formControlName="reservationDate"
     /> </label
   ><br />
-  <a (click)="reserveDesk()">Rezerwuj</a>
+  <input type="submit" value="Rezerwuj" />
 </form>

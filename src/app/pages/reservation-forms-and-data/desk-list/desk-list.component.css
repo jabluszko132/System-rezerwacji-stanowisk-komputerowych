@@ -16,6 +16,10 @@ table > tr:first-of-type {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
+table > tr:last-of-type {
+  border-end-start-radius: 10px;
+  border-end-end-radius: 10px;
+}
 td {
   text-align: center;
   padding: 0.4em;
