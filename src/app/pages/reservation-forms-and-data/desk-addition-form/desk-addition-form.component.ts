@@ -15,13 +15,7 @@ export class DeskAdditionFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
 
   newDeskID: FormControl = new FormControl(1, [Validators.required]);
-  // numbers1$ = from([1,2,3,4,5, 6, 7, 8, 9]);
-  // numbers2(x:number) {return of(2*x)}
-
   ngOnInit() {
-    // this.numbers1$.pipe(switchMap((d)=>{ return this.numbers2(d)})).subscribe((d) => {
-    //   console.log(d);
-    // })
     action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
       return this.service.addDesk(d)})).subscribe();
   }
@@ -29,7 +23,5 @@ export class DeskAdditionFormComponent implements OnInit {
   addDesk() {
     if(this.newDeskID.invalid) return;
     action$.next(this.newDeskID.value);
-
-    // this.service.addDesk(this.newDeskID.value);
   }
 }

@@ -1,22 +1,3 @@
-/* table {
-  border: 5px solid;
-  border-radius: 15px 15px;
-} 
- tr {
-  outline: 1px solid;
-  border-collapse: collapse;
-}
-
- td:hover {
-  transform: scaleX(1.01);
-  z-index: 1;
-} 
-
-:host {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-} */
 tr {
   outline: 1px solid;
   border-collapse: collapse;

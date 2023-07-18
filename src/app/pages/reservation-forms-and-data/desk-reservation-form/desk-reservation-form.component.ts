@@ -32,13 +32,12 @@ export class DeskReservationFormComponent implements OnInit {
       return d == this.reservationForm.value
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
+  
   reserveDesk(): void {
     if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors)
     {
-      //add error handling later
       alert('Podaj poprawne wartości we wszystkich polach formularza')
       return;
     }else action$.next(this.reservationForm.value as Reservation);
-    // this.service.reserveDesk(this.reservationForm.value as Reservation);
   }
 }
