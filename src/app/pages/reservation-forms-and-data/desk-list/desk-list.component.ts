@@ -14,9 +14,7 @@ export class DeskListComponent implements OnInit {
   deskList: Observable<any> = this.service.getDeskList();
 
   ngOnInit() {
-    this.deskList.subscribe((w) => {
-      console.log('deskL: ' + w);
-    });
+    this.deskList.subscribe();
   }
 
   deleteDesk(desk: Desk): void {

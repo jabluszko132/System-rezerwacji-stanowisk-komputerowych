@@ -13,13 +13,10 @@ export class ReservationListComponent implements OnInit {
   reservationList: Observable<any> = this.service.getReservationList();
 
   ngOnInit() {
-    this.reservationList.subscribe((w) => {
-      console.log('reservationL' + w);
-    });
+    this.reservationList.subscribe();
   }
 
   deleteReservation(reservation: Reservation): void {
-    console.log(reservation);
     this.service.deleteReservation(reservation);
   }
 }
