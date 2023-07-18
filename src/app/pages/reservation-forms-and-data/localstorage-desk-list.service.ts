@@ -111,7 +111,7 @@ export class LocalstorageDeskListService {
   }
 
   deleteDesk(deskId: number): Observable<Boolean> {
-    let deskToDeleteIndex: number | null | undefined = this.deskList.indexOf({
+    let deskToDeleteIndex: number = this.deskList.indexOf({
       deskID: deskId,
     });
     if (deskToDeleteIndex == -1) {
