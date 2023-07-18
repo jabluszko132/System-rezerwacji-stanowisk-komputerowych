@@ -50,18 +50,9 @@ export class LocalstorageDeskListService {
       if (this.deskList.find((m: any) => m.deskID == newDeskId)) {
         alert('stanowisko już istnieje');
         return of(false);
-      } else {
-        this.deskList.push({
-          deskID: newDeskId,
-        });
       }
-    } else {
-      this.deskList = [
-        {
-          deskID: newDeskId,
-        },
-      ];
     }
+    this.deskList.push({ deskID: newDeskId });
     this.pushDeskListToLS();
     console.log(this.deskList);
     return of(true);
