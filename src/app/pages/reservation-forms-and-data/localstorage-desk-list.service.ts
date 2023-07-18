@@ -116,7 +116,6 @@ export class LocalstorageDeskListService {
   }
 
   deleteDesk(desk: Desk): Observable<Boolean> {
-    console.log(this.deskList);
     let deskToDeleteIndex: number = this.deskList.indexOf(desk);
     if (deskToDeleteIndex == -1) {
       alert('Nie ma takiego stanowiska');

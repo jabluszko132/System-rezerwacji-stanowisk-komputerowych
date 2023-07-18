@@ -4,6 +4,13 @@
   </tr>
   <tr *ngFor="let desk of deskList | async">
     <td>{{ desk.deskID }}</td>
-    <td><a (click)="deleteDesk(desk)">x</a></td>
+    <td>
+      <a
+        (click)="deleteDesk(desk)"
+        tabindex="0"
+        (keydown.enter)="deleteDesk(desk)"
+        >x</a
+      >
+    </td>
   </tr>
 </table>

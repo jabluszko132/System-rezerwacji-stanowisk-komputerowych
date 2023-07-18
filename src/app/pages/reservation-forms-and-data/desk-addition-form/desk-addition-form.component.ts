@@ -19,7 +19,6 @@ export class DeskAdditionFormComponent implements OnInit {
     action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
       return this.service.addDesk(d)})).subscribe();
   }
-
   addDesk() {
     if(this.newDeskID.invalid) return;
     action$.next(this.newDeskID.value);

@@ -32,7 +32,6 @@ export class DeskReservationFormComponent implements OnInit {
       return d == this.reservationForm.value
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
-  
   reserveDesk(): void {
     if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors)
     {
