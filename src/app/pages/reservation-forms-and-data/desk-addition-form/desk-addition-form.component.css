@@ -14,7 +14,7 @@ label > input {
   border: none;
   padding: 2px;
   max-height: 1.5em;
-  outline: 1px solid white;
+  outline: 1px solid var(--secondaryThemeColor);
 }
 
 form {
@@ -40,7 +40,7 @@ input[type='submit'] {
   font-weight: 200;
   font-family: 'Geologica';
   background: transparent;
-  outline: 2px solid #fff;
+  outline: 2px solid var(--secondaryThemeColor);
   color: #fff;
   border: none;
   padding: 0.4em;
@@ -54,7 +54,7 @@ input[type='submit']:not(:focus-within):hover {
 
 input[type='submit']:focus-within {
   background-color: #fff;
-  color: #4eb0d1;
+  color: transparent;
 }
 
 .inputErrors {

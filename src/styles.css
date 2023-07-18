@@ -10,6 +10,7 @@
 
 :root {
   --mainThemeColor: #1f366b;
+  --secondaryTheme: #fff;
   --pageBackgroundColor: #23282d;
 }
 
@@ -49,7 +50,7 @@ app-root {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: rgb(50, 50, 50);
+  background-color: #323232;
 }
 ::-webkit-scrollbar {
   width: 0.5em;
