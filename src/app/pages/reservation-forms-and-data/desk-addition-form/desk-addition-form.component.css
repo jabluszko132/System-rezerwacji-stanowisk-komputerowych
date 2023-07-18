@@ -17,11 +17,11 @@ label > input {
 }
 
 form {
-  padding: 1em 1em 2.5em 1em;
+  padding: 1em 3.5em 2.5em 3.5em;
   margin: 1em;
   background-color: #4eb0d1;
   border-radius: 10px;
-  max-width: fit-content;
+  max-width: 310px;
 }
 
 h3 {
@@ -33,7 +33,7 @@ h3 {
   justify-content: center;
 }
 
-a {
+input[type='submit'] {
   border-radius: 15px;
   font-size: 1em;
   font-weight: 100;
@@ -44,6 +44,14 @@ a {
   user-select: none;
 }
 
-a:hover {
+input[type='submit']:hover {
   outline: 2px solid;
+}
+
+.inputErrors {
+  color: red;
+  height: 0;
+  width: 100%;
+  text-align: end;
+  font-size: 0.7em;
 }

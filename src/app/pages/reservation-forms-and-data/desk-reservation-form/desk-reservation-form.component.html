@@ -3,18 +3,21 @@
   <label
     >Numer stanowiska:
     <input name="deskID" type="number" formControlName="deskID" />
-    <div *ngIf="deskID.invalid" class="inputErrors">
-      To pole nie może być puste
-    </div>
     <!-- <select *ngFor="let desk of deskList">
       <option value=[desk.deskID]>{{desk.deskID}}</option>
     </select> -->
   </label>
+  <div *ngIf="deskID.invalid" class="inputErrors">
+    To pole nie może być puste
+  </div>
   <br />
   <label>
     Kto rezerwuje:
     <input name="reservedBy" type="text" formControlName="reservedBy" />
   </label>
+  <div *ngIf="reservedBy.touched && reservedBy.invalid" class="inputErrors">
+    To pole nie może być puste
+  </div>
   <br />
   <label>
     Na kiedy rezerwacja:
@@ -22,7 +25,15 @@
       name="reservationDate"
       type="date"
       formControlName="reservationDate"
-    /> </label
-  ><br />
+    />
+  </label>
+
+  <div
+    *ngIf="reservationDate.touched && reservationDate.invalid"
+    class="inputErrors"
+  >
+    Podaj poprawną datę
+  </div>
+  <br />
   <input type="submit" value="Rezerwuj" />
 </form>

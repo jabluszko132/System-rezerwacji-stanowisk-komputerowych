@@ -36,7 +36,7 @@ export class DeskReservationFormComponent implements OnInit {
     if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors)
     {
       //add error handling later
-      console.log(false)
+      alert('Podaj poprawne wartości we wszystkich polach formularza')
       return;
     }else action$.next(this.reservationForm.value as Reservation);
     // this.service.reserveDesk(this.reservationForm.value as Reservation);

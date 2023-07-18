@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
-import {filter, Subject, switchMap, of, from} from 'rxjs';
+import {filter, Subject, switchMap} from 'rxjs';
 
 const action$ = new Subject<number>;
 
@@ -14,7 +14,7 @@ const action$ = new Subject<number>;
 export class DeskAdditionFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
 
-  newDeskID: FormControl = new FormControl(1);
+  newDeskID: FormControl = new FormControl(1, [Validators.required]);
   // numbers1$ = from([1,2,3,4,5, 6, 7, 8, 9]);
   // numbers2(x:number) {return of(2*x)}
 
@@ -27,7 +27,9 @@ export class DeskAdditionFormComponent implements OnInit {
   }
 
   addDesk() {
+    if(this.newDeskID.invalid) return;
     action$.next(this.newDeskID.value);
+
     // this.service.addDesk(this.newDeskID.value);
   }
 }

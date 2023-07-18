@@ -1,9 +1,12 @@
-<form>
+<form (ngSubmit)="addDesk()">
   <h3 class="bigTxtFont">Dodaj nowe stanowisko</h3>
   <label
-    >Identyfikator nowego stanowiska:
+    >ID stanowiska:
     <input name="deskID" type="number" [formControl]="newDeskID" />
   </label>
+  <div *ngIf="newDeskID.invalid" class="inputErrors">
+    To pole nie może być puste
+  </div>
   <br />
-  <a (click)="addDesk()">Dodaj</a>
+  <input type="submit" value="Dodaj" />
 </form>
