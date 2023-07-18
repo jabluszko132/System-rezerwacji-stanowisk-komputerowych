@@ -4,7 +4,7 @@
     >ID stanowiska:
     <input name="deskID" type="number" [formControl]="newDeskID" />
   </label>
-  <div *ngIf="newDeskID.invalid" class="inputErrors">
+  <div *ngIf="newDeskID.touched && newDeskID.invalid" class="inputErrors">
     To pole nie może być puste
   </div>
   <br />

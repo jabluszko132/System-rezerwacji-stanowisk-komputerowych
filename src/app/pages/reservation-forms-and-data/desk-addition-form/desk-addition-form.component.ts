@@ -14,7 +14,7 @@ const action$ = new Subject<number>;
 export class DeskAdditionFormComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
 
-  newDeskID: FormControl = new FormControl(1, [Validators.required]);
+  newDeskID: FormControl = new FormControl(null,[Validators.required]);
   ngOnInit() {
     action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
       return this.service.addDesk(d)})).subscribe();
