@@ -1,8 +1,10 @@
+
+
 header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: #4eb0d1;
+  background-color: var(--mainThemeColor);
   min-height: 5em;
 }
 
@@ -18,7 +20,7 @@ nav > a {
   background: #9cc7d5;
   padding: 5px;
   border-radius: 10px 5px 10px 5px;
-  border: 2px solid #96cadb;
+  border: 2px solid rgba(150, 202, 219, 0.2);
   user-select: none;
   margin: 5px;
   display: flex;

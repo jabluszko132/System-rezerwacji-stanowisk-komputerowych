@@ -1,6 +1,6 @@
 td {
   margin: 0;
-  background: #4eb0d1;
+  background: var(--mainThemeColor);
 }
 
 @media (forced-colors: active) {

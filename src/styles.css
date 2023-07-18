@@ -7,6 +7,11 @@
 
     ICE: sans serif (ouch)
 */
+
+:root {
+  --mainThemeColor: #1f366b;
+}
+
 * {
   font-family: 'Roboto', 'sans-serif';
 }
