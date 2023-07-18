@@ -4,6 +4,12 @@
   overflow: hidden;
 } */
 
+@media (forced-colors: active) {
+  td {
+    border: 1px solid;
+  }
+}
+
 td {
   text-align: center;
   padding: 0.4em;

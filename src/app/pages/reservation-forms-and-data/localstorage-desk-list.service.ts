@@ -33,6 +33,7 @@ export class LocalstorageDeskListService {
   }
 
   private pushDeskListToLS(): void {
+    console.log('fetch');
     localStorage.setItem('deskList', JSON.stringify(this.deskList));
   }
 
