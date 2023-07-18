@@ -37,10 +37,10 @@ h3 {
 input[type='submit'] {
   border-radius: 15px;
   font-size: 1em;
-  font-weight: 100;
+  font-weight: 200;
   font-family: 'Geologica';
   background: transparent;
-  outline: 1px solid #fff;
+  outline: 2px solid #fff;
   color: #fff;
   border: none;
   padding: 0.4em;
