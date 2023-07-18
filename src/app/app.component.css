@@ -42,9 +42,6 @@ nav > a:focus {
 nav > a:focus-visible {
   outline: none;
 }
-/* nav > a:hover {
-  cursor: pointer;
-} */
 
 nav {
   display: flex;

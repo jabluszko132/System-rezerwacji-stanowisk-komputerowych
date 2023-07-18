@@ -38,15 +38,22 @@ input[type='submit'] {
   font-size: 1em;
   font-weight: 100;
   font-family: 'Geologica';
-  background: rgb(221, 216, 216);
-  outline: 1px solid white;
+  background: transparent;
+  outline: 1px solid #fff;
+  color: #fff;
   border: none;
   padding: 0.4em;
   user-select: none;
 }
 
-input[type='submit']:hover {
+input[type='submit']:not(:focus-within):hover {
   outline: 2px solid;
+  font-weight: 200;
+}
+
+input[type='submit']:focus-within {
+  background-color: #fff;
+  color: #4eb0d1;
 }
 
 .inputErrors {
