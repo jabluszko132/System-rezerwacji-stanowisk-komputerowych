@@ -3,6 +3,12 @@ td {
   background: #4eb0d1;
 }
 
+@media (forced-colors: active) {
+  td {
+    border: 1px solid;
+  }
+}
+
 table > tr:first-of-type {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
