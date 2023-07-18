@@ -47,10 +47,10 @@ export class LocalstorageDeskListService {
     let deskListInLS: string | null = localStorage.getItem('deskList');
     if (deskListInLS != null) {
       this.deskList = JSON.parse(deskListInLS);
-      if (this.deskList.find((m: any) => m.deskID == newDeskId)) {
-        alert('stanowisko już istnieje');
-        return of(false);
-      }
+    }
+    if (this.deskList.find((m: any) => m.deskID == newDeskId)) {
+      alert('stanowisko już istnieje');
+      return of(false);
     }
     this.deskList.push({ deskID: newDeskId });
     this.pushDeskListToLS();
