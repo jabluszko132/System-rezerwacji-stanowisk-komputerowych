@@ -1,31 +1,19 @@
-tr {
+/* tr {
   outline: 1px solid;
   border-collapse: collapse;
   overflow: hidden;
-}
-tr {
-  outline: 1px solid;
-  border-collapse: collapse;
-  overflow: hidden;
-}
-table > tr:first-of-type {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-table > tr:last-of-type {
-  border-end-start-radius: 10px;
-  border-end-end-radius: 10px;
-}
+} */
+
 td {
   text-align: center;
   padding: 0.4em;
   border-radius: inherit;
+  background: #4eb0d1;
 }
 
 td:hover {
   transform: scale(1.06);
-  background-color: #4eb0d1;
-  outline: 1px solid;
+  outline: 2px solid;
   z-index: 1;
 }
 
@@ -37,6 +25,29 @@ td:hover {
 }
 
 table {
-  background: #4eb0d1;
+  background: #fff;
   border-radius: 10px 10px;
 }
+
+a {
+  user-select: none;
+}
+a:hover {
+  cursor: pointer;
+}
+/* td border start */
+
+table > tr:first-of-type > td:first-of-type {
+  border-top-left-radius: 10px;
+}
+table > tr:first-of-type > td:last-of-type {
+  border-top-right-radius: 10px;
+}
+table > tr:last-of-type > td:first-of-type {
+  border-end-start-radius: 10px;
+}
+table > tr:last-of-type > td:last-of-type {
+  border-end-end-radius: 10px;
+}
+
+/* td border end */
