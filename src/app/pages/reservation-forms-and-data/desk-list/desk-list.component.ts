@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Desk } from '../desk';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
 @Component({
@@ -13,10 +14,12 @@ export class DeskListComponent implements OnInit {
   deskList: Observable<any> = this.service.getDeskList();
 
   ngOnInit() {
-    this.deskList.subscribe(() => {});
+    this.deskList.subscribe((w) => {
+      console.log('deskL: ' + w);
+    });
   }
 
-  deleteDesk(deskID: number): void {
-    this.service.deleteDesk(deskID);
+  deleteDesk(desk: Desk): void {
+    this.service.deleteDesk(desk);
   }
 }

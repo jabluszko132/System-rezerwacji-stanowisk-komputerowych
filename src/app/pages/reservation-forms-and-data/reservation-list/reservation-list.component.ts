@@ -13,7 +13,9 @@ export class ReservationListComponent implements OnInit {
   reservationList: Observable<any> = this.service.getReservationList();
 
   ngOnInit() {
-    this.reservationList.subscribe(() => {});
+    this.reservationList.subscribe((w) => {
+      console.log('reservationL' + w);
+    });
   }
 
   deleteReservation(reservation: Reservation): void {

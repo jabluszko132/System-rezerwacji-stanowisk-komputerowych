@@ -16,15 +16,19 @@ export class LocalstorageDeskListService {
       date.getDate().toString().padStart(2, '0')
     );
   }
-
+  value: any;
   reservationList: Reservation[] = [];
   deskList: Desk[] = [];
 
   getReservationList(): Observable<Reservation[]> {
+    this.value = localStorage.getItem('reservationList');
+    this.reservationList = this.value ? JSON.parse(this.value) : [];
     return of(this.reservationList);
   }
 
   getDeskList(): Observable<Desk[]> {
+    this.value = localStorage.getItem('deskList');
+    this.deskList = this.value ? JSON.parse(this.value) : [];
     return of(this.deskList);
   }
 
@@ -59,6 +63,7 @@ export class LocalstorageDeskListService {
       ];
     }
     this.pushDeskListToLS();
+    console.log(this.deskList);
     return of(true);
   }
 
@@ -110,15 +115,14 @@ export class LocalstorageDeskListService {
     return of(false);
   }
 
-  deleteDesk(deskId: number): Observable<Boolean> {
-    let deskToDeleteIndex: number = this.deskList.indexOf({
-      deskID: deskId,
-    });
+  deleteDesk(desk: Desk): Observable<Boolean> {
+    console.log(this.deskList);
+    let deskToDeleteIndex: number = this.deskList.indexOf(desk);
     if (deskToDeleteIndex == -1) {
       alert('Nie ma takiego stanowiska');
       return of(false);
     }
-    if (this.reservationList.find((m: any) => m.deskID == deskId)) {
+    if (this.reservationList.find((m: any) => m.deskID == desk.deskID)) {
       alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
       return of(false);
     }
