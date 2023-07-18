@@ -64,10 +64,6 @@ export class LocalstorageDeskListService {
   }
 
   reserveDesk(reserveObj: Reservation): Observable<boolean> {
-    if (reserveObj.reservedBy === '') {
-      alert('Musi istnieć osoba dokonująca rezerwacji');
-      return of(false);
-    }
     if (reserveObj.reservationDate < this.currentDateString()) {
       alert('Data rezerwacji jest wcześniejsza niż obecna');
       return of(false);
