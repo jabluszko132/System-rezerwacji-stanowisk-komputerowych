@@ -10,6 +10,7 @@
 
 :root {
   --mainThemeColor: #1f366b;
+  --pageBackgroundColor: #23282d;
 }
 
 * {
@@ -18,7 +19,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: rgb(35, 40, 45);
+  background: var(--pageBackgroundColor);
   color: white;
   display: flex;
   justify-content: center;
