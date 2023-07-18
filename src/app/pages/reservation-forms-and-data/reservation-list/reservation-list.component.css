@@ -1,5 +1,5 @@
 tr {
-  border: 1px solid;
+  outline: 1px solid;
   overflow: hidden;
 }
 table > tr:first-of-type {
@@ -14,16 +14,14 @@ table > tr:last-of-type {
 td {
   text-align: center;
   padding: 0.4em;
-  border-collapse: collapse;
-  border: 1px solid;
 }
-/* tr > td:not(:first-of-type):not(:last-of-type) {
+tr > td:not(:first-of-type):not(:last-of-type) {
   outline: 1px solid;
-} */
+}
 td:hover {
   transform: scale(1.06);
   background: #45b6db;
-  outline: 1px solid;
+  outline: 2px solid;
 }
 
 tr:hover {
