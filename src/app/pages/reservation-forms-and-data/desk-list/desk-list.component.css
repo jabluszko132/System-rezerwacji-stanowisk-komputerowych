@@ -1,9 +1,3 @@
-/* tr {
-  outline: 1px solid;
-  border-collapse: collapse;
-  overflow: hidden;
-} */
-
 @media (forced-colors: active) {
   td {
     border: 1px solid;
