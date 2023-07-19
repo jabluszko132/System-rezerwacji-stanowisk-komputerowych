@@ -37,6 +37,7 @@ tr > td:last-of-type:hover {
 }
 
 :host {
+  height: fit-content;
   margin: 1em;
   display: flex;
   justify-content: center;
