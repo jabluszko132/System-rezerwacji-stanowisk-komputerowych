@@ -8,6 +8,7 @@ label {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  line-height: 2em;
 }
 label > input {
   width: 40%;
@@ -27,6 +28,7 @@ form {
 
 h3 {
   font-size: 2em;
+  margin-bottom: 2em;
 }
 
 :host {
@@ -45,6 +47,7 @@ input[type='submit'] {
   border: none;
   padding: 0.4em;
   user-select: none;
+  margin-top: 1em;
 }
 
 input[type='submit']:hover {
