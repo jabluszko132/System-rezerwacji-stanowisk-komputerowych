@@ -52,7 +52,8 @@ export class LocalstorageDeskListService {
    * Updates localStorage deskList to local deskList's value
    */
   private pushDeskListToLS(): void {
-    console.log('fetch');
+    console.log('fetch (deskList)');
+    this.sortDeskList();
     localStorage.setItem('deskList', JSON.stringify(this.deskList));
   }
 
@@ -68,9 +69,7 @@ export class LocalstorageDeskListService {
   }
 
   private sortDeskList(): void {
-    this.deskList.sort((a, b) => {
-      return a.deskID - b.deskID;
-    });
+    this.deskList.sort((a, b) => a.deskID - b.deskID);
   }
 
   private sortReservationListByDate(): void {
