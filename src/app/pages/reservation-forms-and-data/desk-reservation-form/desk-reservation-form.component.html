@@ -2,12 +2,12 @@
   <h3 class="bigTxtFont">Rezerwacja</h3>
   <label
     >Numer stanowiska:
-    <input name="deskID" type="number" formControlName="deskID" />
-    <!-- <select>
-      <optgroup *ngFor="let desk of deskList | async" formControlName="deskID">
-        <option value="[desk.deskID]">{{ desk.deskID }}</option>
-      </optgroup>
-    </select> -->
+    <!-- <input name="deskID" type="number" formControlName="deskID" /> -->
+    <select formControlName="deskID">
+      <option *ngFor="let desk of deskList | async" value="{{ desk.deskID }}">
+        {{ desk.deskID }}
+      </option>
+    </select>
   </label>
   <div *ngIf="deskID.touched && deskID.invalid" class="inputErrors">
     To pole nie może być puste

@@ -3,6 +3,7 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import {  FormBuilder, Validators } from '@angular/forms';
 import {filter, Subject, switchMap} from 'rxjs';
 import { Reservation } from '../reservation';
+import { Desk } from '../desk';
 
 const action$ = new Subject<Reservation>
 
@@ -18,7 +19,6 @@ export class DeskReservationFormComponent implements OnInit {
   ) {}
 
   deskList = this.service.getDeskList();
-
 
   reservationForm = this.fb.group({
     deskID: [1,Validators.required],
@@ -37,6 +37,7 @@ export class DeskReservationFormComponent implements OnInit {
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
   }
   reserveDesk(): void {
+    console.log(this.deskID.value)
     if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors)
     {
       alert('Podaj poprawne wartości we wszystkich polach formularza')
