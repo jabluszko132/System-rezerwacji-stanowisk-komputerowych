@@ -7,11 +7,14 @@
 td {
   text-align: center;
   padding: 0.4em;
-  border-radius: inherit;
 }
 
 tr:first-of-type > td {
   background: rgb(var(--mainRgbThemeColor));
+}
+
+tr:last-of-type {
+  border-radius: 0 0 10px 10px;
 }
 
 tr:not(:first-of-type) > td {
@@ -19,8 +22,9 @@ tr:not(:first-of-type) > td {
 }
 
 tr:not(:first-of-type):hover {
-  transform: scale(1.02);
+  transform: scale(1.06);
   transition: 100ms;
+  outline: 2px solid;
   background: #fff;
 }
 
@@ -48,8 +52,9 @@ a {
 }
 
 tr:not(:first-of-type) > td:last-of-type {
-  width: 15%;
+  width: 18%;
   background: var(--pageBackgroundColor);
+  user-select: none;
 }
 
 tr:not(:first-of-type) > td:last-of-type:hover {

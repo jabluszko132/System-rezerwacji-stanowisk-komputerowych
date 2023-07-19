@@ -1,3 +1,9 @@
+@media (forced-colors: active) {
+  td {
+    border: 1px solid;
+  }
+}
+
 td {
   margin: 0;
   text-align: center;
@@ -12,12 +18,8 @@ tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
-@media (forced-colors: active) {
-  td {
-    border: 1px solid;
-  }
-}
-
+/* v Didnt use border: because inheritance wouldnt be working when both selectors apply */
+/*  (that happens when the table is empty) */
 table > tr:first-of-type {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -37,6 +39,7 @@ tr:not(:first-of-type):hover {
 
 tr:not(:first-of-type) > td:last-of-type {
   background: var(--pageBackgroundColor);
+  user-select: none;
 }
 
 tr:not(:first-of-type) > td:last-of-type:hover {
