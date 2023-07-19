@@ -22,6 +22,7 @@ export class LocalstorageDeskListService {
 
   getReservationList(): Observable<Reservation[]> {
     this.forceReservationListRefresh();
+    this.deleteExpiredReservations();
     return of(this.reservationList);
   }
 
@@ -165,6 +166,24 @@ export class LocalstorageDeskListService {
     this.reservationList.splice(reservationToDeleteIndex, 1);
     this.pushReservationListToLS();
     return of(true);
+  }
+
+  /**
+   * This is an unsafe but faster version of deleteReservation method.
+   * It doesnt check if the desk exists on the table. Dont use it
+   * unless you are absolutely sure that the element exists
+   */
+  private unsafeDeleteReservation(reservation: Reservation) {
+    this.reservationList.splice(this.reservationList.indexOf(reservation), 1);
+    this.pushReservationListToLS();
+  }
+
+  deleteExpiredReservations(): void {
+    for (let reservation of this.reservationList) {
+      if (reservation.reservationDate < this.currentDateString()) {
+        this.unsafeDeleteReservation(reservation);
+      } else return;
+    }
   }
 
   //todo
