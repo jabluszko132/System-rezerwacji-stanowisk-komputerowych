@@ -7,7 +7,7 @@
       <option value=[desk.deskID]>{{desk.deskID}}</option>
     </select> -->
   </label>
-  <div *ngIf="deskID.invalid" class="inputErrors">
+  <div *ngIf="deskID.touched && deskID.invalid" class="inputErrors">
     To pole nie może być puste
   </div>
   <br />

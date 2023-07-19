@@ -48,13 +48,13 @@ input[type='submit'] {
 }
 
 input[type='submit']:hover {
-  outline: 2px solid;
-  font-weight: 200;
+  outline: 3px solid;
+  font-weight: 300;
 }
 
 input[type='submit']:focus-within {
   background-color: var(--secondaryThemeColor);
-  color: transparent;
+  color: var(--mainThemeColor);
 }
 
 .inputErrors {

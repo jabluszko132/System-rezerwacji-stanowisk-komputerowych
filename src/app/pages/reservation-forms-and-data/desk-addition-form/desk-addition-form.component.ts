@@ -20,7 +20,10 @@ export class DeskAdditionFormComponent implements OnInit {
       return this.service.addDesk(d)})).subscribe();
   }
   addDesk() {
-    if(this.newDeskID.invalid) return;
+    if(this.newDeskID.invalid) {
+      alert('Proszę podać ID nowego stanowiska')
+      return;
+    }
     action$.next(this.newDeskID.value);
   }
 }
