@@ -28,7 +28,7 @@ td:hover {
   outline: 2px solid;
 }
 
-tr:hover > td:not(:hover) {
+tr:not(:first-of-type):hover > td:not(:hover):not(:last-of-type) {
   background: #aaa;
 }
 
