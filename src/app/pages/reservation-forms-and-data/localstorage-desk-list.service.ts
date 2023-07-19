@@ -21,14 +21,12 @@ export class LocalstorageDeskListService {
   deskList: Desk[] = [];
 
   getReservationList(): Observable<Reservation[]> {
-    this.value = localStorage.getItem('reservationList');
-    this.reservationList = this.value ? JSON.parse(this.value) : [];
+    this.forceReservationListRefresh();
     return of(this.reservationList);
   }
 
   getDeskList(): Observable<Desk[]> {
-    this.value = localStorage.getItem('deskList');
-    this.deskList = this.value ? JSON.parse(this.value) : [];
+    this.forceDeskListRefresh();
     return of(this.deskList);
   }
 
@@ -41,13 +39,13 @@ export class LocalstorageDeskListService {
     this.deskList = this.value ? JSON.parse(this.value) : [];
   }
 
-  // /**
-  //  * Forces this instance's local reservationList value to change to the one in localStorage
-  //  */
-  // private forceReservationListRefresh(): void {
-  //   this.value = localStorage.getItem('reservationList');
-  //   this.reservationList = this.value ? JSON.parse(this.value) : [];
-  // }
+  /**
+   * Forces this instance's local reservationList value to change to the one in localStorage
+   */
+  private forceReservationListRefresh(): void {
+    this.value = localStorage.getItem('reservationList');
+    this.reservationList = this.value ? JSON.parse(this.value) : [];
+  }
 
   /**
    * Updates localStorage deskList to local deskList's value
@@ -61,19 +59,38 @@ export class LocalstorageDeskListService {
    * Updates localStorage reservationList to local reservationList's value
    */
   private pushReservationListToLS(): void {
+    this.sortReservationListByDate();
     localStorage.setItem(
       'reservationList',
       JSON.stringify(this.reservationList)
     );
   }
 
-  addDesk(newDeskId: number): Observable<boolean> {
+  private sortDeskList(): void {
+    this.deskList.sort((a, b) => {
+      return a.deskID - b.deskID;
+    });
+  }
+
+  private sortReservationListByDate(): void {
+    this.reservationList.sort((a, b) => {
+      if (a.reservationDate > b.reservationDate) return 1;
+      if (a.reservationDate < b.reservationDate) return -1;
+      return 0;
+    });
+  }
+
+  /**
+   * Adds desk to deskList (both service's and localStorage)
+   */
+
+  addDesk(newDesk: Desk): Observable<boolean> {
     this.forceDeskListRefresh();
-    if (this.deskList.find((m: any) => m.deskID == newDeskId)) {
+    if (this.deskList.find((m: any) => m.deskID === newDesk.deskID)) {
       alert('stanowisko już istnieje');
       return of(false);
     }
-    this.deskList.push({ deskID: newDeskId });
+    this.deskList.push(newDesk);
     this.pushDeskListToLS();
     console.log(this.deskList);
     return of(true);
