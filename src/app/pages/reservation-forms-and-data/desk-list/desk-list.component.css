@@ -28,7 +28,7 @@ td:hover {
 table {
   background: var(--secondaryThemeColor);
   border-radius: 10px 10px;
-  min-width: 32%;
+  max-width: 135px;
 }
 
 a {
