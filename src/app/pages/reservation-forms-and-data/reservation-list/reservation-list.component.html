@@ -8,13 +8,12 @@
     <td>{{ desk.deskID }}</td>
     <td>{{ desk.reservedBy }}</td>
     <td>{{ desk.reservationDate }}</td>
-    <td>
-      <a
-        (click)="deleteReservation(desk)"
-        tabindex="0"
-        (keydown.enter)="deleteReservation(desk)"
-        >x</a
-      >
+    <td
+      (click)="deleteReservation(desk)"
+      tabindex="0"
+      (keydown.enter)="deleteReservation(desk)"
+      title="usuń"
+    >x
     </td>
   </tr>
 </table>

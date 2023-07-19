@@ -4,13 +4,13 @@
   </tr>
   <tr *ngFor="let desk of deskList | async">
     <td>{{ desk.deskID }}</td>
-    <td>
-      <a
-        (click)="deleteDesk(desk)"
-        tabindex="0"
-        (keydown.enter)="deleteDesk(desk)"
-        >x</a
-      >
+    <td
+      (click)="deleteDesk(desk)"
+      tabindex="0"
+      (keydown.enter)="deleteDesk(desk)"
+      title="usuń"
+    >
+      x
     </td>
   </tr>
 </table>

@@ -32,6 +32,10 @@ tr:hover > td:not(:hover) {
   background: #aaa;
 }
 
+tr > td:last-of-type:hover {
+  cursor: pointer;
+}
+
 :host {
   margin: 1em;
   display: flex;

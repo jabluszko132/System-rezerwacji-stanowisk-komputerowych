@@ -38,7 +38,8 @@ table {
 a {
   user-select: none;
 }
-a:hover {
+
+tr > td:last-of-type:hover {
   cursor: pointer;
 }
 /* td border start */

@@ -62,6 +62,3 @@ app-root {
 a {
   user-select: none;
 }
-a:hover {
-  cursor: pointer;
-}
