@@ -21,7 +21,7 @@ body {
   margin: 0;
   padding: 0;
   background: var(--pageBackgroundColor);
-  color: white;
+  color: var(--secondaryThemeColor);
   display: flex;
   justify-content: center;
   max-width: 100vw;
