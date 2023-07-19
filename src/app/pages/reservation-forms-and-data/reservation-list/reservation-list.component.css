@@ -37,6 +37,7 @@ tr:not(:first-of-type) > td:last-of-type {
 }
 
 tr:not(:first-of-type) > td:last-of-type:hover {
+  background-color: red;
   cursor: pointer;
 }
 
