@@ -18,8 +18,13 @@ tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
+tr:not(:first-of-type):hover {
+  transform: scale(1.02);
+  transition: 100ms;
+  background: #fff;
+}
+
 td:hover {
-  transform: scale(1.06);
   outline: 2px solid;
   z-index: 1;
 }

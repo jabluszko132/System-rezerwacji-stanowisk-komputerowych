@@ -30,6 +30,7 @@ table > tr:last-of-type {
 
 tr:not(:first-of-type):hover {
   transform: scale(1.02);
+  transition: 100ms;
   outline: 2px solid;
   background: var(--secondaryThemeColor);
 }

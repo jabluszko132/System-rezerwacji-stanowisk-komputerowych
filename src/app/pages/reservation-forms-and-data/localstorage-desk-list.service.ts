@@ -109,7 +109,7 @@ export class LocalstorageDeskListService {
           this.addReservationOnNewDate(reserveObj);
           return of(true);
         } else {
-          alert('nie można zarezerwować tego stanowiska');
+          alert('To stanowisko już jest zarezerwowane w tym dniu');
         }
       } else {
         this.addReservationOnNewDate(reserveObj);
