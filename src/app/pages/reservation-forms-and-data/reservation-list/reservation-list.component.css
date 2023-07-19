@@ -1,6 +1,6 @@
 td {
   margin: 0;
-  background: var(--mainThemeColor);
+  background: rgb(var(--mainRgbThemeColor));
 }
 
 @media (forced-colors: active) {
@@ -23,13 +23,14 @@ td {
   text-align: center;
   padding: 0.4em;
 }
-td:hover {
-  transform: scale(1.06);
-  outline: 2px solid;
+td:not(:last-of-type):hover {
+  /* transform: scale(1.06); */
+  outline: 3px solid;
 }
 
-tr:not(:first-of-type):hover > td:not(:hover):not(:last-of-type) {
-  background: #aaa;
+tr:not(:first-of-type):hover {
+  transform: scale(1.06);
+  outline: 2px solid;
 }
 
 tr:not(:first-of-type) > td:last-of-type {

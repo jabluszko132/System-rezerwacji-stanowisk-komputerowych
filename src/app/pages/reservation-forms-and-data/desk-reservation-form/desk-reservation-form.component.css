@@ -16,7 +16,7 @@ label > input {
 form {
   padding: 1em 3.5em 2.5em 3.5em;
   margin: 1em;
-  background-color: var(--mainThemeColor);
+  background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
   max-width: 310px;
   max-height: 24em;
@@ -52,7 +52,7 @@ input[type='submit']:hover {
 
 input[type='submit']:focus-within {
   background-color: var(--secondaryThemeColor);
-  color: var(--mainThemeColor);
+  color: rgb(var(--mainRgbThemeColor));
 }
 
 div.inputErrors {

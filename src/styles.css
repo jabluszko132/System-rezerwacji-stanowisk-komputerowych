@@ -9,7 +9,7 @@
 */
 
 :root {
-  --mainThemeColor: #214c8c;
+  --mainRgbThemeColor: 33, 76, 140;
   --secondaryThemeColor: #fff;
   --pageBackgroundColor: #23282d;
 }

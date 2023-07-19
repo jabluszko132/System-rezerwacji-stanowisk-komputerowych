@@ -2,7 +2,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--mainThemeColor);
+  background: rgb(var(--mainRgbThemeColor));
   min-height: 5em;
 }
 

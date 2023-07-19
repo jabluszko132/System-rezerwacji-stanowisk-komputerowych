@@ -8,7 +8,7 @@ td {
   text-align: center;
   padding: 0.4em;
   border-radius: inherit;
-  background: var(--mainThemeColor);
+  background: rgb(var(--mainRgbThemeColor));
 }
 
 td:hover {
