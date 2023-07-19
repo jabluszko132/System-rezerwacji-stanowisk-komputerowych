@@ -7,6 +7,7 @@ const date = new Date();
 @Injectable()
 export class LocalstorageDeskListService {
   constructor() {}
+
   private currentDateString(): string {
     return (
       date.getFullYear().toString().padStart(4, '0') +
@@ -53,7 +54,7 @@ export class LocalstorageDeskListService {
    */
   private pushDeskListToLS(): void {
     console.log('fetch (deskList)');
-    this.sortDeskList();
+    // this.sortDeskList();
     localStorage.setItem('deskList', JSON.stringify(this.deskList));
   }
 
@@ -68,9 +69,9 @@ export class LocalstorageDeskListService {
     );
   }
 
-  private sortDeskList(): void {
-    this.deskList.sort((a, b) => a.deskID - b.deskID);
-  }
+  // private sortDeskList(): void {
+  //   this.deskList.sort((a, b) => a.deskID - b.deskID);
+  // }
 
   private sortReservationListByDate(): void {
     this.reservationList.sort((a, b) => {
@@ -82,17 +83,36 @@ export class LocalstorageDeskListService {
 
   /**
    * Adds desk to deskList (both service's and localStorage)
+   *
+   * @Issues
+   * Somehow somewhere during v1 of this function the of(this.deskList)
+   * observables (previously passed by getDeskList()) bug out and
+   * stop passing values.
+   *
+   * But somehow the v2 works even though its less optimal. May be that refreshing the list
+   * during that function bugs it out
    */
 
   addDesk(newDesk: Desk): Observable<boolean> {
-    this.forceDeskListRefresh();
-    if (this.deskList.find((m: any) => m.deskID === newDesk.deskID)) {
+    // --------------- 1st version (see: @Issues) ----------------
+    // this.forceDeskListRefresh();
+    // if (this.deskList.find((m: any) => m.deskID === newDesk.deskID)) {
+    //   alert('stanowisko już istnieje');
+    //   return of(false);
+    // }
+    // this.deskList.push(newDesk);
+    // this.pushDeskListToLS();
+    // console.log(this.deskList);
+    // return of(true);
+    // ------------------ 2nd version ---------------------------
+    let deskListInLS: any = localStorage.getItem('deskList') ?? [];
+    deskListInLS = JSON.parse(deskListInLS as string) ?? [];
+    if (deskListInLS.find((m: any) => m.deskID === newDesk.deskID)) {
       alert('stanowisko już istnieje');
       return of(false);
     }
     this.deskList.push(newDesk);
     this.pushDeskListToLS();
-    console.log(this.deskList);
     return of(true);
   }
 
@@ -169,7 +189,7 @@ export class LocalstorageDeskListService {
 
   /**
    * This is an unsafe but faster version of deleteReservation method.
-   * It doesnt check if the desk exists on the table. Dont use it
+   * It doesnt check if the reservation exists on the table. Dont use it
    * unless you are absolutely sure that the element exists
    */
   private unsafeDeleteReservation(reservation: Reservation) {
