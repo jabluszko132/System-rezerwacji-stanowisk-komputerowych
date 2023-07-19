@@ -32,11 +32,34 @@ export class LocalstorageDeskListService {
     return of(this.deskList);
   }
 
+  /**
+   * Forces this instance's local deskList value to change to the one in localStorage
+   *
+   */
+  private forceDeskListRefresh(): void {
+    this.value = localStorage.getItem('deskList');
+    this.deskList = this.value ? JSON.parse(this.value) : [];
+  }
+
+  // /**
+  //  * Forces this instance's local reservationList value to change to the one in localStorage
+  //  */
+  // private forceReservationListRefresh(): void {
+  //   this.value = localStorage.getItem('reservationList');
+  //   this.reservationList = this.value ? JSON.parse(this.value) : [];
+  // }
+
+  /**
+   * Updates localStorage deskList to local deskList's value
+   */
   private pushDeskListToLS(): void {
     console.log('fetch');
     localStorage.setItem('deskList', JSON.stringify(this.deskList));
   }
 
+  /**
+   * Updates localStorage reservationList to local reservationList's value
+   */
   private pushReservationListToLS(): void {
     localStorage.setItem(
       'reservationList',
@@ -45,10 +68,7 @@ export class LocalstorageDeskListService {
   }
 
   addDesk(newDeskId: number): Observable<boolean> {
-    let deskListInLS: string | null = localStorage.getItem('deskList');
-    if (deskListInLS != null) {
-      this.deskList = JSON.parse(deskListInLS);
-    }
+    this.forceDeskListRefresh();
     if (this.deskList.find((m: any) => m.deskID == newDeskId)) {
       alert('stanowisko już istnieje');
       return of(false);
@@ -70,13 +90,13 @@ export class LocalstorageDeskListService {
       return of(false);
     }
     let deskListInLS: any = localStorage.getItem('deskList');
-    let reservationListInLS: any = localStorage.getItem('reservationList');
     if (deskListInLS != null) {
       deskListInLS = JSON.parse(deskListInLS);
       if (!deskListInLS.find((m: any) => m.deskID == reserveObj.deskID)) {
         alert('Nie ma takiego stanowiska');
         return of(false);
       }
+      let reservationListInLS: any = localStorage.getItem('reservationList');
       if (reservationListInLS != null) {
         reservationListInLS = JSON.parse(reservationListInLS);
         if (

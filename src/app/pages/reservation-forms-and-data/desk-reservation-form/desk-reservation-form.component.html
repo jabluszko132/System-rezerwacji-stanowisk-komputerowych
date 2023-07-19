@@ -3,8 +3,10 @@
   <label
     >Numer stanowiska:
     <input name="deskID" type="number" formControlName="deskID" />
-    <!-- <select *ngFor="let desk of deskList">
-      <option value=[desk.deskID]>{{desk.deskID}}</option>
+    <!-- <select>
+      <optgroup *ngFor="let desk of deskList | async" formControlName="deskID">
+        <option value="[desk.deskID]">{{ desk.deskID }}</option>
+      </optgroup>
     </select> -->
   </label>
   <div *ngIf="deskID.touched && deskID.invalid" class="inputErrors">
