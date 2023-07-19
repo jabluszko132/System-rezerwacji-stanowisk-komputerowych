@@ -32,7 +32,11 @@ tr:hover > td:not(:hover) {
   background: #aaa;
 }
 
-tr > td:last-of-type:hover {
+tr:not(:first-of-type) > td:last-of-type {
+  background: var(--pageBackgroundColor);
+}
+
+tr:not(:first-of-type) > td:last-of-type:hover {
   cursor: pointer;
 }
 

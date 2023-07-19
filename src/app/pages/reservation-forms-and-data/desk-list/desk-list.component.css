@@ -28,13 +28,20 @@ td:hover {
 table {
   background: var(--secondaryThemeColor);
   border-radius: 10px 10px;
+  min-width: 32%;
 }
 
 a {
   user-select: none;
 }
 
-tr > td:last-of-type:hover {
+tr:not(:first-of-type) > td:last-of-type {
+  width: 15%;
+  background: var(--pageBackgroundColor);
+}
+
+tr:not(:first-of-type) > td:last-of-type:hover {
+  background: #f00;
   cursor: pointer;
 }
 /* td border start */
