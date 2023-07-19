@@ -25,11 +25,10 @@ td {
 }
 td:hover {
   transform: scale(1.06);
-  background: #45b6db;
   outline: 2px solid;
 }
 
-tr:hover {
+tr:hover > td:not(:hover) {
   background: #aaa;
 }
 
@@ -41,7 +40,7 @@ tr:hover {
 }
 
 table {
-  background: #fff;
+  background: var(--secondaryThemeColor);
   border-radius: 10px 10px;
 }
 

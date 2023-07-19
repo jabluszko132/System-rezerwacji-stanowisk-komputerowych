@@ -41,19 +41,19 @@ input[type='submit'] {
   font-family: 'Geologica';
   background: transparent;
   outline: 2px solid var(--secondaryThemeColor);
-  color: #fff;
+  color: var(--secondaryThemeColor);
   border: none;
   padding: 0.4em;
   user-select: none;
 }
 
-input[type='submit']:not(:focus-within):hover {
+input[type='submit']:hover {
   outline: 2px solid;
   font-weight: 200;
 }
 
 input[type='submit']:focus-within {
-  background-color: #fff;
+  background-color: var(--secondaryThemeColor);
   color: transparent;
 }
 

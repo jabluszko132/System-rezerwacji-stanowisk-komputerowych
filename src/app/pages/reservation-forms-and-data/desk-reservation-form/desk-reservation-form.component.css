@@ -38,21 +38,21 @@ input[type='submit'] {
   font-weight: 200;
   font-family: 'Geologica';
   background: transparent;
-  outline: 2px solid #fff;
-  color: #fff;
+  outline: 2px solid var(--secondaryThemeColor);
+  color: var(--secondaryThemeColor);
   border: none;
   padding: 0.4em;
   user-select: none;
 }
 
-input[type='submit']:not(:focus-within):hover {
+input[type='submit']:hover {
   outline: 2px solid;
   font-weight: 200;
 }
 
 input[type='submit']:focus-within {
-  background-color: #fff;
-  color: #4eb0d1;
+  background-color: var(--secondaryThemeColor);
+  color: var(--mainThemeColor);
 }
 
 div.inputErrors {

@@ -31,7 +31,7 @@ td:hover {
 }
 
 table {
-  background: #fff;
+  background: var(--secondaryThemeColor);
   border-radius: 10px 10px;
 }
 
