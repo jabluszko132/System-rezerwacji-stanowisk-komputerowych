@@ -9,7 +9,7 @@
 */
 
 :root {
-  --mainThemeColor: #1f366b;
+  --mainThemeColor: #214c8c;
   --secondaryThemeColor: #fff;
   --pageBackgroundColor: #23282d;
 }
@@ -61,6 +61,9 @@ app-root {
 }
 ::-webkit-scrollbar-thumb {
   background-color: rgba(13, 15, 17, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(68, 72, 77, 0.7);
 }
 
 a {
