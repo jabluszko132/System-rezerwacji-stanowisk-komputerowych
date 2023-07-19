@@ -8,7 +8,14 @@ td {
   text-align: center;
   padding: 0.4em;
   border-radius: inherit;
+}
+
+tr:first-of-type > td {
   background: rgb(var(--mainRgbThemeColor));
+}
+
+tr:not(:first-of-type) > td {
+  background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
 td:hover {

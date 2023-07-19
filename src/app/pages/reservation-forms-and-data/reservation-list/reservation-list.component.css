@@ -1,6 +1,15 @@
 td {
   margin: 0;
+  text-align: center;
+  padding: 0.4em;
+}
+
+tr:first-of-type > td {
   background: rgb(var(--mainRgbThemeColor));
+}
+
+tr:not(:first-of-type) > td {
+  background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
 @media (forced-colors: active) {
@@ -19,18 +28,10 @@ table > tr:last-of-type {
   border-end-end-radius: 10px;
 }
 
-td {
-  text-align: center;
-  padding: 0.4em;
-}
-td:not(:last-of-type):hover {
-  /* transform: scale(1.06); */
-  outline: 3px solid;
-}
-
 tr:not(:first-of-type):hover {
   transform: scale(1.06);
   outline: 2px solid;
+  background: var(--secondaryThemeColor);
 }
 
 tr:not(:first-of-type) > td:last-of-type {
@@ -39,6 +40,7 @@ tr:not(:first-of-type) > td:last-of-type {
 
 tr:not(:first-of-type) > td:last-of-type:hover {
   background-color: red;
+  outline: 3px solid;
   cursor: pointer;
 }
 
