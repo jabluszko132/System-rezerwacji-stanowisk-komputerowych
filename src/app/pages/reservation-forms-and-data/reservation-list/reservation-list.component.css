@@ -29,7 +29,7 @@ table > tr:last-of-type {
 }
 
 tr:not(:first-of-type):hover {
-  transform: scale(1.06);
+  transform: scale(1.02);
   outline: 2px solid;
   background: var(--secondaryThemeColor);
 }
