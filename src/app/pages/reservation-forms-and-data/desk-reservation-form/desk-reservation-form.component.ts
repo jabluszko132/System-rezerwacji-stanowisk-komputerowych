@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import {  FormBuilder, Validators } from '@angular/forms';
-import {filter, Subject, switchMap} from 'rxjs';
+import {filter, Subject, switchMap, Observable} from 'rxjs';
 import { Reservation } from '../reservation';
 import { Desk } from '../desk';
 
@@ -18,8 +18,7 @@ export class DeskReservationFormComponent implements OnInit {
     private fb: FormBuilder,
   ) {}
 
-  deskList = this.service.getDeskList();
-
+  deskList$ :Observable<any> = this.service.getDeskList();
   reservationForm = this.fb.group({
     deskID: [1,Validators.required],
     reservedBy: ['', Validators.required],
@@ -30,8 +29,9 @@ export class DeskReservationFormComponent implements OnInit {
   reservedBy = this.reservationForm.controls.reservedBy;
   reservationDate = this.reservationForm.controls.reservationDate;
 
+
   ngOnInit() {
-    this.deskList.subscribe();
+    this.deskList$.subscribe();
     action$.pipe(filter(d => {
       return d == this.reservationForm.value
     }),switchMap(d => this.service.reserveDesk(d))).subscribe();
