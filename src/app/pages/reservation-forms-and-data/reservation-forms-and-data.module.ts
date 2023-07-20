@@ -22,6 +22,7 @@ import { DeskMalfunctionReportFormComponent } from './desk-malfunction-report-fo
     DeskAdditionFormComponent,
     DeskListComponent,
     ReservationListComponent,
+    DeskMalfunctionReportFormComponent,
   ],
   providers: [LocalstorageDeskListService, Validators],
 })
