@@ -7,6 +7,12 @@
 td {
   text-align: center;
   padding: 0.4em;
+  text-overflow: clip;
+}
+
+td:nth-of-type(2) {
+  max-width: 50vw;
+  overflow: auto;
 }
 
 tr:first-of-type > td {

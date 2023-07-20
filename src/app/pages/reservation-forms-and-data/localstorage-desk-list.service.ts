@@ -7,7 +7,11 @@ const date = new Date();
 
 @Injectable()
 export class LocalstorageDeskListService {
-  constructor() {}
+  constructor() {
+    this.forceReservationListRefresh();
+    this.forceDeskListRefresh();
+    this.forceMalfunctionReportsRefresh();
+  }
 
   private currentDateString(): string {
     return (
@@ -24,18 +28,15 @@ export class LocalstorageDeskListService {
   malfunctionReports: DeskMalfunctionReport[] = [];
 
   getReservationList(): Observable<Reservation[]> {
-    this.forceReservationListRefresh();
     // this.deleteExpiredReservations();
     return of(this.reservationList);
   }
 
   getDeskList(): Observable<Desk[]> {
-    this.forceDeskListRefresh();
     return of(this.deskList);
   }
 
   getMalfunctionReports(): Observable<DeskMalfunctionReport[]> {
-    this.forceMalfunctionReportsRefresh();
     return of(this.malfunctionReports);
   }
 
