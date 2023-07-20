@@ -1,9 +1,14 @@
 <table>
   <tr>
-    <td colspan="2">Numer stanowiska</td>
+    <td>Numer stanowiska</td>
+    <td colspan="2">Sprawne</td>
   </tr>
   <tr *ngFor="let desk of deskList$ | async">
     <td>{{ desk.deskID }}</td>
+    <td>
+      <ng-template [ngIf]="desk.functional">Tak</ng-template>
+      <ng-template [ngIf]="!desk.functional">Nie</ng-template>
+    </td>
     <td
       (click)="deleteDesk(desk)"
       tabindex="0"

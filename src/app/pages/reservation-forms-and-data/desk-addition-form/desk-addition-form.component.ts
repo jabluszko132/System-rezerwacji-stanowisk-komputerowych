@@ -17,7 +17,7 @@ export class DeskAdditionFormComponent implements OnInit, OnDestroy {
   newDeskID: FormControl = new FormControl(null,[Validators.required]);
   ngOnInit() {
     action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
-      return this.service.addDesk({deskID: d})}), takeUntil(endSubs$)).subscribe();
+      return this.service.addDesk({deskID: d, functional: true})}), takeUntil(endSubs$)).subscribe();
   }
   ngOnDestroy() {
     endSubs$.complete();

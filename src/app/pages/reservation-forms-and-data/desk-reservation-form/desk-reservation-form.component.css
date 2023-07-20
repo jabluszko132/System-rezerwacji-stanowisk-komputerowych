@@ -58,6 +58,7 @@ input[type='submit']:focus-within {
 div.inputErrors {
   color: red;
   height: 0;
+  user-select: none;
   position: relative;
   bottom: 1.5em;
   width: 100%;

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Reservation } from './reservation';
 import { Desk } from './desk';
+import { DeskMalfunctionReport } from './desk-malfunction-report';
 const date = new Date();
 
 @Injectable()
@@ -169,9 +170,9 @@ export class LocalstorageDeskListService {
     }
     if (this.reservationList.find((m: any) => m.deskID == desk.deskID)) {
       alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
-      if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
-        this.deleteReservationsOnDesk(desk);
-      else return of(false);
+      // if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
+      //   this.deleteReservationsOnDesk(desk); else
+      return of(false);
     }
     this.deskList.splice(deskToDeleteIndex, 1);
     this.pushDeskListToLS();
@@ -195,15 +196,15 @@ export class LocalstorageDeskListService {
    * It doesnt check if the reservation exists on the table. Dont use it
    * unless you are absolutely sure that the element exists
    */
-  private unsafeDeleteReservation(reservation: Reservation) {
-    try {
-      this.reservationList.splice(this.reservationList.indexOf(reservation), 1);
-      this.pushReservationListToLS();
-    } catch (e) {
-      console.error(e);
-    }
-    console.log('deleted reservation and pushed');
-  }
+  // private unsafeDeleteReservation(reservation: Reservation) {
+  //   try {
+  //     this.reservationList.splice(this.reservationList.indexOf(reservation), 1);
+  //     this.pushReservationListToLS();
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  //   console.log('deleted reservation and pushed');
+  // }
 
   // deleteExpiredReservations(): void {
   //   let currentDate = this.currentDateString();
@@ -214,24 +215,34 @@ export class LocalstorageDeskListService {
   //   }
   // }
 
-  deleteReservationsOnDesk(desk: Desk): void {
-    let reservation: Reservation | undefined = this.reservationList.find(
-      (m: any) => {
-        m.deskID == desk.deskID;
-      }
+  // deleteReservationsOnDesk(desk: Desk): void {
+  //   let reservationIndex: number = this.reservationList.findIndex((m: any) => {
+  //     m.deskID == desk.deskID;
+  //   });
+  //   console.log(reservationIndex);
+  //   while (reservationIndex != -1) {
+  //     this.unsafeDeleteReservation(this.reservationList[reservationIndex]);
+  //     reservationIndex = this.reservationList.findIndex((m: any) => {
+  //       m.deskID == desk.deskID;
+  //     });
+  //   }
+  // }
+
+  reportMalfunctionOnDesk(report: DeskMalfunctionReport): Observable<boolean> {
+    let reportedDeskIndex: number = this.deskList.findIndex(
+      (m) => m.deskID == report.deskID
     );
-    console.log(reservation);
-    while (reservation != undefined) {
-      this.unsafeDeleteReservation(reservation);
-      reservation = this.reservationList.find((m: any) => {
-        m.deskID == desk.deskID;
-      });
+    if (reportedDeskIndex != -1) {
+      this.deskList[reportedDeskIndex].functional = false;
+      this.pushDeskListToLS();
+      return of(true);
     }
+    alert('Nie ma takiego stanowiska');
+    return of(false);
   }
 
   //todo
-  //finish deleteReservationsOnDesk function
-  //endings of subscriptions in reasonable moments in every script that uses obeservables
   //add hours to reservations
   //add functional variable to desks and make the reservations possible only on true
+  //finish deleteReservationsOnDesk function
 }
