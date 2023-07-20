@@ -1,0 +1,79 @@
+@media (forced-colors: active) {
+  td {
+    border: 1px solid;
+  }
+}
+
+td {
+  text-align: center;
+  padding: 0.4em;
+}
+
+tr:first-of-type > td {
+  background: rgb(var(--mainRgbThemeColor));
+}
+
+tr:last-of-type {
+  border-radius: 0 0 10px 10px;
+}
+
+tr:not(:first-of-type) > td {
+  background: rgba(var(--mainRgbThemeColor), 0.85);
+}
+
+tr:not(:first-of-type):hover {
+  transform: scale(1.06);
+  transition: 100ms;
+  outline: 2px solid;
+  background: #fff;
+}
+
+td:hover {
+  outline: 2px solid;
+  z-index: 1;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1em;
+  height: fit-content;
+}
+
+table {
+  background: var(--secondaryThemeColor);
+  border-radius: 10px 10px;
+  max-width: 135px;
+}
+
+a {
+  user-select: none;
+}
+
+tr:not(:first-of-type) > td:last-of-type {
+  width: 18%;
+  background: var(--pageBackgroundColor);
+  user-select: none;
+}
+
+tr:not(:first-of-type) > td:last-of-type:hover {
+  background: #f00;
+  cursor: pointer;
+}
+/* td border start */
+
+table > tr:first-of-type > td:first-of-type {
+  border-top-left-radius: 10px;
+}
+table > tr:first-of-type > td:last-of-type {
+  border-top-right-radius: 10px;
+}
+table > tr:last-of-type > td:first-of-type {
+  border-end-start-radius: 10px;
+}
+table > tr:last-of-type > td:last-of-type {
+  border-end-end-radius: 10px;
+}
+
+/* td border end */

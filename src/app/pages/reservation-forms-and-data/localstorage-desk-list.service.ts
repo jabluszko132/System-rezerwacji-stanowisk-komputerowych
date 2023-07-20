@@ -34,6 +34,11 @@ export class LocalstorageDeskListService {
     return of(this.deskList);
   }
 
+  getMalfunctionReports(): Observable<DeskMalfunctionReport[]> {
+    this.forceMalfunctionReportsRefresh();
+    return of(this.malfunctionReports);
+  }
+
   /**
    * Forces this instance's local deskList value to change to the one in localStorage
    *
@@ -51,10 +56,10 @@ export class LocalstorageDeskListService {
     this.reservationList = this.value ? JSON.parse(this.value) : [];
   }
 
-  // private forceMalfunctionReportsRefresh(): void {
-  //   this.value = localStorage.getItem('malfunctionReports');
-  //   this.malfunctionReports = this.value ? JSON.parse(this.value) : [];
-  // }
+  private forceMalfunctionReportsRefresh(): void {
+    this.value = localStorage.getItem('malfunctionReports');
+    this.malfunctionReports = this.value ? JSON.parse(this.value) : [];
+  }
 
   /**
    * Updates localStorage deskList to local deskList's value
@@ -263,8 +268,32 @@ export class LocalstorageDeskListService {
     return of(false);
   }
 
+  dealtWithMalfunction(raport: DeskMalfunctionReport): Observable<boolean> {
+    let raportIndex = this.malfunctionReports.findIndex(
+      (m: any) => m == raport
+    );
+    if (raportIndex == -1) {
+      alert('Nie ma raportu o takiej usterce');
+      return of(false);
+    }
+    if (this.malfunctionReports[raportIndex].dealtWith) {
+      alert('Ta usterka już była nieaktualna');
+      return of(false);
+    }
+    this.malfunctionReports[raportIndex].dealtWith = true;
+    this.pushMalfunctionReportsToLS();
+    let deskIndex = this.deskList.findIndex(
+      (m: any) => m.deskID == this.malfunctionReports[raportIndex].deskID
+    );
+    if (deskIndex != -1) {
+      this.deskList[deskIndex].functional = true;
+      this.pushDeskListToLS();
+    }
+    return of(true);
+  }
+
   //todo
   //add hours to reservations
-  //add functional variable to desks and make the reservations possible only on true
+  //add 'functional' variable to desks and make the reservations possible only on true
   //finish deleteReservationsOnDesk function
 }

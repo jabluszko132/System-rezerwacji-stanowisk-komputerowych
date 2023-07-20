@@ -1,3 +1,20 @@
-<p>
-desk-malfunction-report-list works!!
-</p>
+<table>
+  <tr>
+    <td>Numer stanowiska</td>
+    <td>Opis</td>
+    <td colspan="2">Aktualne</td>
+  </tr>
+  <tr *ngFor="let report of reports$ | async">
+    <td>{{ report.deskID }}</td>
+    <td>
+      {{ report.description }}
+      <ng-template [ngIf]="report.description == ''">[Brak]</ng-template>
+    </td>
+    <td>
+      <ng-template [ngIf]="report.dealtWith">Nie</ng-template>
+      <ng-template [ngIf]="!report.dealtWith">Tak</ng-template>
+    </td>
+    <td>0</td>
+    <!--placeholder-->
+  </tr>
+</table>

@@ -11,9 +11,12 @@ const endSubs$: Subject<null> = new Subject<null>;
   styleUrls: ['./desk-malfunction-report-list.component.css'],
 })
 export class DeskMalfunctionReportListComponent implements OnInit, OnDestroy {
-  constructor() {}
-
-  ngOnInit() {}
+  constructor(private service : LocalstorageDeskListService) {}
+  reports$ = this.service.getMalfunctionReports();
+  
+  ngOnInit() {
+    this.reports$.pipe(takeUntil(endSubs$)).subscribe();
+  }
 
   ngOnDestroy() {
     endSubs$.complete();
