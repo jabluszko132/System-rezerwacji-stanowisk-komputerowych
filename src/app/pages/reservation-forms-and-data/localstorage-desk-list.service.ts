@@ -23,7 +23,7 @@ export class LocalstorageDeskListService {
 
   getReservationList(): Observable<Reservation[]> {
     this.forceReservationListRefresh();
-    this.deleteExpiredReservations();
+    // this.deleteExpiredReservations();
     return of(this.reservationList);
   }
 
@@ -53,7 +53,6 @@ export class LocalstorageDeskListService {
    * Updates localStorage deskList to local deskList's value
    */
   private pushDeskListToLS(): void {
-    console.log('fetch (deskList)');
     // this.sortDeskList();
     localStorage.setItem('deskList', JSON.stringify(this.deskList));
   }
@@ -84,16 +83,18 @@ export class LocalstorageDeskListService {
   /**
    * Adds desk to deskList (both service's and localStorage)
    *
-   * @Issues
-   * Somehow somewhere during v1 of this function the of(this.deskList)
-   * observables (previously passed by getDeskList()) bug out and
-   * stop passing values.
    *
-   * But somehow the v2 works even though its less optimal. May be that refreshing the list
-   * during that function bugs it out
    */
 
   addDesk(newDesk: Desk): Observable<boolean> {
+    /**@Issues
+     * Somehow somewhere during v1 of this function the of(this.deskList)
+     * observables (previously passed by getDeskList()) bug out and
+     * stop passing values.
+     *
+     * But somehow the v2 works even though its less optimal. May be that refreshing the list
+     * during that function bugs it out */
+
     // --------------- 1st version (see: @Issues) ----------------
     // this.forceDeskListRefresh();
     // if (this.deskList.find((m: any) => m.deskID === newDesk.deskID)) {
@@ -168,7 +169,9 @@ export class LocalstorageDeskListService {
     }
     if (this.reservationList.find((m: any) => m.deskID == desk.deskID)) {
       alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
-      return of(false);
+      if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
+        this.deleteReservationsOnDesk(desk);
+      else return of(false);
     }
     this.deskList.splice(deskToDeleteIndex, 1);
     this.pushDeskListToLS();
@@ -193,18 +196,42 @@ export class LocalstorageDeskListService {
    * unless you are absolutely sure that the element exists
    */
   private unsafeDeleteReservation(reservation: Reservation) {
-    this.reservationList.splice(this.reservationList.indexOf(reservation), 1);
-    this.pushReservationListToLS();
+    try {
+      this.reservationList.splice(this.reservationList.indexOf(reservation), 1);
+      this.pushReservationListToLS();
+    } catch (e) {
+      console.error(e);
+    }
+    console.log('deleted reservation and pushed');
   }
 
-  deleteExpiredReservations(): void {
-    for (let reservation of this.reservationList) {
-      if (reservation.reservationDate < this.currentDateString()) {
-        this.unsafeDeleteReservation(reservation);
-      } else return;
+  // deleteExpiredReservations(): void {
+  //   let currentDate = this.currentDateString();
+  //   for (let reservation of this.reservationList) {
+  //     if (reservation.reservationDate < currentDate) {
+  //       this.unsafeDeleteReservation(reservation);
+  //     } else return;
+  //   }
+  // }
+
+  deleteReservationsOnDesk(desk: Desk): void {
+    let reservation: Reservation | undefined = this.reservationList.find(
+      (m: any) => {
+        m.deskID == desk.deskID;
+      }
+    );
+    console.log(reservation);
+    while (reservation != undefined) {
+      this.unsafeDeleteReservation(reservation);
+      reservation = this.reservationList.find((m: any) => {
+        m.deskID == desk.deskID;
+      });
     }
   }
 
   //todo
+  //finish deleteReservationsOnDesk function
   //endings of subscriptions in reasonable moments in every script that uses obeservables
+  //add hours to reservations
+  //add functional variable to desks and make the reservations possible only on true
 }

@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import {  FormBuilder, Validators } from '@angular/forms';
-import {filter, Subject, switchMap, Observable} from 'rxjs';
+import {filter, Subject, switchMap, takeUntil} from 'rxjs';
 import { Reservation } from '../reservation';
-import { Desk } from '../desk';
 
-const action$ = new Subject<Reservation>
+const action$: Subject<any> = new Subject<any>;
+const endSubs$: Subject<null> = new Subject<null>;
 
 @Component({
   selector: 'app-desk-reservation-form',
   templateUrl: './desk-reservation-form.component.html',
   styleUrls: ['./desk-reservation-form.component.css'],
 })
-export class DeskReservationFormComponent implements OnInit {
+export class DeskReservationFormComponent implements OnInit, OnDestroy {
   constructor(
     private service: LocalstorageDeskListService,
     private fb: FormBuilder,
@@ -34,8 +34,13 @@ export class DeskReservationFormComponent implements OnInit {
     // this.deskList$.subscribe();
     action$.pipe(filter(d => {
       return d == this.reservationForm.value
-    }),switchMap(d => this.service.reserveDesk(d))).subscribe();
+    }),switchMap(d => this.service.reserveDesk(d)),takeUntil(endSubs$)).subscribe();
   }
+
+  ngOnDestroy() {
+    endSubs$.complete();
+  }
+
   reserveDesk(): void {
     console.log(this.deskID.value)
     if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors)

@@ -2,7 +2,7 @@
   <tr>
     <td colspan="2">Numer stanowiska</td>
   </tr>
-  <tr *ngFor="let desk of deskList | async">
+  <tr *ngFor="let desk of deskList$ | async">
     <td>{{ desk.deskID }}</td>
     <td
       (click)="deleteDesk(desk)"
