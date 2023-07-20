@@ -4,12 +4,15 @@
   flex-wrap: wrap;
 }
 label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   line-height: 2em;
 }
+label:not(:last-of-type) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 label > input {
   width: 40%;
   border: none;
@@ -23,7 +26,7 @@ form {
   margin: 1em;
   background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
-  max-width: 310px;
+  max-width: 260px;
 }
 
 h3 {
@@ -47,7 +50,7 @@ input[type='submit'] {
   border: none;
   padding: 0.4em;
   user-select: none;
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 input[type='submit']:hover {
@@ -67,4 +70,15 @@ input[type='submit']:focus-within {
   width: 100%;
   text-align: end;
   font-size: 0.7em;
+}
+
+textarea {
+  max-width: 80%;
+  min-width: 50%;
+  min-height: 3em;
+  max-height: 10em;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #778899;
 }

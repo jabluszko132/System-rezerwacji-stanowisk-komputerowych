@@ -1,6 +1,6 @@
 <form [formGroup]="reportForm" (ngSubmit)="report()">
   <!--(ngSubmit)="addDesk()">-->
-  <h3 class="bigTxtFont">Dodaj stanowisko</h3>
+  <h3 class="bigTxtFont">Zgłoś awarię</h3>
   <label>
     ID stanowiska:
     <input name="deskID" type="number" formControlName="deskID" />
@@ -12,7 +12,20 @@
   <br />
   <label>
     Opis:
-    <input name="reportDesc" type="text" formControlName="description" />
+    <br />
+    <!-- <input name="reportDesc" type="text" formControlName="description" /> -->
+    <textarea
+      name="reportDesc"
+      formControlName="description"
+      maxlength="600"
+    ></textarea>
+    <br />
   </label>
+  <div
+    *ngIf="description.value ? description.value.length > 500 : false"
+    class="inputErrors"
+  >
+    Maksymalna długość opisu to 500 znaków
+  </div>
   <input type="submit" value="Wyślij" />
 </form>

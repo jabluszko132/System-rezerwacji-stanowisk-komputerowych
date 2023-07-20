@@ -21,7 +21,7 @@ export class LocalstorageDeskListService {
   value: any;
   reservationList: Reservation[] = [];
   deskList: Desk[] = [];
-  malfunctionReportsList: DeskMalfunctionReport[] = [];
+  malfunctionReports: DeskMalfunctionReport[] = [];
 
   getReservationList(): Observable<Reservation[]> {
     this.forceReservationListRefresh();
@@ -51,6 +51,11 @@ export class LocalstorageDeskListService {
     this.reservationList = this.value ? JSON.parse(this.value) : [];
   }
 
+  // private forceMalfunctionReportsRefresh(): void {
+  //   this.value = localStorage.getItem('malfunctionReports');
+  //   this.malfunctionReports = this.value ? JSON.parse(this.value) : [];
+  // }
+
   /**
    * Updates localStorage deskList to local deskList's value
    */
@@ -67,6 +72,13 @@ export class LocalstorageDeskListService {
     localStorage.setItem(
       'reservationList',
       JSON.stringify(this.reservationList)
+    );
+  }
+
+  private pushMalfunctionReportsToLS(): void {
+    localStorage.setItem(
+      'malfunctionReports',
+      JSON.stringify(this.malfunctionReports)
     );
   }
 
@@ -132,8 +144,15 @@ export class LocalstorageDeskListService {
     let deskListInLS: any = localStorage.getItem('deskList');
     if (deskListInLS != null) {
       deskListInLS = JSON.parse(deskListInLS);
-      if (!deskListInLS.find((m: any) => m.deskID == reserveObj.deskID)) {
+      let deskIndex: number = deskListInLS.findIndex(
+        (m: any) => m.deskID == reserveObj.deskID
+      );
+      if (deskIndex == -1) {
         alert('Nie ma takiego stanowiska');
+        return of(false);
+      }
+      if (!deskListInLS[deskIndex].functional) {
+        alert('To stanowisko jest niesprawne. Zarezerwuj inne');
         return of(false);
       }
       let reservationListInLS: any = localStorage.getItem('reservationList');
@@ -235,6 +254,8 @@ export class LocalstorageDeskListService {
     );
     if (reportedDeskIndex != -1) {
       this.deskList[reportedDeskIndex].functional = false;
+      this.malfunctionReports.push(report);
+      this.pushMalfunctionReportsToLS();
       this.pushDeskListToLS();
       return of(true);
     }

@@ -18,7 +18,8 @@ export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
 
   reportForm = this.fb.group({
     deskID: [1,[Validators.required]],
-    description: ''
+    description: ['',[Validators.maxLength(500)]],
+    dealtWith: false
   });
 
   deskID = this.reportForm.controls.deskID;
