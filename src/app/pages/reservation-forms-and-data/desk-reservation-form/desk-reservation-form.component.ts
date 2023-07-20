@@ -43,13 +43,17 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     endSubs$.complete();
   }
-
   reserveDesk(): void {
     console.log(this.deskID.value)
     if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors)
     {
       alert('Podaj poprawne wartości we wszystkich polach formularza')
       return;
-    }else action$.next(this.reservationForm.value as Reservation);
+    }
+    if(this.startHour >= this.endHour) {
+      alert('Godzina początkowa nie może być późniejsza niż, ani równa końcowej');
+      return;
+    } 
+    action$.next(this.reservationForm.value as Reservation);
   }
 }
