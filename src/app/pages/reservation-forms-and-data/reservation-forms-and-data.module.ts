@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LocalstorageDeskListService } from './localstorage-desk-list.service';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { DeskMalfunctionReportFormComponent } from './desk-malfunction-report-form/desk-malfunction-report-form.component';
+import { DeskMalfunctionReportListComponent } from './desk-malfunction-report-list/desk-malfunction-report-list.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
@@ -16,6 +17,7 @@ import { DeskMalfunctionReportFormComponent } from './desk-malfunction-report-fo
     DeskListComponent,
     ReservationListComponent,
     DeskMalfunctionReportFormComponent,
+    DeskMalfunctionReportListComponent,
   ],
   exports: [
     DeskReservationFormComponent,
@@ -23,6 +25,7 @@ import { DeskMalfunctionReportFormComponent } from './desk-malfunction-report-fo
     DeskListComponent,
     ReservationListComponent,
     DeskMalfunctionReportFormComponent,
+    DeskMalfunctionReportListComponent,
   ],
   providers: [LocalstorageDeskListService, Validators],
 })
