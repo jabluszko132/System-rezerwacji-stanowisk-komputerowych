@@ -14,7 +14,7 @@
       <ng-template [ngIf]="report.dealtWith">Nie</ng-template>
       <ng-template [ngIf]="!report.dealtWith">Tak</ng-template>
     </td>
-    <td>0</td>
+    <td (click)="dealtWithMalfunction(report)">0</td>
     <!--placeholder-->
   </tr>
 </table>

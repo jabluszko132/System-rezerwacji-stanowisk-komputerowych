@@ -125,7 +125,7 @@ export class LocalstorageDeskListService {
     // console.log(this.deskList);
     // return of(true);
     // ------------------ 2nd version ---------------------------
-    let deskListInLS: any = localStorage.getItem('deskList') ?? [];
+    let deskListInLS: any = localStorage.getItem('deskList') ?? '[]';
     deskListInLS = JSON.parse(deskListInLS as string) ?? [];
     if (deskListInLS.find((m: any) => m.deskID === newDesk.deskID)) {
       alert('stanowisko już istnieje');

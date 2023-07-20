@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { Desk } from '../desk';
+import { DeskMalfunctionReport } from '../desk-malfunction-report';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
 const endSubs$: Subject<null> = new Subject<null>;
@@ -13,12 +13,16 @@ const endSubs$: Subject<null> = new Subject<null>;
 export class DeskMalfunctionReportListComponent implements OnInit, OnDestroy {
   constructor(private service : LocalstorageDeskListService) {}
   reports$ = this.service.getMalfunctionReports();
-  
+
   ngOnInit() {
     this.reports$.pipe(takeUntil(endSubs$)).subscribe();
   }
 
   ngOnDestroy() {
     endSubs$.complete();
+  }
+  
+  dealtWithMalfunction(report:DeskMalfunctionReport) {
+    this.service.dealtWithMalfunction(report);
   }
 }
