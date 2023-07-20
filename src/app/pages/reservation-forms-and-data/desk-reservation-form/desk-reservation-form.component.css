@@ -19,7 +19,7 @@ form {
   background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
   max-width: 310px;
-  max-height: 24em;
+  max-height: 28em;
 }
 
 h3 {

@@ -2,12 +2,14 @@
   <tr>
     <td>Numer stanowiska</td>
     <td>Zarezerwowane przez</td>
-    <td colspan="2">Dzień rezerwacji</td>
+    <td>Dzień rezerwacji</td>
+    <td colspan="2">Godziny rezerwacji</td>
   </tr>
   <tr *ngFor="let desk of reservationList$ | async">
     <td>{{ desk.deskID }}</td>
     <td>{{ desk.reservedBy }}</td>
     <td>{{ desk.reservationDate }}</td>
+    <td>Od {{ desk.startHour }} do {{ desk.endHour }}</td>
     <td
       (click)="deleteReservation(desk)"
       tabindex="0"

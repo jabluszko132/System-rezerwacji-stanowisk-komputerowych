@@ -27,7 +27,6 @@ export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     action$.pipe(filter(val => val === this.reportForm.value),switchMap(d => {
-      d.description.replace('/\n/g', '<br />');
       console.log(d);
       return this.service.reportMalfunctionOnDesk(d)}), takeUntil(endSubs$)).subscribe();
   }

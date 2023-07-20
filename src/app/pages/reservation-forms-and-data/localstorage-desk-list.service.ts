@@ -295,6 +295,6 @@ export class LocalstorageDeskListService {
 
   //todo
   //add hours to reservations
-  //add 'functional' variable to desks and make the reservations possible only on true
+  //fix the problem with new lines in reports descriptions
   //finish deleteReservationsOnDesk function
 }

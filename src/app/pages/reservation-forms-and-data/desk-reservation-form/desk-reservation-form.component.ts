@@ -23,12 +23,15 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
     deskID: [1,Validators.required],
     reservedBy: ['', Validators.required],
     reservationDate: ['', [Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),Validators.required]],
+    startHour: ['',Validators.required],
+    endHour: ['',Validators.required]
   });
 
   deskID = this.reservationForm.controls.deskID;
   reservedBy = this.reservationForm.controls.reservedBy;
   reservationDate = this.reservationForm.controls.reservationDate;
-
+  startHour  = this.reservationForm.controls.startHour;
+  endHour = this.reservationForm.controls.endHour;
 
   ngOnInit() {
     // this.deskList$.subscribe();
