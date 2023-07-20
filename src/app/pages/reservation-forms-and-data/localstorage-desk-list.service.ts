@@ -21,6 +21,7 @@ export class LocalstorageDeskListService {
   value: any;
   reservationList: Reservation[] = [];
   deskList: Desk[] = [];
+  malfunctionReportsList: DeskMalfunctionReport[] = [];
 
   getReservationList(): Observable<Reservation[]> {
     this.forceReservationListRefresh();
