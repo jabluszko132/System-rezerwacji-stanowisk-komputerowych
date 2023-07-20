@@ -4,7 +4,7 @@ label {
   align-items: center;
   margin-bottom: 1em;
 }
-label > input/*,select*/ {
+label > input {
   width: 40%;
   margin-right: 1%;
   border: none;
