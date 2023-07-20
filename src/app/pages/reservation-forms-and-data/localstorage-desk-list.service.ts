@@ -142,6 +142,21 @@ export class LocalstorageDeskListService {
     this.pushReservationListToLS();
   }
 
+  /**
+   * Return true if a reservation data and time collids with any on the reservationList
+   */
+  reservationTimeCollide(reservation: Reservation): boolean {
+    debugger;
+    for (let x of this.reservationList) {
+      if (x.reservationDate > reservation.reservationDate) return false;
+      if (x.reservationDate == reservation.reservationDate) {
+        if (x.startHour > reservation.endHour) continue;
+        else if (x.endHour >= reservation.startHour) return true;
+      }
+    }
+    return false;
+  }
+
   reserveDesk(reserveObj: Reservation): Observable<boolean> {
     if (reserveObj.reservationDate < this.currentDateString()) {
       alert('Data rezerwacji jest wcześniejsza niż obecna');
@@ -164,17 +179,12 @@ export class LocalstorageDeskListService {
       let reservationListInLS: any = localStorage.getItem('reservationList');
       if (reservationListInLS != null) {
         reservationListInLS = JSON.parse(reservationListInLS);
-        if (
-          !reservationListInLS.find(
-            (m: any) =>
-              m.deskID == reserveObj.deskID &&
-              m.reservationDate == reserveObj.reservationDate
-          )
-        ) {
+        console.log(this.reservationTimeCollide(reserveObj));
+        if (!this.reservationTimeCollide(reserveObj)) {
           this.addReservationOnNewDate(reserveObj);
           return of(true);
         } else {
-          alert('To stanowisko już jest zarezerwowane w tym dniu');
+          alert('To stanowisko już wtedy jest zarezerwowane');
         }
       } else {
         this.addReservationOnNewDate(reserveObj);

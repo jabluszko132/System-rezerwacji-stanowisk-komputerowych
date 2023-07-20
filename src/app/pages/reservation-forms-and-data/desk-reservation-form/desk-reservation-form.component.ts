@@ -50,7 +50,7 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
       alert('Podaj poprawne wartości we wszystkich polach formularza')
       return;
     }
-    if(this.startHour >= this.endHour) {
+    if(this.startHour.value as string >= (this.endHour.value as string)) {
       alert('Godzina początkowa nie może być późniejsza niż, ani równa końcowej');
       return;
     } 
