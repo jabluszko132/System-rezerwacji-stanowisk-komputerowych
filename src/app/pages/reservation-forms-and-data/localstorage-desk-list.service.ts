@@ -305,7 +305,6 @@ export class LocalstorageDeskListService {
   }
 
   //todo
-  //add hours to reservations
   //fix the problem with new lines in reports descriptions
   //finish deleteReservationsOnDesk function
 }
