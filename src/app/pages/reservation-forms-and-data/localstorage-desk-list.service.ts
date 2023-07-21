@@ -314,11 +314,11 @@ export class LocalstorageDeskListService {
   // }
 
   /**
-   * Returns list of ranges of hours avalible for reservation on a given desk and day
+   * Returns list of ranges of hours available for reservation on a given desk and day
    *
    * @Important works only if reservationList is sorted by date
    */
-  avalibleReservationHoursOnDay(desk: Desk, date: string): NumberRange[] {
+  availableReservationHoursOnDay(desk: Desk, date: string): NumberRange[] {
     if (!date.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
       console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
       return [];
@@ -336,20 +336,20 @@ export class LocalstorageDeskListService {
           to: 18,
         },
       ];
-    let avalibleHours: NumberRange[] = [];
+    let availableHours: NumberRange[] = [];
     let lastCheckedHour: number = 6;
     let nextReservedHour: number;
     for (i; this.reservationList[i].reservationDate == date; i++) {
       nextReservedHour = this.reservationList[i].startHour;
       if (nextReservedHour > lastCheckedHour) {
-        avalibleHours.push({
+        availableHours.push({
           from: lastCheckedHour,
           to: nextReservedHour,
         });
       }
       lastCheckedHour = this.reservationList[i].endHour;
     }
-    return avalibleHours;
+    return availableHours;
   }
 
   //todo
