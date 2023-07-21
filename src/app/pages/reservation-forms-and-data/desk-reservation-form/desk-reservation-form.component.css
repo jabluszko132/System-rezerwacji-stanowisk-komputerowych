@@ -62,9 +62,11 @@ div.inputErrors {
   color: red;
   height: 0;
   user-select: none;
+  font-family: 'Geologica';
+  font-weight: 500;
   bottom: 1.5em;
   width: 55%;
   position: relative;
   font-size: 0.7em;
-  margin-left: 50%;
+  left: 50%;
 }
