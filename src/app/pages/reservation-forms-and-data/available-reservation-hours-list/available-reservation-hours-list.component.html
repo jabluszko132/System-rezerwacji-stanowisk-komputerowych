@@ -15,7 +15,5 @@
 </form>
 <div>
   Stanowisko jest dostępne w tym dniu w godzinach:
-  <ng-template *ngFor="let x of availableHours">
-    od {{ x.from }} do {{ x.to }}
-  </ng-template>
+  <div *ngFor="let x of availableHours">od {{ x.from }} do {{ x.to }}</div>
 </div>

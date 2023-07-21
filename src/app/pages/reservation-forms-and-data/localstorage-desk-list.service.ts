@@ -75,7 +75,7 @@ export class LocalstorageDeskListService {
    * Updates localStorage reservationList to local reservationList's value
    */
   private pushReservationListToLS(): void {
-    this.sortReservationListByDate();
+    this.sortReservationListByDate(this.reservationList);
     localStorage.setItem(
       'reservationList',
       JSON.stringify(this.reservationList)
@@ -93,8 +93,8 @@ export class LocalstorageDeskListService {
   //   this.deskList.sort((a, b) => a.deskID - b.deskID);
   // }
 
-  private sortReservationListByDate(): void {
-    this.reservationList.sort((a, b) => {
+  private sortReservationListByDate(resList: Reservation[]): void {
+    resList.sort((a, b) => {
       if (a.reservationDate > b.reservationDate) return 1;
       if (a.reservationDate < b.reservationDate) return -1;
       return 0;
@@ -305,6 +305,26 @@ export class LocalstorageDeskListService {
     return of(true);
   }
 
+  /**
+   * Returns list of reservations on given desk and date
+   */
+  deskReservationsOnDay(deskID: number, date: string): Reservation[] {
+    let startIndex = this.reservationList.findIndex(
+      (m: any) => m.reservationDate == date
+    );
+    if (startIndex == -1) return [];
+    let reservations: Reservation[] = [];
+    for (
+      let i = startIndex;
+      i < this.reservationList.length - startIndex;
+      i++
+    ) {
+      if (this.reservationList[i].deskID == deskID)
+        reservations.push(this.reservationList[i]);
+    }
+    return reservations;
+  }
+
   // /**
   //  * Returns an array with numbers from startAt to startAt + size
   //  */
@@ -316,40 +336,49 @@ export class LocalstorageDeskListService {
   /**
    * Returns list of ranges of hours available for reservation on a given desk and day
    *
-   * @Important works only if reservationList is sorted by date
    */
-  availableReservationHoursOnDay(desk: Desk, date: string): NumberRange[] {
+  availableReservationHoursOnDay(deskID: number, date: string): NumberRange[] {
     if (!date.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
       console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
       console.log(date);
       return [];
     }
-    if (this.deskList.indexOf(desk) == -1) {
+    if (this.deskList.findIndex((m: any) => m.deskID == deskID) == -1) {
       console.error('The given desk doesnt exist on deskList');
+      return [];
     }
-    let i: number = this.reservationList.findIndex(
-      (m: any) => m.reservationDate == date
+    let reservationsOnDesk: Reservation[] = this.deskReservationsOnDay(
+      deskID,
+      date
     );
-    if (i == -1)
+    if (reservationsOnDesk.length == 0)
       return [
         {
           from: 6,
           to: 18,
         },
       ];
+    this.sortReservationListByDate(reservationsOnDesk);
     let availableHours: NumberRange[] = [];
     let lastCheckedHour: number = 6;
     let nextReservedHour: number;
-    for (i; this.reservationList[i].reservationDate == date; i++) {
-      nextReservedHour = this.reservationList[i].startHour;
-      if (nextReservedHour > lastCheckedHour) {
+    let i: number;
+    debugger;
+    for (i = 0; i < reservationsOnDesk.length; i++) {
+      nextReservedHour = reservationsOnDesk[i].startHour;
+      if (nextReservedHour > lastCheckedHour && lastCheckedHour != 6) {
         availableHours.push({
           from: lastCheckedHour,
           to: nextReservedHour,
         });
       }
-      lastCheckedHour = this.reservationList[i].endHour;
+      lastCheckedHour = reservationsOnDesk[i].endHour;
     }
+    if (lastCheckedHour < 18)
+      availableHours.push({
+        from: lastCheckedHour,
+        to: 18,
+      });
     return availableHours;
   }
 
