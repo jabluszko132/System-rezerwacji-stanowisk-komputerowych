@@ -144,6 +144,8 @@ export class LocalstorageDeskListService {
 
   /**
    * Return true if a reservation data and time collids with any on the reservationList
+   *
+   * @Important Works only if reservationList is previously sorted by date
    */
   reservationTimeCollide(reservation: Reservation): boolean {
     for (let x of this.reservationList) {
