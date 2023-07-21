@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import { filter, Subject, switchMap, takeUntil } from 'rxjs';
-import { WorkHoursValidatorDirective } from '../work-hours-validator.directive';
 
 
 const action$: Subject<any> = new Subject<any>;
