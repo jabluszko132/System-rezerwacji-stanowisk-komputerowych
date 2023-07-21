@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Reservation } from './reservation';
 import { Desk } from './desk';
 import { DeskMalfunctionReport } from './desk-malfunction-report';
+import { NumberRange } from './number-range';
 const date = new Date();
 
 @Injectable()
@@ -302,6 +303,53 @@ export class LocalstorageDeskListService {
       this.pushDeskListToLS();
     }
     return of(true);
+  }
+
+  // /**
+  //  * Returns an array with numbers from startAt to startAt + size
+  //  */
+  // private range(size: number, startAt: number) {
+  //   console.log([...Array(size).keys()].map((i) => i + startAt));
+  //   return [...Array(size).keys()].map((i) => i + startAt);
+  // }
+
+  /**
+   * Returns list of ranges of hours avalible for reservation on a given desk and day
+   *
+   * @Important works only if reservationList is sorted by date
+   */
+  avalibleReservationHoursOnDay(desk: Desk, date: string): NumberRange[] {
+    if (!date.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
+      console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
+      return [];
+    }
+    if (this.deskList.indexOf(desk) == -1) {
+      console.error('The given desk doesnt exist on deskList');
+    }
+    let i: number = this.reservationList.findIndex(
+      (m: any) => m.reservationDate == date
+    );
+    if (i == -1)
+      return [
+        {
+          from: 6,
+          to: 18,
+        },
+      ];
+    let avalibleHours: NumberRange[] = [];
+    let lastCheckedHour: number = 6;
+    let nextReservedHour: number;
+    for (i; this.reservationList[i].reservationDate == date; i++) {
+      nextReservedHour = this.reservationList[i].startHour;
+      if (nextReservedHour > lastCheckedHour) {
+        avalibleHours.push({
+          from: lastCheckedHour,
+          to: nextReservedHour,
+        });
+      }
+      lastCheckedHour = this.reservationList[i].endHour;
+    }
+    return avalibleHours;
   }
 
   //todo
