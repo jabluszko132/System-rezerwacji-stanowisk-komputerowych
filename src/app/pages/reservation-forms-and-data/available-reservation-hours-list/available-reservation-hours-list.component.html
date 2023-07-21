@@ -1,0 +1,17 @@
+<form>
+  <label
+    >Numer stanowiska
+    <input type="number" name="deskID" />
+  </label>
+  <label
+    >Dzień
+    <input type="date" name="reservationDate" />
+  </label>
+  <input type="submit" value="Sprawdź" />
+</form>
+<div>
+  Stanowisko jest dostępne w tym dniu w godzinach:
+  <ng-template *ngFor="let x of availableHours">
+    od {{ x.from }} do {{ x.to }}
+  </ng-template>
+</div>
