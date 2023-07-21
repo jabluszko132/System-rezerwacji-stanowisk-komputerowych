@@ -325,14 +325,6 @@ export class LocalstorageDeskListService {
     return reservations;
   }
 
-  // /**
-  //  * Returns an array with numbers from startAt to startAt + size
-  //  */
-  // private range(size: number, startAt: number) {
-  //   console.log([...Array(size).keys()].map((i) => i + startAt));
-  //   return [...Array(size).keys()].map((i) => i + startAt);
-  // }
-
   /**
    * Returns list of ranges of hours available for reservation on a given desk and day
    *
