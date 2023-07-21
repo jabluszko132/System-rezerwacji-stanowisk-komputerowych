@@ -321,6 +321,7 @@ export class LocalstorageDeskListService {
   availableReservationHoursOnDay(desk: Desk, date: string): NumberRange[] {
     if (!date.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
       console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
+      console.log(date);
       return [];
     }
     if (this.deskList.indexOf(desk) == -1) {

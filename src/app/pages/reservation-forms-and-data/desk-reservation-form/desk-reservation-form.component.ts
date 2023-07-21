@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import {  FormBuilder, Validators } from '@angular/forms';
-import {filter, Subject, switchMap, takeUntil} from 'rxjs';
+import {filter, Subject, switchMap, takeUntil, of} from 'rxjs';
 import { Reservation } from '../reservation';
 // import { WorkHoursValidatorDirective } from '../work-hours-validator.directive';
 
@@ -39,7 +39,7 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
     // this.deskList$.subscribe();
     action$.pipe(filter(d => {
       return d == this.reservationForm.value
-    }),switchMap(d => this.service.reserveDesk(d)),takeUntil(endSubs$)).subscribe();
+    }),switchMap(d => {this.service.reserveDesk(d);return of(null)}),takeUntil(endSubs$)).subscribe();
   }
 
   ngOnDestroy() {

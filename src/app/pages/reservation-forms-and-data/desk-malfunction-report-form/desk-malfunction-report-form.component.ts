@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
-import { filter, Subject, switchMap, takeUntil } from 'rxjs';
+import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
 
 
 const action$: Subject<any> = new Subject<any>;
@@ -27,8 +27,9 @@ export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     action$.pipe(filter(val => val === this.reportForm.value),switchMap(d => {
-      console.log(d);
-      return this.service.reportMalfunctionOnDesk(d)}), takeUntil(endSubs$)).subscribe();
+      this.service.reportMalfunctionOnDesk(d);
+      return of(null)
+  }), takeUntil(endSubs$)).subscribe();
   }
   ngOnDestroy() {
     endSubs$.complete();

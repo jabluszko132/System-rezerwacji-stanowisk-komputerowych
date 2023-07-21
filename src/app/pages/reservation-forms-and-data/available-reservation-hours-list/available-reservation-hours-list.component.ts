@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { filter, Subject, switchMap, takeUntil } from 'rxjs';
+import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import { NumberRange } from '../number-range';
 
@@ -17,7 +17,7 @@ export class AvailableReservationHoursListComponent implements OnInit, OnDestroy
   availableHours: NumberRange[] = [];
 
   form = this.fb.nonNullable.group({
-    deskID: ['', [Validators.required]],
+    deskID: [1, [Validators.required]],
     reservationDate: ['',[Validators.required]],
   })
 
@@ -25,7 +25,10 @@ export class AvailableReservationHoursListComponent implements OnInit, OnDestroy
   reservationDate = this.form.controls.reservationDate;
 
   ngOnInit() {
-    action$.pipe(filter((m:any)=>m == this.form.value),switchMap((d:any)=>this.service.availableReservationHoursOnDay(d.deskID,d.reservationDate)),takeUntil(endSubs$)).subscribe();
+    action$.pipe(filter((m:any)=>m == this.form.value),switchMap((d:any)=>{
+      this.availableHours = this.service.availableReservationHoursOnDay(d.deskID,d.reservationDate);
+      return of(null);
+      }),takeUntil(endSubs$)).subscribe();
   }
 
   ngOnDestroy() {

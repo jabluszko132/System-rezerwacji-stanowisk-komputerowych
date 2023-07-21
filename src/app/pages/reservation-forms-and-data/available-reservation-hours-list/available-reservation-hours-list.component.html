@@ -1,11 +1,15 @@
 <form (ngSubmit)="getAvailableHours()" [formGroup]="form">
   <label
     >Numer stanowiska
-    <input type="number" name="deskID" />
+    <input type="number" name="deskID" formControlName="deskID" />
   </label>
   <label
     >Dzień
-    <input type="date" name="reservationDate" />
+    <input
+      type="date"
+      name="reservationDate"
+      formControlName="reservationDate"
+    />
   </label>
   <input type="submit" value="Sprawdź" />
 </form>
