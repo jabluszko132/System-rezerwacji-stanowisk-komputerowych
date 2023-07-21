@@ -152,7 +152,7 @@ export class LocalstorageDeskListService {
       if (x.reservationDate > reservation.reservationDate) return false;
       if (x.reservationDate == reservation.reservationDate) {
         if (x.startHour > reservation.endHour) continue;
-        else if (x.endHour >= reservation.startHour) return true;
+        else if (x.endHour > reservation.startHour) return true;
       }
     }
     return false;
