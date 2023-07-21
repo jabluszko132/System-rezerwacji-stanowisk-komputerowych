@@ -1,19 +1,30 @@
-<form (ngSubmit)="getAvailableHours()" [formGroup]="form">
-  <label
-    >Numer stanowiska
-    <input type="number" name="deskID" formControlName="deskID" />
-  </label>
-  <label
-    >Dzień
-    <input
-      type="date"
-      name="reservationDate"
-      formControlName="reservationDate"
-    />
-  </label>
-  <input type="submit" value="Sprawdź" />
-</form>
-<div>
-  Stanowisko jest dostępne w tym dniu w godzinach:
-  <div *ngFor="let x of availableHours">od {{ x.from }} do {{ x.to }}</div>
+<div id="wrapper">
+  <form (ngSubmit)="getAvailableHours()" [formGroup]="form">
+    <h3>Godziny dostępności stanowiska</h3>
+    <label
+      >Numer stanowiska
+      <input type="number" name="deskID" formControlName="deskID" />
+    </label>
+    <label
+      >Dzień
+      <input
+        type="date"
+        name="reservationDate"
+        formControlName="reservationDate"
+      />
+    </label>
+    <input type="submit" value="Sprawdź" />
+  </form>
+  <div id="#list">
+    Stanowisko jest dostępne w tym dniu w godzinach:
+    <table *ngIf="availableHours.length > 0">
+      <tr *ngFor="let x of availableHours">
+        <td>od</td>
+        <td>{{ x.from }}</td>
+        <td>do</td>
+        <td>{{ x.to }}</td>
+      </tr>
+    </table>
+    <div *ngIf="availableHours.length == 0">[Brak]</div>
+  </div>
 </div>
