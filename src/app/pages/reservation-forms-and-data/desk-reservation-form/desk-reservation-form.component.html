@@ -40,12 +40,24 @@
   <br />
   <label>
     Początek:
-    <input type="time" name="startHour" formControlName="startHour" />
+    <input
+      type="time"
+      name="startHour"
+      formControlName="startHour"
+      min="06:00:00"
+      max="19:00:00"
+    />
   </label>
   <br />
   <label>
     Koniec:
-    <input type="time" name="endHour" formControlName="endHour" />
+    <input
+      type="time"
+      name="endHour"
+      formControlName="endHour"
+      min="07:00:00"
+      max="20:00:00"
+    />
   </label>
   <br />
   <input type="submit" value="Rezerwuj" />

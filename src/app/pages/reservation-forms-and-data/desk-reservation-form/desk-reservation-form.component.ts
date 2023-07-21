@@ -3,9 +3,11 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import {  FormBuilder, Validators } from '@angular/forms';
 import {filter, Subject, switchMap, takeUntil} from 'rxjs';
 import { Reservation } from '../reservation';
+import { WorkHoursValidatorDirective } from '../work-hours-validator.directive';
 
 const action$: Subject<any> = new Subject<any>;
 const endSubs$: Subject<null> = new Subject<null>;
+const hoursValidator = new WorkHoursValidatorDirective;
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -23,8 +25,8 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
     deskID: [1,Validators.required],
     reservedBy: ['', Validators.required],
     reservationDate: ['', [Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),Validators.required]],
-    startHour: ['',Validators.required],
-    endHour: ['',Validators.required]
+    startHour: ['',Validators.required, hoursValidator],
+    endHour: ['',Validators.required, hoursValidator]
   });
 
   deskID = this.reservationForm.controls.deskID;
