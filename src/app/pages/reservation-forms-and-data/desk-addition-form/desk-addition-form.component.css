@@ -61,14 +61,14 @@ input[type='submit']:focus-within {
   color: rgb(var(--mainRgbThemeColor));
 }
 
-.inputErrors {
+div.inputErrors {
   color: red;
-  font-weight: 500;
-  user-select: none;
   height: 0;
-  text-align: end;
+  user-select: none;
+  font-family: 'Geologica';
+  font-weight: 500;
+  width: 60%;
   position: relative;
-  font-family: 'Geologica, sans-serif';
+  font-size: 0.75em;
   left: 50%;
-  font-size: 0.7em;
 }
