@@ -38,9 +38,12 @@ form {
   height: fit-content;
   display: grid;
   justify-items: center;
+  padding-bottom: 2em;
+  line-height: 1em;
 }
 
 table {
+  line-height: 1.2em;
   text-align: center;
   max-width: 20%;
 }
