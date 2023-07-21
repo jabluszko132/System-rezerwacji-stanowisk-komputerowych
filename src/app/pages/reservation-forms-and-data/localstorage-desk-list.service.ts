@@ -93,8 +93,8 @@ export class LocalstorageDeskListService {
   //   this.deskList.sort((a, b) => a.deskID - b.deskID);
   // }
 
-  private sortReservationListByDate(resList: Reservation[]): void {
-    resList.sort((a, b) => {
+  private sortReservationListByDate(list: Reservation[]): void {
+    list.sort((a, b) => {
       if (a.reservationDate > b.reservationDate) return 1;
       if (a.reservationDate < b.reservationDate) return -1;
       return 0;
@@ -149,12 +149,13 @@ export class LocalstorageDeskListService {
    * @Important Works only if reservationList is previously sorted by date
    */
   reservationTimeCollide(reservation: Reservation): boolean {
-    for (let x of this.reservationList) {
-      if (x.reservationDate > reservation.reservationDate) return false;
-      if (x.reservationDate == reservation.reservationDate) {
-        if (x.startHour > reservation.endHour) continue;
-        else if (x.endHour > reservation.startHour) return true;
-      }
+    let reservationsForDesk = this.deskReservationsOnDay(
+      reservation.deskID,
+      reservation.reservationDate
+    );
+    for (let x of reservationsForDesk) {
+      if (x.startHour > reservation.endHour) continue;
+      else if (x.endHour > reservation.startHour) return true;
     }
     return false;
   }
@@ -316,7 +317,8 @@ export class LocalstorageDeskListService {
     let reservations: Reservation[] = [];
     for (
       let i = startIndex;
-      i < this.reservationList.length - startIndex;
+      i < this.reservationList.length - startIndex &&
+      this.reservationList[i].reservationDate == date;
       i++
     ) {
       if (this.reservationList[i].deskID == deskID)
