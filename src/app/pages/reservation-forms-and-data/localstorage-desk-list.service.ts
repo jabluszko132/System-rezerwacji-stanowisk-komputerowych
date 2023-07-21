@@ -154,7 +154,7 @@ export class LocalstorageDeskListService {
       reservation.reservationDate
     );
     for (let x of reservationsForDesk) {
-      if (x.startHour > reservation.endHour) continue;
+      if (x.startHour >= reservation.endHour) continue;
       else if (x.endHour > reservation.startHour) return true;
     }
     return false;
