@@ -24,6 +24,7 @@ form {
   background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
   max-width: 310px;
+  display: grid;
 }
 
 h3 {
@@ -62,9 +63,12 @@ input[type='submit']:focus-within {
 
 .inputErrors {
   color: red;
+  font-weight: 500;
   user-select: none;
   height: 0;
-  width: 100%;
   text-align: end;
+  position: relative;
+  font-family: 'Geologica, sans-serif';
+  left: 50%;
   font-size: 0.7em;
 }

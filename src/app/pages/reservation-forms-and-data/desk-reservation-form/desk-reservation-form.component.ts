@@ -25,8 +25,8 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
     deskID: [1,Validators.required],
     reservedBy: ['', Validators.required],
     reservationDate: ['', [Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),Validators.required]],
-    startHour: ['',[Validators.required,]],
-    endHour: ['',[Validators.required]]
+    startHour: [6,[Validators.required,Validators.min(6),Validators.max(20)]],
+    endHour: [20,[Validators.required,Validators.min(6),Validators.max(20)]]
   });
 
   deskID = this.reservationForm.controls.deskID;
@@ -45,22 +45,18 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     endSubs$.complete();
   }
-  
+
   reserveDesk(): void {
-    if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors)
+    if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors || this.startHour.errors || this.endHour.errors)
     {
       alert('Podaj poprawne wartości we wszystkich polach formularza')
       return;
     }
-    if(this.startHour.value as string >= (this.endHour.value as string)) {
+    if(this.startHour.value  >= this.endHour.value) {
       alert('Godzina początkowa nie może być późniejsza niż, ani równa końcowej');
       return;
     }
-    if(this.startHour.value as string < '06:00:00' || this.startHour.value as string > '20:00:00' || this.endHour.value as string < '06:00:00' || this.endHour.value as string > '20:00:00') {
-      alert('Rezerwacja musi mieścić się w godzinach pracy (6 - 20)');
-      return;
-    } 
-    if(parseInt(this.endHour.value[0] as string + this.endHour.value[1] as string) - parseInt(this.startHour.value[0] as string + this.startHour.value[1] as string) < 1) {
+    if(this.endHour.value - this.startHour.value < 1) {
       alert('Minimalna długość rezerwacji to 1 godzina');
       return;
     }

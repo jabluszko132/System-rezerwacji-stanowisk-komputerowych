@@ -20,6 +20,8 @@ form {
   border-radius: 10px;
   max-width: 310px;
   max-height: 28em;
+  display: grid;
+  text-align: center;
 }
 
 h3 {
@@ -33,6 +35,7 @@ h3 {
 }
 
 input[type='submit'] {
+  /* width: fit-content; */
   border-radius: 15px;
   font-size: 1em;
   font-weight: 200;
@@ -59,9 +62,9 @@ div.inputErrors {
   color: red;
   height: 0;
   user-select: none;
-  position: relative;
   bottom: 1.5em;
-  width: 100%;
-  text-align: end;
+  width: 55%;
+  position: relative;
   font-size: 0.7em;
+  margin-left: 50%;
 }
