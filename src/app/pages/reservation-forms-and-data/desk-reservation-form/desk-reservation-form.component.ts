@@ -25,8 +25,8 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
     deskID: [1,Validators.required],
     reservedBy: ['', Validators.required],
     reservationDate: ['', [Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),Validators.required]],
-    startHour: [6,[Validators.required,Validators.min(6),Validators.max(20)]],
-    endHour: [20,[Validators.required,Validators.min(6),Validators.max(20)]]
+    startHour: [6,[Validators.required,Validators.min(6),Validators.max(17)]],
+    endHour: [18,[Validators.required,Validators.min(7),Validators.max(18)]]
   });
 
   deskID = this.reservationForm.controls.deskID;

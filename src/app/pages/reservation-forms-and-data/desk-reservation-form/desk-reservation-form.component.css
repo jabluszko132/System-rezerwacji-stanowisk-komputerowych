@@ -19,7 +19,7 @@ form {
   background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
   max-width: 295px;
-  max-height: 30em;
+  max-height: 40em;
   display: grid;
   text-align: center;
 }
@@ -69,4 +69,10 @@ div.inputErrors {
   position: relative;
   font-size: 0.75em;
   left: 50%;
+}
+
+hr {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 3em;
 }

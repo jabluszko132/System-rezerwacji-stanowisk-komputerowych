@@ -1,5 +1,6 @@
 <form [formGroup]="reservationForm" (ngSubmit)="reserveDesk()">
   <h3 class="bigTxtFont">Zarezerwuj</h3>
+
   <label
     >Numer stanowiska:
     <input name="deskID" type="number" formControlName="deskID" />
@@ -22,6 +23,8 @@
     To pole nie może być puste
   </div>
   <br />
+  <p>Dzień i godziny rezerwacji</p>
+  <hr />
   <label>
     Dzień rezerwacji:
     <input
@@ -45,12 +48,12 @@
       name="startHour"
       formControlName="startHour"
       min="6"
-      max="19"
+      max="17"
     />
   </label>
 
   <div *ngIf="startHour.touched && startHour.invalid" class="inputErrors">
-    Początek rezerwacji musi zawierać się w godzinach 6-19
+    Początek rezerwacji musi zawierać się w godzinach 6-17
   </div>
 
   <br />
@@ -61,12 +64,12 @@
       name="endHour"
       formControlName="endHour"
       min="7"
-      max="20"
+      max="18"
     />
   </label>
 
   <div *ngIf="endHour.touched && endHour.invalid" class="inputErrors">
-    Koniec rezerwacji musi zawierać się w godzinach 7-20
+    Koniec rezerwacji musi zawierać się w godzinach 7-18
   </div>
 
   <br />
