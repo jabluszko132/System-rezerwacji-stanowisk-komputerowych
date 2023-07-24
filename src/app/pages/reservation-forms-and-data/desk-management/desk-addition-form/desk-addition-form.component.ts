@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
+import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
 import {filter, Subject, switchMap, takeUntil} from 'rxjs';
 
 

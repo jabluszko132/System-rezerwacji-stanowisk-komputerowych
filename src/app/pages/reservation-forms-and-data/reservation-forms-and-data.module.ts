@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DeskReservationFormComponent } from './desk-reservation-form/desk-reservation-form.component';
-import { DeskAdditionFormComponent } from './desk-addition-form/desk-addition-form.component';
-import { DeskListComponent } from './desk-list/desk-list.component';
+// import { DeskAdditionFormComponent } from './desk-addition-form/desk-addition-form.component';
+// import { DeskListComponent } from './desk-list/desk-list.component';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LocalstorageDeskListService } from './localstorage-desk-list.service';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
@@ -14,8 +14,8 @@ import { AvailableReservationHoursListComponent } from './available-reservation-
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   declarations: [
     DeskReservationFormComponent,
-    DeskAdditionFormComponent,
-    DeskListComponent,
+    // DeskAdditionFormComponent,
+    // DeskListComponent,
     ReservationListComponent,
     // DeskMalfunctionReportFormComponent,
     // DeskMalfunctionReportListComponent,
@@ -23,8 +23,8 @@ import { AvailableReservationHoursListComponent } from './available-reservation-
   ],
   exports: [
     DeskReservationFormComponent,
-    DeskAdditionFormComponent,
-    DeskListComponent,
+    // DeskAdditionFormComponent,
+    // DeskListComponent,
     ReservationListComponent,
     // DeskMalfunctionReportFormComponent,
     // DeskMalfunctionReportListComponent,

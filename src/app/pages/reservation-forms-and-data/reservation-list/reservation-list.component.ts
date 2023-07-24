@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
-import { Reservation } from '../reservation';
+import { Reservation } from '../interfaces/reservation';
 
 @Component({
   selector: 'app-reservation-list',
