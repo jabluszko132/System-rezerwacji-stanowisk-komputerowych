@@ -364,7 +364,6 @@ export class LocalstorageDeskListService {
     let lastCheckedHour: number = 6;
     let nextReservedHour: number;
     let i: number;
-    debugger;
     for (i = 0; i < reservationsOnDesk.length; i++) {
       nextReservedHour = reservationsOnDesk[i].startHour;
       if (nextReservedHour > lastCheckedHour && lastCheckedHour != 6) {

@@ -15,7 +15,7 @@ const endSubs$: Subject<null> = new Subject<null>;
 export class AvailableReservationHoursListComponent implements OnInit, OnDestroy {
   constructor(private service: LocalstorageDeskListService, private fb: FormBuilder) {}
   availableHours: NumberRange[] = [];
-  
+  displayList = false;
 
   form = this.fb.nonNullable.group({
     deskID: [1, [Validators.required]],
@@ -39,5 +39,6 @@ export class AvailableReservationHoursListComponent implements OnInit, OnDestroy
   getAvailableHours(): void {
     action$.next(this.form.value);
     console.log(this.availableHours);
+    this.displayList = true;
   }
 }

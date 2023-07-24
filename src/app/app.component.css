@@ -25,7 +25,7 @@ nav > a {
   align-items: center;
   text-align: center;
 }
-@media (max-width: 350px) {
+@media (max-width: 550px) {
   nav {
     flex-direction: column-reverse;
   }
