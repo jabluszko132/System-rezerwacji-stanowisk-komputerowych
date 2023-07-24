@@ -3,7 +3,7 @@ header {
   align-items: center;
   justify-content: space-around;
   background: rgb(var(--mainRgbThemeColor));
-  min-height: 5em;
+  min-height: fit-content;
   max-height: 15vh;
 }
 
@@ -29,6 +29,9 @@ nav > a {
 @media (max-width: 550px) {
   nav {
     flex-direction: column-reverse;
+  }
+  header {
+    max-height: 15em;
   }
 }
 
