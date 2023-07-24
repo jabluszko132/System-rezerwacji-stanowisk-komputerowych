@@ -3,8 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import {filter, Subject, switchMap, takeUntil} from 'rxjs';
 
-const action$: Subject<any> = new Subject<any>;
-const endSubs$: Subject<null> = new Subject<null>;
 
 @Component({
   selector: 'app-desk-addition-form',
@@ -14,13 +12,17 @@ const endSubs$: Subject<null> = new Subject<null>;
 export class DeskAdditionFormComponent implements OnInit, OnDestroy {
   constructor(private service: LocalstorageDeskListService) {}
 
+  private action$: Subject<any> = new Subject<any>;
+  private endSubs$: Subject<void> = new Subject<void>;
+
   newDeskID: FormControl = new FormControl(null,[Validators.required]);
   ngOnInit() {
-    action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
-      return this.service.addDesk({deskID: d, functional: true})}), takeUntil(endSubs$)).subscribe();
+    this.action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
+      return this.service.addDesk({deskID: d, functional: true})}), takeUntil(this.endSubs$)).subscribe();
   }
   ngOnDestroy() {
-    endSubs$.complete();
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
 
   addDesk(): void {
@@ -28,6 +30,6 @@ export class DeskAdditionFormComponent implements OnInit, OnDestroy {
       alert('Proszę podać ID nowego stanowiska')
       return;
     }
-    action$.next(this.newDeskID.value);
+    this.action$.next(this.newDeskID.value);
   }
 }

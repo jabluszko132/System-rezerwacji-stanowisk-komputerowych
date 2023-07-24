@@ -3,26 +3,18 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { Desk } from '../desk';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
-
-const endSubs$: Subject<null> = new Subject<null>;
-
-
 @Component({
   selector: 'app-desk-list',
   templateUrl: './desk-list.component.html',
   styleUrls: ['./desk-list.component.css'],
 })
-export class DeskListComponent implements OnInit, OnDestroy {
+export class DeskListComponent implements OnInit {
   constructor(private service: LocalstorageDeskListService) {}
 
   deskList$: Observable<any> = this.service.getDeskList();
 
   ngOnInit() {
-    this.deskList$.pipe(takeUntil(endSubs$)).subscribe();
-  }
-
-  ngOnDestroy() {
-    endSubs$.complete();
+    this.deskList$.subscribe();
   }
 
   deleteDesk(desk: Desk): void {

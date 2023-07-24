@@ -5,8 +5,6 @@ import {filter, Subject, switchMap, takeUntil, of} from 'rxjs';
 import { Reservation } from '../reservation';
 // import { WorkHoursValidatorDirective } from '../work-hours-validator.directive';
 
-const action$: Subject<any> = new Subject<any>;
-const endSubs$: Subject<null> = new Subject<null>;
 // const hoursValidator = new WorkHoursValidatorDirective;
 
 @Component({
@@ -19,7 +17,9 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
     private service: LocalstorageDeskListService,
     private fb: FormBuilder,
   ) {}
-
+  private action$: Subject<any> = new Subject<any>;
+  private endSubs$: Subject<void> = new Subject<void>;
+  
   // deskList$ :Observable<any> = this.service.getDeskList();
   reservationForm = this.fb.nonNullable.group({
     deskID: [1,Validators.required],
@@ -37,13 +37,14 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.deskList$.subscribe();
-    action$.pipe(filter(d => {
+    this.action$.pipe(filter(d => {
       return d == this.reservationForm.value
-    }),switchMap(d => {this.service.reserveDesk(d);return of(null)}),takeUntil(endSubs$)).subscribe();
+    }),switchMap(d => {this.service.reserveDesk(d);return of(null)}),takeUntil(this.endSubs$)).subscribe();
   }
 
   ngOnDestroy() {
-    endSubs$.complete();
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
 
   reserveDesk(): void {
@@ -60,6 +61,6 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
       alert('Minimalna długość rezerwacji to 1 godzina');
       return;
     }
-    action$.next(this.reservationForm.value as Reservation);
+    this.action$.next(this.reservationForm.value as Reservation);
   }
 }

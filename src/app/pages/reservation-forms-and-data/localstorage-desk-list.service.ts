@@ -383,6 +383,9 @@ export class LocalstorageDeskListService {
   }
 
   //todo
+  //>make action$s and endSubs$s acually work
+  //>pack components into smaller modules
+  //  +make smaller services out of this service and put them into smaller modules
   //>use bulma framework for css
   //>make a booking table - show all hours on given day (mark unavailable ones) and
   //make user choose start and end of reservation (like nday tickets for peka or

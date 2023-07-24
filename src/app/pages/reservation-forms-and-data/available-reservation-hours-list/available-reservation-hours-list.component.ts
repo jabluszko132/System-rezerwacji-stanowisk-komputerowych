@@ -4,8 +4,6 @@ import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import { NumberRange } from '../number-range';
 
-const action$: Subject<any> = new Subject<any>
-const endSubs$: Subject<null> = new Subject<null>;
 
 @Component({
   selector: 'app-available-reservation-hours-list',
@@ -14,6 +12,10 @@ const endSubs$: Subject<null> = new Subject<null>;
 })
 export class AvailableReservationHoursListComponent implements OnInit, OnDestroy {
   constructor(private service: LocalstorageDeskListService, private fb: FormBuilder) {}
+
+  private action$: Subject<any> = new Subject<any>
+  private endSubs$: Subject<void> = new Subject<void>;
+
   availableHours: NumberRange[] = [];
   displayList = false;
 
@@ -26,18 +28,18 @@ export class AvailableReservationHoursListComponent implements OnInit, OnDestroy
   reservationDate: FormControl<string> = this.form.controls.reservationDate;
 
   ngOnInit() {
-    action$.pipe(filter((m:any)=>m == this.form.value),switchMap((d:any)=>{
-      this.availableHours = this.service.availableReservationHoursOnDay(d.deskID,d.reservationDate);
-      return of(null);
-      }),takeUntil(endSubs$)).subscribe();
+    this.action$.pipe(filter((m:any)=>m == this.form.value),switchMap((d:any)=>
+      this.availableHours = this.service.availableReservationHoursOnDay(d.deskID,d.reservationDate)
+    ),takeUntil(this.endSubs$)).subscribe();
   }
 
   ngOnDestroy() {
-    endSubs$.complete();
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
   
   getAvailableHours(): void {
-    action$.next(this.form.value);
+    this.action$.next(this.form.value);
     console.log(this.availableHours);
     this.displayList = true;
   }

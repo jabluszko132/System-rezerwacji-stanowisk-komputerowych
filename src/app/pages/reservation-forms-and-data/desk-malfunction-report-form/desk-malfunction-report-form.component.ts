@@ -4,8 +4,6 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
 
 
-const action$: Subject<any> = new Subject<any>;
-const endSubs$: Subject<null> = new Subject<null>;
 
 
 @Component({
@@ -16,6 +14,9 @@ const endSubs$: Subject<null> = new Subject<null>;
 export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
   constructor(private service: LocalstorageDeskListService, private fb: FormBuilder ) {}
 
+  private action$: Subject<any> = new Subject<any>;
+  private endSubs$: Subject<void> = new Subject<void>;
+  
   reportForm = this.fb.group({
     deskID: [1,[Validators.required]],
     description: ['',[Validators.maxLength(500)]],
@@ -26,13 +27,12 @@ export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
   description = this.reportForm.controls.description;
 
   ngOnInit() {
-    action$.pipe(filter(val => val === this.reportForm.value),switchMap(d => {
-      this.service.reportMalfunctionOnDesk(d);
-      return of(null)
-  }), takeUntil(endSubs$)).subscribe();
+    this.action$.pipe(filter(val => val === this.reportForm.value),switchMap(d => 
+      this.service.reportMalfunctionOnDesk(d)), takeUntil(this.endSubs$)).subscribe();
   }
   ngOnDestroy() {
-    endSubs$.complete();
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
 
   report(): void {
@@ -40,6 +40,6 @@ export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
     {
       alert('Podaj poprawne wartości we wszystkich polach formularza')
       return;
-    }else action$.next(this.reportForm.value);
+    }else this.action$.next(this.reportForm.value);
   }
 }
