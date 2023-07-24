@@ -23,6 +23,7 @@ body {
   display: flex;
   justify-content: center;
   max-width: 100vw;
+  overflow: hidden;
 }
 
 html {

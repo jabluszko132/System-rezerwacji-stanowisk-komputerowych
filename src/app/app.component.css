@@ -4,6 +4,7 @@ header {
   justify-content: space-around;
   background: rgb(var(--mainRgbThemeColor));
   min-height: 5em;
+  max-height: 15vh;
 }
 
 header > p {
@@ -48,4 +49,15 @@ nav {
   justify-content: flex-end;
   width: 45%;
   margin: 1%;
+}
+
+article {
+  overflow-y: auto;
+  width: 100%;
+  min-height: fit-content;
+  max-height: 89vh;
+}
+
+:host {
+  height: 100vh;
 }

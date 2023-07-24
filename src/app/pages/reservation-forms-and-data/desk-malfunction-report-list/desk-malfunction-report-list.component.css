@@ -30,6 +30,7 @@ p {
   overflow: auto;
   width: 100%;
   max-height: inherit;
+  text-align: start;
 }
 
 tr:first-of-type > td {
