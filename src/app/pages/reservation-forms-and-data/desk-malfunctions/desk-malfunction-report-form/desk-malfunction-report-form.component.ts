@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
-import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
+import { filter, Subject, switchMap, takeUntil } from 'rxjs';
+import { DeskMalfunctionsLSService } from '../desk-malfunctions-ls.service';
 
 
 
@@ -12,7 +12,7 @@ import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
   styleUrls: ['./desk-malfunction-report-form.component.css'],
 })
 export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
-  constructor(private service: LocalstorageDeskListService, private fb: FormBuilder ) {}
+  constructor(private service: DeskMalfunctionsLSService, private fb: FormBuilder ) {}
 
   private action$: Subject<any> = new Subject<any>;
   private endSubs$: Subject<void> = new Subject<void>;

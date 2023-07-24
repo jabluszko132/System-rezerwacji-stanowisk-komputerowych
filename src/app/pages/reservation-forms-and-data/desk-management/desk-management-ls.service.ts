@@ -84,12 +84,14 @@ export class DeskManagementLSService {
     return this.deskList.findIndex((m: any) => m.deskID == deskID) != -1;
   }
 
-  updateDeskFunctionality(deskID: number, doesItfunction: boolean): void {
+  updateDeskFunctionality(deskID: number, doesItFunction: boolean): void {
     let deskIndex = this.deskList.findIndex((m: any) => m.deskID == deskID);
     if (deskIndex == -1) {
       console.error('This desk doesnt exist');
       return;
     }
-    this.deskList[deskIndex].functional = false;
+    console.log('Set functionality to ' + doesItFunction);
+    this.deskList[deskIndex].functional = doesItFunction;
+    this.pushDeskListToLS();
   }
 }

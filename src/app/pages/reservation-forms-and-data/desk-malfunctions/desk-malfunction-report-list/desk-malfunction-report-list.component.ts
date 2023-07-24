@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { DeskMalfunctionReport } from '../../interfaces/desk-malfunction-report';
 import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
+import { DeskMalfunctionsLSService } from '../desk-malfunctions-ls.service';
 
 @Component({
   selector: 'app-desk-malfunction-report-list',
@@ -9,7 +10,7 @@ import { LocalstorageDeskListService } from '../../localstorage-desk-list.servic
   styleUrls: ['./desk-malfunction-report-list.component.css'],
 })
 export class DeskMalfunctionReportListComponent implements OnInit {
-  constructor(private service: LocalstorageDeskListService) {}
+  constructor(private service: DeskMalfunctionsLSService) {}
   reports$ = this.service.getMalfunctionReports();
 
   ngOnInit() {

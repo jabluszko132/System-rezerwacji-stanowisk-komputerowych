@@ -13,7 +13,6 @@ export class LocalstorageDeskListService {
     this.forceDeskListRefresh();
     this.forceMalfunctionReportsRefresh();
   }
-
   private currentDateString(): string {
     return (
       date.getFullYear().toString().padStart(4, '0') +
@@ -27,16 +26,13 @@ export class LocalstorageDeskListService {
   reservationList: Reservation[] = [];
   deskList: Desk[] = [];
   malfunctionReports: DeskMalfunctionReport[] = [];
-
   getReservationList(): Observable<Reservation[]> {
     // this.deleteExpiredReservations();
     return of(this.reservationList);
   }
-
   getMalfunctionReports(): Observable<DeskMalfunctionReport[]> {
     return of(this.malfunctionReports);
   }
-
   /**
    * Forces this instance's local deskList value to change to the one in localStorage
    *
@@ -45,7 +41,6 @@ export class LocalstorageDeskListService {
     this.value = localStorage.getItem('deskList');
     this.deskList = this.value ? JSON.parse(this.value) : [];
   }
-
   /**
    * Forces this instance's local reservationList value to change to the one in localStorage
    */
@@ -53,12 +48,10 @@ export class LocalstorageDeskListService {
     this.value = localStorage.getItem('reservationList');
     this.reservationList = this.value ? JSON.parse(this.value) : [];
   }
-
   private forceMalfunctionReportsRefresh(): void {
     this.value = localStorage.getItem('malfunctionReports');
     this.malfunctionReports = this.value ? JSON.parse(this.value) : [];
   }
-
   /**
    * Updates localStorage deskList to local deskList's value
    */
@@ -66,7 +59,6 @@ export class LocalstorageDeskListService {
     // this.sortDeskList();
     localStorage.setItem('deskList', JSON.stringify(this.deskList));
   }
-
   /**
    * Updates localStorage reservationList to local reservationList's value
    */
@@ -77,18 +69,15 @@ export class LocalstorageDeskListService {
       JSON.stringify(this.reservationList)
     );
   }
-
   private pushMalfunctionReportsToLS(): void {
     localStorage.setItem(
       'malfunctionReports',
       JSON.stringify(this.malfunctionReports)
     );
   }
-
   // private sortDeskList(): void {
   //   this.deskList.sort((a, b) => a.deskID - b.deskID);
   // }
-
   private sortReservationListByDate(list: Reservation[]): void {
     list.sort((a, b) => {
       if (a.reservationDate > b.reservationDate) return 1;
@@ -96,18 +85,6 @@ export class LocalstorageDeskListService {
       return 0;
     });
   }
-
-  /**
-   * Adds desk to deskList (both service's and localStorage)
-   *
-   *
-   */
-
-  private addReservationOnNewDate(reserveObj: Reservation): void {
-    this.reservationList.push(reserveObj);
-    this.pushReservationListToLS();
-  }
-
   /**
    * Return true if a reservation data and time collids with any on the reservationList
    *
@@ -124,59 +101,6 @@ export class LocalstorageDeskListService {
     }
     return false;
   }
-
-  reserveDesk(reserveObj: Reservation): Observable<boolean> {
-    if (reserveObj.reservationDate < this.currentDateString()) {
-      alert('Data rezerwacji jest wcześniejsza niż obecna');
-      return of(false);
-    }
-    let deskListInLS: any = localStorage.getItem('deskList');
-    if (deskListInLS != null) {
-      deskListInLS = JSON.parse(deskListInLS);
-      let deskIndex: number = deskListInLS.findIndex(
-        (m: any) => m.deskID == reserveObj.deskID
-      );
-      if (deskIndex == -1) {
-        alert('Nie ma takiego stanowiska');
-        return of(false);
-      }
-      if (!deskListInLS[deskIndex].functional) {
-        alert('To stanowisko jest niesprawne. Zarezerwuj inne');
-        return of(false);
-      }
-      let reservationListInLS: any = localStorage.getItem('reservationList');
-      if (reservationListInLS != null) {
-        reservationListInLS = JSON.parse(reservationListInLS);
-        if (!this.reservationTimeCollide(reserveObj)) {
-          this.addReservationOnNewDate(reserveObj);
-          return of(true);
-        } else {
-          alert('To stanowisko już wtedy jest zarezerwowane');
-        }
-      } else {
-        this.addReservationOnNewDate(reserveObj);
-        return of(true);
-      }
-    } else {
-      alert(
-        'Lista stanowisk jest pusta. Dodaj stanowisko aby móc je zarezerwować'
-      );
-    }
-    return of(false);
-  }
-
-  deleteReservation(reservation: Reservation): Observable<Boolean> {
-    let reservationToDeleteIndex: number =
-      this.reservationList.indexOf(reservation);
-    if (reservationToDeleteIndex == -1) {
-      alert('Nie ma takiej rezerwacji');
-      return of(false);
-    }
-    this.reservationList.splice(reservationToDeleteIndex, 1);
-    this.pushReservationListToLS();
-    return of(true);
-  }
-
   /**
    * This is an unsafe but faster version of deleteReservation method.
    * It doesnt check if the reservation exists on the table. Dont use it
@@ -193,7 +117,6 @@ export class LocalstorageDeskListService {
       console.error(e);
     }
   }
-
   // deleteExpiredReservations(): void {
   //   let currentDate = this.currentDateString();
   //   for (let reservation of this.reservationList) {
@@ -202,17 +125,14 @@ export class LocalstorageDeskListService {
   //     } else return;
   //   }
   // }
-
   deleteReservationsOnDesk(desk: Desk): void {
     let reservationIndex: number = this.reservationList.findIndex((m: any) => {
       // console.log(m.deskID);
       // console.log(desk.deskID);
-
       //^I love it when the only thing that
       //you change in your code is adding
       //some logs and immediately deleting them and it somehow fixes
       //everything
-
       return m.deskID == desk.deskID;
     });
     while (reservationIndex != -1) {
@@ -222,7 +142,6 @@ export class LocalstorageDeskListService {
       });
     }
   }
-
   reportMalfunctionOnDesk(report: DeskMalfunctionReport): Observable<boolean> {
     let reportedDeskIndex: number = this.deskList.findIndex(
       (m) => m.deskID == report.deskID
@@ -237,7 +156,6 @@ export class LocalstorageDeskListService {
     alert('Nie ma takiego stanowiska');
     return of(false);
   }
-
   dealtWithMalfunction(raport: DeskMalfunctionReport): Observable<boolean> {
     let raportIndex = this.malfunctionReports.findIndex(
       (m: any) => m == raport
@@ -261,7 +179,6 @@ export class LocalstorageDeskListService {
     }
     return of(true);
   }
-
   /**
    * Returns list of reservations on given desk and date
    */
@@ -282,7 +199,6 @@ export class LocalstorageDeskListService {
     }
     return reservations;
   }
-
   /**
    * Returns list of ranges of hours available for reservation on a given desk and day
    *
@@ -329,17 +245,14 @@ export class LocalstorageDeskListService {
       });
     return availableHours;
   }
-
   hasAnyReservations(desk: Desk): boolean {
     return (
       this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
     );
   }
-
   deskExists(deskID: number): boolean {
     return this.deskList.findIndex((m: any) => m.deskID == deskID) != -1;
   }
-
   //todo
   //>make action$s and endSubs$s acually work
   //>pack components into smaller modules
