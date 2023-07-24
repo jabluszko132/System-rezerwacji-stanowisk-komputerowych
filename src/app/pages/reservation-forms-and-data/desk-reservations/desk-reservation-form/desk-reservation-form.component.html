@@ -1,7 +1,7 @@
 <form [formGroup]="reservationForm" (ngSubmit)="reserveDesk()">
   <h3 class="bigTxtFont">Zarezerwuj</h3>
 
-  <label
+  <label class="block"
     >Numer stanowiska:
     <input
       name="deskID"
@@ -20,7 +20,7 @@
     To pole nie może być puste
   </div>
   <br />
-  <label>
+  <label class="block">
     Kto rezerwuje:
     <input
       name="reservedBy"
@@ -35,7 +35,7 @@
   <br />
   <p>Dzień i godziny rezerwacji</p>
   <hr />
-  <label>
+  <label class="block">
     Dzień rezerwacji:
     <input
       name="reservationDate"
@@ -52,7 +52,7 @@
     Podaj poprawną datę
   </div>
   <br />
-  <label>
+  <label class="block">
     Początek:
     <input
       type="number"
@@ -69,7 +69,7 @@
   </div>
 
   <br />
-  <label>
+  <label class="block">
     Koniec:
     <input
       type="number"
@@ -86,5 +86,5 @@
   </div>
 
   <br />
-  <input type="submit" value="Rezerwuj" class="button is-info" />
+  <input type="submit" value="Rezerwuj" class="button is-info block" />
 </form>

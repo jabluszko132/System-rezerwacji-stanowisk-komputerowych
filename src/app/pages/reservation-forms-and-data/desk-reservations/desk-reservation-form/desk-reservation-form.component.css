@@ -19,7 +19,7 @@ form {
   background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
   max-width: 295px;
-  max-height: 40em;
+  max-height: fit-content;
   display: grid;
   text-align: center;
 }
