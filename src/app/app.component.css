@@ -4,7 +4,7 @@ header {
   justify-content: space-around;
   background: rgb(var(--headerRgbColor));
   min-height: fit-content;
-  max-height: 15vh;
+  max-height: 15vmax;
 }
 
 header > p {
@@ -28,7 +28,12 @@ nav > a {
 }
 @media (max-width: 550px) {
   nav {
-    flex-direction: column-reverse;
+    flex-direction: column;
+    max-width: 30%;
+  }
+  nav > a {
+    display: flex;
+    justify-content: center;
   }
   header {
     max-height: 15em;
