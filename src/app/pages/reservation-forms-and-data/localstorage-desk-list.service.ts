@@ -208,9 +208,9 @@ export class LocalstorageDeskListService {
     }
     if (this.reservationList.find((m: any) => m.deskID == desk.deskID)) {
       alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
-      // if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
-      //   this.deleteReservationsOnDesk(desk); else
-      return of(false);
+      if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
+        this.deleteReservationsOnDesk(desk);
+      else return of(false);
     }
     this.deskList.splice(deskToDeleteIndex, 1);
     this.pushDeskListToLS();
@@ -234,15 +234,17 @@ export class LocalstorageDeskListService {
    * It doesnt check if the reservation exists on the table. Dont use it
    * unless you are absolutely sure that the element exists
    */
-  // private unsafeDeleteReservation(reservation: Reservation) {
-  //   try {
-  //     this.reservationList.splice(this.reservationList.indexOf(reservation), 1);
-  //     this.pushReservationListToLS();
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  //   console.log('deleted reservation and pushed');
-  // }
+  private unsafeDeleteReservation(reservation: Reservation) {
+    try {
+      this.reservationList.splice(
+        this.reservationList.findIndex((m: any) => m == reservation),
+        1
+      );
+      this.pushReservationListToLS();
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   // deleteExpiredReservations(): void {
   //   let currentDate = this.currentDateString();
@@ -253,18 +255,25 @@ export class LocalstorageDeskListService {
   //   }
   // }
 
-  // deleteReservationsOnDesk(desk: Desk): void {
-  //   let reservationIndex: number = this.reservationList.findIndex((m: any) => {
-  //     m.deskID == desk.deskID;
-  //   });
-  //   console.log(reservationIndex);
-  //   while (reservationIndex != -1) {
-  //     this.unsafeDeleteReservation(this.reservationList[reservationIndex]);
-  //     reservationIndex = this.reservationList.findIndex((m: any) => {
-  //       m.deskID == desk.deskID;
-  //     });
-  //   }
-  // }
+  deleteReservationsOnDesk(desk: Desk): void {
+    let reservationIndex: number = this.reservationList.findIndex((m: any) => {
+      // console.log(m.deskID);
+      // console.log(desk.deskID);
+
+      //^I love it when the only thing that
+      //you change in your code is adding
+      //some logs and immediately deleting them and it somehow fixes
+      //everything
+
+      return m.deskID == desk.deskID;
+    });
+    while (reservationIndex != -1) {
+      this.unsafeDeleteReservation(this.reservationList[reservationIndex]);
+      reservationIndex = this.reservationList.findIndex((m: any) => {
+        m.deskID == desk.deskID;
+      });
+    }
+  }
 
   reportMalfunctionOnDesk(report: DeskMalfunctionReport): Observable<boolean> {
     let reportedDeskIndex: number = this.deskList.findIndex(
