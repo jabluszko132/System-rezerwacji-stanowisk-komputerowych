@@ -182,7 +182,6 @@ export class LocalstorageDeskListService {
       let reservationListInLS: any = localStorage.getItem('reservationList');
       if (reservationListInLS != null) {
         reservationListInLS = JSON.parse(reservationListInLS);
-        console.log(this.reservationTimeCollide(reserveObj));
         if (!this.reservationTimeCollide(reserveObj)) {
           this.addReservationOnNewDate(reserveObj);
           return of(true);
@@ -334,7 +333,6 @@ export class LocalstorageDeskListService {
   availableReservationHoursOnDay(deskID: number, date: string): NumberRange[] {
     if (!date.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
       console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
-      console.log(date);
       return [];
     }
     if (this.deskList.findIndex((m: any) => m.deskID == deskID) == -1) {

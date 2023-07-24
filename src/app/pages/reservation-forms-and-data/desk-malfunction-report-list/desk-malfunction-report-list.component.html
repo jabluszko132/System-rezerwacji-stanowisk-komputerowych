@@ -7,7 +7,7 @@
   <tr *ngFor="let report of reports$ | async">
     <td>{{ report.deskID }}</td>
     <td>
-      <p [ngIf]="report.description != ''">
+      <p *ngIf="report.description != ''">
         {{ report.description }}
       </p>
       <ng-template [ngIf]="report.description == ''">[Brak]</ng-template>

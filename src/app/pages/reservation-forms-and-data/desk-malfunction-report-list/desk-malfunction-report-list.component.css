@@ -22,13 +22,11 @@ tr:not(:first-of-type) > td:nth-of-type(2) {
   display: flex;
   align-items: center;
   justify-content: center;
-  white-space: pre-line;
   overflow: visible;
-  text-align: center;
 }
 
 p {
-  text-align: start;
+  white-space: pre-line;
   overflow: auto;
   width: 100%;
   max-height: inherit;
@@ -50,7 +48,7 @@ tr:not(:first-of-type):hover {
   transform: scale(1.06);
   transition: 100ms;
   outline: 2px solid;
-  background: #fff;
+  background: var(--secondaryThemeColor);
 }
 
 td:hover {
