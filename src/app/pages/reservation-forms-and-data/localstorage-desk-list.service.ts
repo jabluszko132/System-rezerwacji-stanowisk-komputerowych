@@ -383,6 +383,8 @@ export class LocalstorageDeskListService {
   }
 
   //todo
-  //fix the problem with new lines in reports descriptions
-  //finish deleteReservationsOnDesk function
+  //>use bulma framework for css
+  //>make a booking table - show all hours on given day (mark unavailable ones) and
+  //make user choose start and end of reservation (like nday tickets for peka or
+  //flight booking)
 }

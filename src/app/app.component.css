@@ -13,27 +13,21 @@ header > p {
   text-align: center;
 }
 
+nav {
+  max-width: 50%;
+  min-width: fit-content;
+}
+
 nav > a {
-  text-decoration: none;
-  color: inherit;
-  background: rgba(156, 199, 213, 0.5);
-  padding: 5px;
-  border-radius: 10px 5px 10px 5px;
-  border: 2px solid rgba(107, 143, 155, 0.4);
   user-select: none;
   margin: 5px;
-  display: flex;
-  align-items: center;
-  text-align: center;
+  width: 100%;
 }
-@media (max-width: 550px) {
+
+@media (max-width: 750px) {
   nav {
     flex-direction: column;
     max-width: 30%;
-  }
-  nav > a {
-    display: flex;
-    justify-content: center;
   }
   header {
     max-height: 15em;
