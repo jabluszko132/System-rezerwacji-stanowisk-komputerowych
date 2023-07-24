@@ -55,12 +55,18 @@ nav {
 }
 
 article {
-  overflow-y: auto;
+  overflow: auto;
   width: 100%;
   min-height: fit-content;
   max-height: 89vh;
+  text-align: center;
 }
 
 :host {
   height: 100vh;
+}
+
+#scrlPlaceholder {
+  /* Its so article scroll shows the entire thing */
+  height: 3em;
 }
