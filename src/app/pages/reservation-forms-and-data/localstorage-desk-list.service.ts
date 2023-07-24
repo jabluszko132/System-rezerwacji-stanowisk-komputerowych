@@ -344,6 +344,7 @@ export class LocalstorageDeskListService {
   //>make action$s and endSubs$s acually work
   //>pack components into smaller modules
   //  +make smaller services out of this service and put them into smaller modules
+  //    ++make the lists work on observable of the same variable so everything works
   //>learn angular coding style
   //>use bulma framework for css
   //>make a booking table - show all hours on given day (mark unavailable ones) and
