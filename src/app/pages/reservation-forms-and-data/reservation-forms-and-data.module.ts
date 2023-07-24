@@ -12,19 +12,29 @@ import { DeskReservationsModule } from './desk-reservations/desk-reservations.mo
 import { DeskReservationFormComponent } from './desk-reservations/desk-reservation-form/desk-reservation-form.component';
 import { ReservationListComponent } from './desk-reservations/reservation-list/reservation-list.component';
 import { AvailableReservationHoursListComponent } from './desk-reservations/available-reservation-hours-list/available-reservation-hours-list.component';
+import { DeskMalfunctionsModule } from './desk-malfunctions/desk-malfunctions.module';
+import { DeskMalfunctionReportListComponent } from './desk-malfunctions/desk-malfunction-report-list/desk-malfunction-report-list.component';
+import { DeskMalfunctionReportFormComponent } from './desk-malfunctions/desk-malfunction-report-form/desk-malfunction-report-form.component';
 // import { ReservationListComponent } from './reservation-list/reservation-list.component';
 // import { DeskMalfunctionReportFormComponent } from './desk-malfunction-report-form/desk-malfunction-report-form.component';
 // import { DeskMalfunctionReportListComponent } from './desk-malfunction-report-list/desk-malfunction-report-list.component';
 // import { AvailableReservationHoursListComponent } from './available-reservation-hours-list/available-reservation-hours-list.component';
 
 @NgModule({
-  imports: [CommonModule, DeskManagementModule, DeskReservationsModule],
+  imports: [
+    CommonModule,
+    DeskManagementModule,
+    DeskReservationsModule,
+    DeskMalfunctionsModule,
+  ],
   exports: [
     DeskAdditionFormComponent,
     DeskListComponent,
     DeskReservationFormComponent,
     ReservationListComponent,
     AvailableReservationHoursListComponent,
+    DeskMalfunctionReportListComponent,
+    DeskMalfunctionReportFormComponent,
     // DeskListComponent,
     // ReservationListComponent,
     // DeskMalfunctionReportFormComponent,

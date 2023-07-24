@@ -80,5 +80,16 @@ export class DeskManagementLSService {
     return of(true);
   }
 
-  // things regarding desk management from localstorage-desk-list service will be here
+  deskExists(deskID: number): boolean {
+    return this.deskList.findIndex((m: any) => m.deskID == deskID) != -1;
+  }
+
+  updateDeskFunctionality(deskID: number, doesItfunction: boolean): void {
+    let deskIndex = this.deskList.findIndex((m: any) => m.deskID == deskID);
+    if (deskIndex == -1) {
+      console.error('This desk doesnt exist');
+      return;
+    }
+    this.deskList[deskIndex].functional = false;
+  }
 }
