@@ -7,9 +7,7 @@
   <tr *ngFor="let report of reports$ | async">
     <td>{{ report.deskID }}</td>
     <td>
-      <textarea readonly *ngIf="report.description != ''">{{
-        report.description
-      }}</textarea>
+      {{ report.description }}
       <ng-template [ngIf]="report.description == ''">[Brak]</ng-template>
     </td>
     <td>

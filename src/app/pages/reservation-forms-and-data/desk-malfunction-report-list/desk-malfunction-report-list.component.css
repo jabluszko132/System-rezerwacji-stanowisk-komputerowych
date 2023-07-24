@@ -18,22 +18,13 @@ tr:not(:first-of-type) > td:nth-of-type(2) {
   max-width: 50vw;
   min-width: 30vw;
   min-height: inherit;
-  max-height: 25em;
-  overflow: visible;
+  max-height: 35em;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  white-space: pre-line;
+  overflow: auto;
 }
-textarea {
-  height: 100%;
-  min-height: inherit;
-  min-width: fit-content;
-  max-height: inherit;
-  width: fit-content;
-  user-select: text;
-  text-overflow: visible;
-}
-
 tr:first-of-type > td {
   background: rgb(var(--mainRgbThemeColor));
 }
