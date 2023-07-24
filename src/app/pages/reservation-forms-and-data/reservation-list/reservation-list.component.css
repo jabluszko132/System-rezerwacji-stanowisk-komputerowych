@@ -34,7 +34,7 @@ tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
-/* v Didnt use border: because inheritance wouldnt be working when both selectors apply */
+/* v Didnt use border: because inheritance wouldnt work when both selectors apply */
 /*  (that happens when the table is empty) */
 table > tr:first-of-type {
   border-top-left-radius: 10px;
