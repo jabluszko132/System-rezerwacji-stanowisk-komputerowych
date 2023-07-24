@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
-import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
-import { NumberRange } from '../interfaces/number-range';
+import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
+import { NumberRange } from '../../interfaces/number-range';
 
 
 @Component({

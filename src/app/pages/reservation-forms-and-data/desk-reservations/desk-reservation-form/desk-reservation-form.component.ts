@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
+import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
 import {  FormBuilder, Validators } from '@angular/forms';
 import {filter, Subject, switchMap, takeUntil, of} from 'rxjs';
-import { Reservation } from '../interfaces/reservation';
+import { Reservation } from '../../interfaces/reservation';
 // import { WorkHoursValidatorDirective } from '../work-hours-validator.directive';
 
 // const hoursValidator = new WorkHoursValidatorDirective;
