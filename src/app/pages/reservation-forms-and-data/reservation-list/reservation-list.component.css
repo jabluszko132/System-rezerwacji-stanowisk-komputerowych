@@ -1,6 +1,22 @@
+#width2LowMS {
+  display: none;
+  background: rgb(var(--mainRgbThemeColor));
+  padding: 2em;
+  border-radius: 10px;
+}
+
 @media (forced-colors: active) {
   td {
     border: 1px solid;
+  }
+}
+
+@media (max-width: 400px) {
+  table {
+    display: none;
+  }
+  #width2LowMS {
+    display: block;
   }
 }
 
