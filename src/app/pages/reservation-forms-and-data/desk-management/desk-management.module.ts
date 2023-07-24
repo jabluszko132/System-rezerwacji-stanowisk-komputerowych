@@ -7,7 +7,7 @@ import { DeskManagementLSService } from './desk-management-ls.service';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   declarations: [DeskAdditionFormComponent, DeskListComponent],
   providers: [LocalstorageDeskListService, DeskManagementLSService, Validators],
   exports: [DeskAdditionFormComponent, DeskListComponent],

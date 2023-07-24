@@ -33,10 +33,6 @@ export class LocalstorageDeskListService {
     return of(this.reservationList);
   }
 
-  getDeskList(): Observable<Desk[]> {
-    return of(this.deskList);
-  }
-
   getMalfunctionReports(): Observable<DeskMalfunctionReport[]> {
     return of(this.malfunctionReports);
   }
@@ -107,37 +103,6 @@ export class LocalstorageDeskListService {
    *
    */
 
-  addDesk(newDesk: Desk): Observable<boolean> {
-    /**@Issues
-     * Somehow somewhere during v1 of this function the of(this.deskList)
-     * observables (previously passed by getDeskList()) bug out and
-     * stop passing values.
-     *
-     * But somehow the v2 works even though its less optimal. May be that refreshing the list
-     * during that function bugs it out */
-
-    // --------------- 1st version (see: @Issues) ----------------
-    // this.forceDeskListRefresh();
-    // if (this.deskList.find((m: any) => m.deskID === newDesk.deskID)) {
-    //   alert('stanowisko już istnieje');
-    //   return of(false);
-    // }
-    // this.deskList.push(newDesk);
-    // this.pushDeskListToLS();
-    // console.log(this.deskList);
-    // return of(true);
-    // ------------------ 2nd version ---------------------------
-    let deskListInLS: any = localStorage.getItem('deskList') ?? '[]';
-    deskListInLS = JSON.parse(deskListInLS as string) ?? [];
-    if (deskListInLS.find((m: any) => m.deskID === newDesk.deskID)) {
-      alert('stanowisko już istnieje');
-      return of(false);
-    }
-    this.deskList.push(newDesk);
-    this.pushDeskListToLS();
-    return of(true);
-  }
-
   private addReservationOnNewDate(reserveObj: Reservation): void {
     this.reservationList.push(reserveObj);
     this.pushReservationListToLS();
@@ -198,23 +163,6 @@ export class LocalstorageDeskListService {
       );
     }
     return of(false);
-  }
-
-  deleteDesk(desk: Desk): Observable<Boolean> {
-    let deskToDeleteIndex: number = this.deskList.indexOf(desk);
-    if (deskToDeleteIndex == -1) {
-      alert('Nie ma takiego stanowiska');
-      return of(false);
-    }
-    if (this.reservationList.find((m: any) => m.deskID == desk.deskID)) {
-      alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
-      if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
-        this.deleteReservationsOnDesk(desk);
-      else return of(false);
-    }
-    this.deskList.splice(deskToDeleteIndex, 1);
-    this.pushDeskListToLS();
-    return of(true);
   }
 
   deleteReservation(reservation: Reservation): Observable<Boolean> {
@@ -380,6 +328,12 @@ export class LocalstorageDeskListService {
         to: 18,
       });
     return availableHours;
+  }
+
+  hasAnyReservations(desk: Desk): boolean {
+    return (
+      this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
+    );
   }
 
   //todo

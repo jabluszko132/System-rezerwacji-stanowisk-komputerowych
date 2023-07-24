@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Desk } from '../../interfaces/desk';
 import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
+import { DeskManagementLSService } from '../desk-management-ls.service';
 
 @Component({
   selector: 'app-desk-list',
@@ -9,7 +10,7 @@ import { LocalstorageDeskListService } from '../../localstorage-desk-list.servic
   styleUrls: ['./desk-list.component.css'],
 })
 export class DeskListComponent implements OnInit {
-  constructor(private service: LocalstorageDeskListService) {}
+  constructor(private service: DeskManagementLSService) {}
 
   deskList$: Observable<any> = this.service.getDeskList();
 

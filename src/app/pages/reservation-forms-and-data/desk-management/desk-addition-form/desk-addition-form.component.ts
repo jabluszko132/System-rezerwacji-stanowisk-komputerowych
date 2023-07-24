@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
 import {filter, Subject, switchMap, takeUntil} from 'rxjs';
+import { DeskManagementLSService } from '../desk-management-ls.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ import {filter, Subject, switchMap, takeUntil} from 'rxjs';
   styleUrls: ['./desk-addition-form.component.css'],
 })
 export class DeskAdditionFormComponent implements OnInit, OnDestroy {
-  constructor(private service: LocalstorageDeskListService) {}
+  constructor(private service: DeskManagementLSService) {}
 
   private action$: Subject<any> = new Subject<any>;
   private endSubs$: Subject<void> = new Subject<void>;
