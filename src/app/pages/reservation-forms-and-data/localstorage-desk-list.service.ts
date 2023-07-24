@@ -292,7 +292,7 @@ export class LocalstorageDeskListService {
       console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
       return [];
     }
-    if (this.deskList.findIndex((m: any) => m.deskID == deskID) == -1) {
+    if (!this.deskExists(deskID)) {
       console.error('The given desk doesnt exist on deskList');
       return [];
     }
@@ -334,6 +334,10 @@ export class LocalstorageDeskListService {
     return (
       this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
     );
+  }
+
+  deskExists(deskID: number): boolean {
+    return this.deskList.findIndex((m: any) => m.deskID == deskID) != -1;
   }
 
   //todo

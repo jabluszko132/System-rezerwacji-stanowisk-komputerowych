@@ -3,6 +3,7 @@ import { LocalstorageDeskListService } from '../../localstorage-desk-list.servic
 import {  FormBuilder, Validators } from '@angular/forms';
 import {filter, Subject, switchMap, takeUntil, of} from 'rxjs';
 import { Reservation } from '../../interfaces/reservation';
+import { DeskReservationsLsService } from '../desk-reservations-ls.service';
 // import { WorkHoursValidatorDirective } from '../work-hours-validator.directive';
 
 // const hoursValidator = new WorkHoursValidatorDirective;
@@ -14,7 +15,7 @@ import { Reservation } from '../../interfaces/reservation';
 })
 export class DeskReservationFormComponent implements OnInit, OnDestroy {
   constructor(
-    private service: LocalstorageDeskListService,
+    private service: DeskReservationsLsService,
     private fb: FormBuilder,
   ) {}
   private action$: Subject<any> = new Subject<any>;

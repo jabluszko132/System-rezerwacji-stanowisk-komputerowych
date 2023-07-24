@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
 import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
 import { NumberRange } from '../../interfaces/number-range';
+import { DeskReservationsLsService } from '../desk-reservations-ls.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { NumberRange } from '../../interfaces/number-range';
   styleUrls: ['./available-reservation-hours-list.component.css'],
 })
 export class AvailableReservationHoursListComponent implements OnInit, OnDestroy {
-  constructor(private service: LocalstorageDeskListService, private fb: FormBuilder) {}
+  constructor(private service: DeskReservationsLsService, private fb: FormBuilder) {}
 
   private action$: Subject<any> = new Subject<any>
   private endSubs$: Subject<void> = new Subject<void>;

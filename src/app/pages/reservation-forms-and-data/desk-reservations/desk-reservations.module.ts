@@ -5,6 +5,7 @@ import { ReservationListComponent } from './reservation-list/reservation-list.co
 import { AvailableReservationHoursListComponent } from './available-reservation-hours-list/available-reservation-hours-list.component';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { DeskReservationsLsService } from './desk-reservations-ls.service';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
@@ -13,7 +14,11 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
     ReservationListComponent,
     AvailableReservationHoursListComponent,
   ],
-  providers: [LocalstorageDeskListService, Validators],
+  providers: [
+    LocalstorageDeskListService,
+    DeskReservationsLsService,
+    Validators,
+  ],
   exports: [
     DeskReservationFormComponent,
     ReservationListComponent,
