@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Reservation } from './reservation';
-import { Desk } from './desk';
-import { DeskMalfunctionReport } from './desk-malfunction-report';
-import { NumberRange } from './number-range';
+import { Reservation } from './interfaces/reservation';
+import { Desk } from './interfaces/desk';
+import { DeskMalfunctionReport } from './interfaces/desk-malfunction-report';
+import { NumberRange } from './interfaces/number-range';
 const date = new Date();
 
 @Injectable()
@@ -386,6 +386,7 @@ export class LocalstorageDeskListService {
   //>make action$s and endSubs$s acually work
   //>pack components into smaller modules
   //  +make smaller services out of this service and put them into smaller modules
+  //>learn angular coding style
   //>use bulma framework for css
   //>make a booking table - show all hours on given day (mark unavailable ones) and
   //make user choose start and end of reservation (like nday tickets for peka or
