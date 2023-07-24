@@ -2,7 +2,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: rgb(var(--mainRgbThemeColor));
+  background: rgb(var(--headerRgbColor));
   min-height: fit-content;
   max-height: 15vh;
 }
