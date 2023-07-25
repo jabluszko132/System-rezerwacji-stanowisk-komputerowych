@@ -146,7 +146,6 @@ export class LocalstorageDeskListService {
   }
 
   //todo
-  //>move unnesessary things from constructors to ngOnInits
   //>learn angular coding style
   //>use bulma framework for css
   //>make a booking table - show all hours on given day (mark unavailable ones) and
@@ -154,4 +153,5 @@ export class LocalstorageDeskListService {
   //flight booking)
   //>figure out when and where to complete() the subjects deskList$ and reservationList$
   //>think of a better name for this service and apply it
+  //>move unnesessary things from constructors to ngOnInits
 }
