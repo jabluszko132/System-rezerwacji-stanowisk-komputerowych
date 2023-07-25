@@ -3,12 +3,12 @@ import { Observable, of } from 'rxjs';
 import { Reservation } from '../interfaces/reservation';
 import { Desk } from '../interfaces/desk';
 import { NumberRange } from '../interfaces/number-range';
-import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
+import { DeskManagementLSService } from '../desk-management/desk-management-ls.service';
 const date = new Date();
 
 @Injectable()
 export class DeskReservationsLsService {
-  constructor(private lsDeskService: LocalstorageDeskListService) {
+  constructor(private lsDeskService: DeskManagementLSService) {
     this.forceReservationListRefresh();
   }
 

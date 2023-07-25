@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { DeskReservationsLsService } from '../desk-reservations/desk-reservations-ls.service';
 import { Desk } from '../interfaces/desk';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
@@ -68,12 +69,7 @@ export class DeskManagementLSService {
       alert('Nie ma takiego stanowiska');
       return of(false);
     }
-    if (this.lsDeskService.hasAnyReservations(desk)) {
-      alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
-      if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
-        this.lsDeskService.deleteReservationsOnDesk(desk);
-      else return of(false);
-    }
+    if (!this.lsDeskService.canDeskBeDeleted(desk)) return of(false);
     console.log('changed deskList');
     this.deskList.splice(deskToDeleteIndex, 1);
     this.pushDeskListToLS();
