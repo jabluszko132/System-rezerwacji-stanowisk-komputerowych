@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Reservation } from '../interfaces/reservation';
 import { Desk } from '../interfaces/desk';
 import { NumberRange } from '../interfaces/number-range';
 import { DeskManagementLSService } from '../desk-management/desk-management-ls.service';
+import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 const date = new Date();
 
 @Injectable()
 export class DeskReservationsLsService {
-  constructor(private lsDeskService: DeskManagementLSService) {
+  constructor(
+    private lsDeskService: DeskManagementLSService,
+    private mainService: LocalstorageDeskListService
+  ) {
     this.forceReservationListRefresh();
   }
 
@@ -22,7 +26,9 @@ export class DeskReservationsLsService {
     );
   }
 
-  reservationList: Reservation[] = [];
+  reservationList$: BehaviorSubject<Reservation[]> =
+    this.mainService.getReservationList();
+  reservationList: Reservation[] = this.reservationList$.getValue();
   value: any;
 
   getReservationList(): Observable<Reservation[]> {
@@ -34,8 +40,7 @@ export class DeskReservationsLsService {
    * Forces this instance's local reservationList value to change to the one in localStorage
    */
   private forceReservationListRefresh(): void {
-    this.value = localStorage.getItem('reservationList');
-    this.reservationList = this.value ? JSON.parse(this.value) : [];
+    this.reservationList = this.reservationList$.getValue();
   }
 
   private sortReservationListByDate(list: Reservation[]): void {
@@ -55,6 +60,7 @@ export class DeskReservationsLsService {
       'reservationList',
       JSON.stringify(this.reservationList)
     );
+    this.reservationList$.next(this.reservationList);
   }
 
   private addReservationOnNewDate(reserveObj: Reservation): void {

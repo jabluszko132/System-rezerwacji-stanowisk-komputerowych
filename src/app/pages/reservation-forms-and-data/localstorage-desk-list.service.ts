@@ -19,6 +19,11 @@ export class LocalstorageDeskListService {
     Reservation[]
   >(this.reservationList);
   deskList: Desk[] = [];
+
+  getReservationList(): BehaviorSubject<Reservation[]> {
+    return this.reservationList$;
+  }
+
   /**
    * Forces this instance's local deskList value to change to the one in localStorage
    *
@@ -44,6 +49,7 @@ export class LocalstorageDeskListService {
       'reservationList',
       JSON.stringify(this.reservationList)
     );
+    this.reservationList$.next(this.reservationList);
   }
   // private sortDeskList(): void {
   //   this.deskList.sort((a, b) => a.deskID - b.deskID);
