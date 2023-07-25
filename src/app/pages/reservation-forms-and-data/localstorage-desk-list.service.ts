@@ -146,14 +146,12 @@ export class LocalstorageDeskListService {
   }
 
   //todo
-  //>pack components into smaller modules
-  //  +make smaller services out of this service and put them into smaller modules
-  //    ++make the lists work on subject of the same variable so everything works
-  //      +++figure out when and where to complete() the subject
   //>move unnesessary things from constructors to ngOnInits
   //>learn angular coding style
   //>use bulma framework for css
   //>make a booking table - show all hours on given day (mark unavailable ones) and
   //make user choose start and end of reservation (like nday tickets for peka or
   //flight booking)
+  //>figure out when and where to complete() the subjects deskList$ and reservationList$
+  //>think of a better name for this service and apply it
 }
