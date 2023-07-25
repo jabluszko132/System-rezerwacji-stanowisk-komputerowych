@@ -9,7 +9,9 @@ const date = new Date();
 @Injectable()
 export class LocalstorageDeskListService {
   constructor() {
-    this.reservationList$.pipe(takeUntilDestroyed()).subscribe();
+    this.reservationList$
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.pushReservationListToLS());
     this.deskList$.pipe(takeUntilDestroyed()).subscribe();
   }
 
@@ -36,6 +38,9 @@ export class LocalstorageDeskListService {
   getReservationList(): BehaviorSubject<Reservation[]> {
     return this.reservationList$;
   }
+  getDeskList(): BehaviorSubject<Desk[]> {
+    return this.deskList$;
+  }
 
   /**
    * Forces this instance's local deskList value to change to the one in localStorage
@@ -61,7 +66,6 @@ export class LocalstorageDeskListService {
       'reservationList',
       JSON.stringify(this.reservationList)
     );
-    this.reservationList$.next(this.reservationList);
   }
   // private sortDeskList(): void {
   //   this.deskList.sort((a, b) => a.deskID - b.deskID);
@@ -105,7 +109,7 @@ export class LocalstorageDeskListService {
         m.deskID == desk.deskID;
       });
     }
-    this.pushReservationListToLS();
+    this.reservationList$.next(this.reservationList);
   }
 
   // deleteExpiredReservations(): void {

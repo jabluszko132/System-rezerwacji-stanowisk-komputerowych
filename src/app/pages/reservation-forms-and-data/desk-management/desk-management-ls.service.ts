@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { DeskReservationsLsService } from '../desk-reservations/desk-reservations-ls.service';
 import { Desk } from '../interfaces/desk';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
@@ -9,6 +9,7 @@ export class DeskManagementLSService {
   constructor(private lsDeskService: LocalstorageDeskListService) {
     this.forceDeskListRefresh();
   }
+  deskList$: BehaviorSubject<Desk[]> = this.lsDeskService.getDeskList();
   deskList: Desk[] = [];
   value: any;
 
@@ -21,15 +22,14 @@ export class DeskManagementLSService {
    *
    */
   private forceDeskListRefresh(): void {
-    this.value = localStorage.getItem('deskList');
-    this.deskList = this.value ? JSON.parse(this.value) : [];
+    this.deskList = this.deskList$.getValue();
   }
 
   /**
    * Updates localStorage deskList to local deskList's value
    */
   private pushDeskListToLS(): void {
-    localStorage.setItem('deskList', JSON.stringify(this.deskList));
+    this.deskList$.next(this.deskList);
   }
 
   addDesk(newDesk: Desk): Observable<boolean> {
