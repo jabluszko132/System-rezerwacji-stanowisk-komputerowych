@@ -1,0 +1,16 @@
+<div>
+  <form>
+    <label
+      >ID stanowiska:
+      <input type="number" class="input" />
+    </label>
+    <label
+      >Dzień rezerwacji:
+      <input type="date" class="input" />
+    </label>
+  </form>
+  <h1>Godziny rezerwacji</h1>
+  <div>
+    <div *ngFor="let i of workHours" [ngClass]="">{{ i }}</div>
+  </div>
+</div>

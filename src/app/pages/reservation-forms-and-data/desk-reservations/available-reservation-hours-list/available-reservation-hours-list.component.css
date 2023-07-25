@@ -12,20 +12,17 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-label {
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center; */
+/* label {
   width: 100%;
   line-height: 2em;
-}
-label > input {
+} */
+/* label > input {
   width: 40%;
   border: none;
   padding: 2px;
   max-height: 1.5em;
   outline: 1px solid var(--secondaryThemeColor);
-}
+} */
 
 form {
   padding: 1em 3.5em 2.5em 3.5em;
@@ -55,11 +52,18 @@ table {
   line-height: 1.2em;
   text-align: center;
   max-width: 20%;
+  background-color: transparent;
+  color: var(--secondaryThemeColor);
 }
 
 tr,
 td {
+  border: none;
   width: fit-content;
+}
+
+tr:not(:last-of-type) {
+  border-bottom: 1px solid var(--secondaryThemeColor);
 }
 
 h3 {
@@ -72,7 +76,7 @@ h3 {
   justify-content: center;
 }
 
-input[type='submit'] {
+/* input[type='submit'] {
   border-radius: 15px;
   font-size: 1em;
   font-weight: 200;
@@ -94,7 +98,7 @@ input[type='submit']:hover {
 input[type='submit']:focus-within {
   background-color: var(--secondaryThemeColor);
   color: rgb(var(--mainRgbThemeColor));
-}
+} */
 
 div.inputErrors {
   color: red;

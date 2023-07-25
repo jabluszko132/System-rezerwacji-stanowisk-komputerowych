@@ -1,32 +1,40 @@
 <div id="wrapper">
   <form (ngSubmit)="getAvailableHours()" [formGroup]="form">
     <h3>Godziny dostępności stanowiska</h3>
-    <label
-      >Numer stanowiska
-      <input type="number" name="deskID" formControlName="deskID" />
+    <label class="block">
+      Numer stanowiska
+      <div class="control">
+        <input
+          class="input"
+          type="number"
+          name="deskID"
+          formControlName="deskID"
+        />
+      </div>
     </label>
-    <label
-      >Dzień
+    <label class="block">
+      <div>Dzień</div>
       <input
+        class="input"
         type="date"
         name="reservationDate"
         formControlName="reservationDate"
       />
     </label>
-    <input type="submit" value="Sprawdź" />
+    <input class="block button is-link" type="submit" value="Sprawdź" />
   </form>
   <div id="list" *ngIf="displayList && availableHours.length > 0">
     Stanowisko jest dostępne w tym dniu w godzinach:
-    <table *ngIf="availableHours.length > 0">
-      <tr *ngFor="let x of availableHours">
-        <td>od</td>
-        <td>{{ x.from }}</td>
-        <td>do</td>
-        <td>{{ x.to }}</td>
+    <table class="table" *ngIf="availableHours.length > 0">
+      <tr class="tr" *ngFor="let x of availableHours">
+        <td class="td block">od</td>
+        <td class="td block">{{ x.from }}</td>
+        <td class="td block">do</td>
+        <td class="td block">{{ x.to }}</td>
       </tr>
     </table>
   </div>
-  <div *ngIf="availableHours.length == 0 && displayList">
+  <div class="block" *ngIf="availableHours.length == 0 && displayList">
     To stanowisko nie jest dostępne w tym dniu
   </div>
 </div>
