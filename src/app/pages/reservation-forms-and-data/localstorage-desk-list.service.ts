@@ -1,24 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Reservation } from './interfaces/reservation';
 import { Desk } from './interfaces/desk';
-import { DeskMalfunctionReport } from './interfaces/desk-malfunction-report';
-import { NumberRange } from './interfaces/number-range';
-import { DeskReservationsLsService } from './desk-reservations/desk-reservations-ls.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 const date = new Date();
 
 @Injectable()
 export class LocalstorageDeskListService {
   constructor() {
-    this.forceReservationListRefresh();
-    this.forceDeskListRefresh();
+    this.reservationList$.pipe(takeUntilDestroyed()).subscribe();
+    this.deskList$.pipe(takeUntilDestroyed()).subscribe();
   }
-  value: any;
-  reservationList: Reservation[] = [];
-  reservationList$: BehaviorSubject<Reservation[]> = new BehaviorSubject<
-    Reservation[]
-  >(this.reservationList);
-  deskList: Desk[] = [];
+
+  private reservationList$: BehaviorSubject<Reservation[]> =
+    new BehaviorSubject<Reservation[]>(this.lsGetReservationList());
+
+  private reservationList: Reservation[] = this.reservationList$.getValue();
+
+  private deskList$: BehaviorSubject<Desk[]> = new BehaviorSubject<Desk[]>(
+    this.lsGetDeskList()
+  );
+
+  private deskList: Desk[] = this.deskList$.getValue();
+
+  private lsGetDeskList(): Desk[] {
+    let value = localStorage.getItem('deskList');
+    return value ? JSON.parse(value) : [];
+  }
+  private lsGetReservationList(): Reservation[] {
+    let value = localStorage.getItem('reservationList');
+    return value ? JSON.parse(value) : [];
+  }
 
   getReservationList(): BehaviorSubject<Reservation[]> {
     return this.reservationList$;
@@ -29,17 +42,16 @@ export class LocalstorageDeskListService {
    *
    */
   private forceDeskListRefresh(): void {
-    this.value = localStorage.getItem('deskList');
-    this.deskList = this.value ? JSON.parse(this.value) : [];
+    this.deskList = this.deskList$.getValue();
   }
+
   /**
    * Forces this instance's local reservationList value to change to the one in localStorage
    */
   private forceReservationListRefresh(): void {
-    this.value = localStorage.getItem('reservationList');
-    this.reservationList = this.value ? JSON.parse(this.value) : [];
-    this.reservationList$.next(this.reservationList);
+    this.reservationList = this.reservationList$.getValue();
   }
+
   /**
    * Updates localStorage reservationList to local reservationList's value
    */
@@ -72,11 +84,30 @@ export class LocalstorageDeskListService {
         this.reservationList.findIndex((m: any) => m == reservation),
         1
       );
-      this.pushReservationListToLS();
     } catch (e) {
       console.error(e);
     }
   }
+
+  deleteReservationsOnDesk(desk: Desk): void {
+    let reservationIndex: number = this.reservationList.findIndex((m: any) => {
+      // console.log(m.deskID);
+      // console.log(desk.deskID);
+      //^I love it when the only thing that
+      //you change in your code is adding
+      //some logs and immediately deleting them and it somehow fixes
+      //everything
+      return m.deskID == desk.deskID;
+    });
+    while (reservationIndex != -1) {
+      this.unsafeDeleteReservation(this.reservationList[reservationIndex]);
+      reservationIndex = this.reservationList.findIndex((m: any) => {
+        m.deskID == desk.deskID;
+      });
+    }
+    this.pushReservationListToLS();
+  }
+
   // deleteExpiredReservations(): void {
   //   let currentDate = this.currentDateString();
   //   for (let reservation of this.reservationList) {
@@ -96,18 +127,17 @@ export class LocalstorageDeskListService {
     if (this.hasAnyReservations(desk)) {
       alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
       if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
-        // this.reservationService.deleteReservationsOnDesk(desk);
-        return true;
+        this.deleteReservationsOnDesk(desk);
       else false;
     }
     return true;
   }
 
   //todo
-  //>make action$s and endSubs$s acually work
   //>pack components into smaller modules
   //  +make smaller services out of this service and put them into smaller modules
-  //    ++make the lists work on observable of the same variable so everything works
+  //    ++make the lists work on subject of the same variable so everything works
+  //      +++figure out when and where to complete() the subject
   //>learn angular coding style
   //>use bulma framework for css
   //>make a booking table - show all hours on given day (mark unavailable ones) and

@@ -13,6 +13,7 @@ export class DeskReservationsLsService {
     private lsDeskService: DeskManagementLSService,
     private mainService: LocalstorageDeskListService
   ) {
+    this.reservationList$.subscribe();
     this.forceReservationListRefresh();
   }
 
@@ -209,47 +210,5 @@ export class DeskReservationsLsService {
     this.reservationList.splice(reservationToDeleteIndex, 1);
     this.pushReservationListToLS();
     return of(true);
-  }
-
-  /**
-   * This is an unsafe but faster version of deleteReservation method.
-   * It doesnt check if the reservation exists on the table. Dont use it
-   * unless you are absolutely sure that the element exists
-   */
-  private unsafeDeleteReservation(reservation: Reservation) {
-    try {
-      this.reservationList.splice(
-        this.reservationList.findIndex((m: any) => m == reservation),
-        1
-      );
-      this.pushReservationListToLS();
-    } catch (e) {
-      console.error(e);
-    }
-  }
-  // deleteExpiredReservations(): void {
-  //   let currentDate = this.currentDateString();
-  //   for (let reservation of this.reservationList) {
-  //     if (reservation.reservationDate < currentDate) {
-  //       this.unsafeDeleteReservation(reservation);
-  //     } else return;
-  //   }
-  // }
-  deleteReservationsOnDesk(desk: Desk): void {
-    let reservationIndex: number = this.reservationList.findIndex((m: any) => {
-      // console.log(m.deskID);
-      // console.log(desk.deskID);
-      //^I love it when the only thing that
-      //you change in your code is adding
-      //some logs and immediately deleting them and it somehow fixes
-      //everything
-      return m.deskID == desk.deskID;
-    });
-    while (reservationIndex != -1) {
-      this.unsafeDeleteReservation(this.reservationList[reservationIndex]);
-      reservationIndex = this.reservationList.findIndex((m: any) => {
-        m.deskID == desk.deskID;
-      });
-    }
   }
 }
