@@ -1,16 +1,17 @@
-<table>
-  <tr>
-    <td>Numer stanowiska</td>
-    <td>Zarezerwowane przez</td>
-    <td>Dzień rezerwacji</td>
-    <td colspan="2">Godziny rezerwacji</td>
+<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+  <tr class="tr">
+    <td class="td">Numer stanowiska</td>
+    <td class="td">Zarezerwowane przez</td>
+    <td class="td">Dzień rezerwacji</td>
+    <td class="td" colspan="2">Godziny rezerwacji</td>
   </tr>
-  <tr *ngFor="let desk of reservationList$ | async">
-    <td>{{ desk.deskID }}</td>
-    <td>{{ desk.reservedBy }}</td>
-    <td>{{ desk.reservationDate }}</td>
-    <td>Od {{ desk.startHour }} do {{ desk.endHour }}</td>
+  <tr class="tr" *ngFor="let desk of reservationList$ | async">
+    <td class="td">{{ desk.deskID }}</td>
+    <td class="td">{{ desk.reservedBy }}</td>
+    <td class="td">{{ desk.reservationDate }}</td>
+    <td class="td">Od {{ desk.startHour }} do {{ desk.endHour }}</td>
     <td
+      class="td"
       (click)="deleteReservation(desk)"
       tabindex="0"
       (keydown.enter)="deleteReservation(desk)"

@@ -1,15 +1,16 @@
-<table>
-  <tr>
-    <td>Numer stanowiska</td>
-    <td colspan="2">Sprawne</td>
+<table class="table is-bordered is-striped is-narrow is-hoverable">
+  <tr class="tr">
+    <td class="td">Numer stanowiska</td>
+    <td class="td" colspan="2">Sprawne</td>
   </tr>
-  <tr *ngFor="let desk of deskList$ | async">
-    <td>{{ desk.deskID }}</td>
-    <td>
+  <tr class="tr" *ngFor="let desk of deskList$ | async">
+    <td class="td">{{ desk.deskID }}</td>
+    <td class="td">
       <ng-template [ngIf]="desk.functional">Tak</ng-template>
       <ng-template [ngIf]="!desk.functional">Nie</ng-template>
     </td>
     <td
+      class="td"
       (click)="deleteDesk(desk)"
       tabindex="0"
       (keydown.enter)="deleteDesk(desk)"

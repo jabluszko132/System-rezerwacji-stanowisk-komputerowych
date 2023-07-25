@@ -13,9 +13,9 @@
   flex-wrap: wrap;
 }
 label {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   width: 100%;
   line-height: 2em;
 }

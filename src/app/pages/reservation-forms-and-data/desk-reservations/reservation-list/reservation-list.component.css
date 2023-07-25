@@ -34,24 +34,24 @@ tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
-/* v Didnt use border: because inheritance wouldnt work when both selectors apply */
-/*  (that happens when the table is empty) */
-table > tr:first-of-type {
+/* v Didnt use border: because inheritance wouldnt work when both selectors apply 
+(that happens when the table is empty) */
+/* table > tr:first-of-type {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-}
+} */
 
 table > tr:last-of-type {
   border-end-start-radius: 10px;
   border-end-end-radius: 10px;
 }
 
-tr:not(:first-of-type):hover {
+/* tr:not(:first-of-type):hover {
   transform: scale(1.02);
   transition: 100ms;
   outline: 2px solid;
   background: var(--secondaryThemeColor);
-}
+} */
 
 tr:not(:first-of-type) > td:last-of-type {
   background: var(--pageBackgroundColor);
@@ -60,7 +60,6 @@ tr:not(:first-of-type) > td:last-of-type {
 
 tr:not(:first-of-type) > td:last-of-type:hover {
   background-color: red;
-  outline: 3px solid;
   cursor: pointer;
 }
 
@@ -74,12 +73,13 @@ tr:not(:first-of-type) > td:last-of-type:hover {
 
 table {
   background: var(--secondaryThemeColor);
-  border-radius: 10px 10px;
+  color: var(--secondaryThemeColor);
+  /* border-radius: 10px 10px; */
 }
 
 /* td border start */
 
-table > tr:first-of-type > td:first-of-type {
+/* table > tr:first-of-type > td:first-of-type {
   border-top-left-radius: 10px;
 }
 table > tr:first-of-type > td:last-of-type {
@@ -89,7 +89,7 @@ table > tr:last-of-type > td:first-of-type {
   border-end-start-radius: 10px;
 }
 table > tr:last-of-type > td:last-of-type {
-  border-end-end-radius: 10px;
-}
+  border-end-end-radius: 10px; 
+} */
 
 /* td border end */
