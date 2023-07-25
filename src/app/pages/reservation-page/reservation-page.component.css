@@ -2,7 +2,14 @@
   text-align: center;
 }
 
-:host > p {
+/* :host > p {
   margin-top: 2em;
   margin-bottom: 2em;
+} */
+
+#greeting {
+  color: white;
+  font-family: 'Geologica';
+  font-weight: 500;
+  padding: 1em;
 }
