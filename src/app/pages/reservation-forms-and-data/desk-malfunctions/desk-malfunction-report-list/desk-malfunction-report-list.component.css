@@ -6,7 +6,7 @@
 
 td {
   text-align: center;
-  padding: 0.4em;
+  padding: 0.5em;
   text-overflow: clip;
 }
 
@@ -29,7 +29,7 @@ p {
   white-space: pre-line;
   overflow: auto;
   width: 100%;
-  max-height: inherit;
+  max-height: 33em;
   text-align: start;
 }
 
@@ -69,6 +69,7 @@ table {
   background: var(--secondaryThemeColor);
   border-radius: 10px 10px;
   max-width: 135px;
+  color: var(--secondaryThemeColor);
 }
 
 a {
@@ -86,7 +87,7 @@ tr:not(:first-of-type) > td:last-of-type:hover {
   cursor: pointer;
 }
 /* td border start */
-
+/* 
 table > tr:first-of-type > td:first-of-type {
   border-top-left-radius: 10px;
 }
@@ -98,6 +99,6 @@ table > tr:last-of-type > td:first-of-type {
 }
 table > tr:last-of-type > td:last-of-type {
   border-end-end-radius: 10px;
-}
+} */
 
 /* td border end */

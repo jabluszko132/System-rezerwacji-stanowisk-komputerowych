@@ -1,22 +1,22 @@
-<table>
-  <tr>
-    <td>Numer stanowiska</td>
-    <td>Opis</td>
-    <td colspan="2">Aktualne</td>
+<table class="table is-fullwidth is-striped is-hoverable is-bordered">
+  <tr class="tr">
+    <td class="td">Numer stanowiska</td>
+    <td class="td">Opis</td>
+    <td class="td" colspan="2">Aktualne</td>
   </tr>
-  <tr *ngFor="let report of reports$ | async">
-    <td>{{ report.deskID }}</td>
-    <td>
-      <p *ngIf="report.description != ''">
+  <tr class="tr" *ngFor="let report of reports$ | async">
+    <td class="td">{{ report.deskID }}</td>
+    <td class="td">
+      <p class="bulma-scroll-mixin" *ngIf="report.description != ''">
         {{ report.description }}
       </p>
       <ng-template [ngIf]="report.description == ''">[Brak]</ng-template>
     </td>
-    <td>
+    <td class="td">
       <ng-template [ngIf]="report.dealtWith">Nie</ng-template>
       <ng-template [ngIf]="!report.dealtWith">Tak</ng-template>
     </td>
-    <td (click)="dealtWithMalfunction(report)">0</td>
+    <td class="td" (click)="dealtWithMalfunction(report)">0</td>
     <!--placeholder-->
   </tr>
 </table>
