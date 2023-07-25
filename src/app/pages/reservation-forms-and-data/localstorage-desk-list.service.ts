@@ -102,15 +102,15 @@ export class LocalstorageDeskListService {
   }
 
   deleteReservationsOnDesk(desk: Desk): void {
-    let reservationIndex: number = this.reservationList.findIndex((m: any) => {
+    let reservationIndex: number = this.reservationList.findIndex(
+      (m: any) => m.deskID == desk.deskID
       // console.log(m.deskID);
       // console.log(desk.deskID);
       //^I love it when the only thing that
       //you change in your code is adding
       //some logs and immediately deleting them and it somehow fixes
       //everything
-      return m.deskID == desk.deskID;
-    });
+    );
     while (reservationIndex != -1) {
       this.unsafeDeleteReservation(this.reservationList[reservationIndex]);
       reservationIndex = this.reservationList.findIndex((m: any) => {
