@@ -1,16 +1,23 @@
 <div>
-  <form>
+  <form (ngSubmit)="getAvailableHours()" [formGroup]="form">
     <label
       >ID stanowiska:
-      <input type="number" class="input" />
+      <input type="number" class="input" formControlName="deskID" />
     </label>
     <label
       >Dzień rezerwacji:
-      <input type="date" class="input" />
+      <input type="date" class="input" formControlName="reservationDate" />
     </label>
+    <input type="submit" />
   </form>
   <h1>Godziny rezerwacji</h1>
-  <div>
-    <div *ngFor="let i of workHours" [ngClass]="">{{ i }}</div>
+  <div *ngIf="availableHours.length > 0">
+    <div
+      *ngFor="let i of workHours"
+      [ngClass]="checkIfReservedHour(i) ? 'reserved' : 'available'"
+    >
+      {{ i }}
+    </div>
   </div>
 </div>
+<button (click)="checkIfReservedHour(2)">x</button>

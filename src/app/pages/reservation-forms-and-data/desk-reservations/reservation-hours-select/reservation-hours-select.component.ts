@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DeskReservationsLsService } from '../desk-reservations-ls.service';
 import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
@@ -10,7 +10,7 @@ import {NumberRange} from '../../interfaces/number-range';
   templateUrl: './reservation-hours-select.component.html',
   styleUrls: ['./reservation-hours-select.component.css'],
 })
-export class ReservationHoursSelectComponent implements OnInit {
+export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   constructor(
     private service: DeskReservationsLsService,
     private fb: FormBuilder
@@ -33,6 +33,7 @@ export class ReservationHoursSelectComponent implements OnInit {
   reservationDate: FormControl<string> = this.form.controls.reservationDate;
 
   ngOnInit() {
+    this.checkIfReservedHour(2);
     this.action$.pipe(filter((m:any)=>m == this.form.value),switchMap((d:any)=>
       this.availableHours = this.service.availableReservationHoursOnDay(d.deskID,d.reservationDate)
     ),takeUntil(this.endSubs$)).subscribe();
@@ -44,9 +45,34 @@ export class ReservationHoursSelectComponent implements OnInit {
   }
   
   getAvailableHours(): void {
-    if(this.deskID.errors || this.reservationDate) return;
+    console.log(this.deskID.errors)
+    console.log(this.reservationDate.errors)
+    if(this.deskID.errors || this.reservationDate.errors) return;
     this.action$.next(this.form.value);
-    console.log(this.availableHours);
+    console.log(this.availableHours)
     this.displayList = true;
+  }
+
+  checkIfReservedHour(hour:number) :boolean {
+    let previousToIsHour: boolean = false;
+    // if(this.availableHours.length != 0) debugger;
+    if(hour == 18) {
+      if(this.availableHours[this.availableHours.length-1].to == 18) return false;
+      else return true;
+    }
+    for(let x of this.availableHours) {
+
+      // if(previousToIsHour) {
+      //   if(x.from == hour) return true;
+      //   else return false;
+      // }
+
+      if(hour > x.from && hour < x.to) return false;
+      if(hour == x.from || hour == x.to) return false;
+
+      // previousToIsHour = hour == x.to;
+
+    }
+    return true;
   }
 }

@@ -15,6 +15,7 @@ import { AvailableReservationHoursListComponent } from './desk-reservations/avai
 import { DeskMalfunctionsModule } from './desk-malfunctions/desk-malfunctions.module';
 import { DeskMalfunctionReportListComponent } from './desk-malfunctions/desk-malfunction-report-list/desk-malfunction-report-list.component';
 import { DeskMalfunctionReportFormComponent } from './desk-malfunctions/desk-malfunction-report-form/desk-malfunction-report-form.component';
+import { ReservationHoursSelectComponent } from './desk-reservations/reservation-hours-select/reservation-hours-select.component';
 // import { ReservationListComponent } from './reservation-list/reservation-list.component';
 // import { DeskMalfunctionReportFormComponent } from './desk-malfunction-report-form/desk-malfunction-report-form.component';
 // import { DeskMalfunctionReportListComponent } from './desk-malfunction-report-list/desk-malfunction-report-list.component';
@@ -35,6 +36,7 @@ import { DeskMalfunctionReportFormComponent } from './desk-malfunctions/desk-mal
     AvailableReservationHoursListComponent,
     DeskMalfunctionReportListComponent,
     DeskMalfunctionReportFormComponent,
+    ReservationHoursSelectComponent,
     // DeskListComponent,
     // ReservationListComponent,
     // DeskMalfunctionReportFormComponent,
