@@ -40,7 +40,7 @@ export class AvailableReservationHoursListComponent implements OnInit, OnDestroy
   }
   
   getAvailableHours(): void {
-    if(this.deskID.errors || this.reservationDate)
+    if(this.deskID.errors || this.reservationDate) return;
     this.action$.next(this.form.value);
     console.log(this.availableHours);
     this.displayList = true;
