@@ -12,7 +12,9 @@ export class LocalstorageDeskListService {
     this.reservationList$
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushReservationListToLS());
-    this.deskList$.pipe(takeUntilDestroyed()).subscribe();
+    this.deskList$
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.pushDeskListToLS());
   }
 
   private reservationList$: BehaviorSubject<Reservation[]> =
@@ -66,6 +68,12 @@ export class LocalstorageDeskListService {
       'reservationList',
       JSON.stringify(this.reservationList)
     );
+  }
+  /**
+   * Updates localStorage reservationList to local reservationList's value
+   */
+  private pushDeskListToLS(): void {
+    localStorage.setItem('deskList', JSON.stringify(this.deskList));
   }
   // private sortDeskList(): void {
   //   this.deskList.sort((a, b) => a.deskID - b.deskID);
@@ -142,6 +150,7 @@ export class LocalstorageDeskListService {
   //  +make smaller services out of this service and put them into smaller modules
   //    ++make the lists work on subject of the same variable so everything works
   //      +++figure out when and where to complete() the subject
+  //>move unnesessary things from constructors to ngOnInits
   //>learn angular coding style
   //>use bulma framework for css
   //>make a booking table - show all hours on given day (mark unavailable ones) and
