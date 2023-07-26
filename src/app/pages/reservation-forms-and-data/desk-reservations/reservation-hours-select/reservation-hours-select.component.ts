@@ -19,7 +19,14 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {}
 
-  workHours: number[] = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  /** 
+   * List of hours during which people work in the office
+   * Includes the whole hour 
+   * Eg. if the list ends with 17 it means the office works until 17:59
+   * 
+   * It is made so in order to simplify reserving hours
+   */
+  workHours: number[] = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]; 
 
   private action$: Subject<any> = new Subject<any>;
   private submitReservation$: Subject<Reservation> = new Subject<Reservation>;
@@ -76,7 +83,7 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
     if(this.availableHours.length == 0) return true;
     //v special case - hour isnt in range <x.from,x.to) but still can be available
     if(hour == this.workHours[this.workHours.length-1]) {  
-      if(this.availableHours[this.availableHours.length-1].to == hour) return false;
+      if(this.availableHours[this.availableHours.length-1].to == hour + 1) return false;
       else return true;
     }
     for(let x of this.availableHours) {
@@ -104,7 +111,7 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
             return;
           } 
         }
-        this.reservationHours.to = h;
+        this.reservationHours.to = h+1;
       }
     }else {
       this.reservationHours.to = -1;
@@ -112,7 +119,7 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
     }
   }
 
-  reserve() {
+  reserve(): void {
     if(this.deskID.errors || this.reservationDate.errors || this.deskID.errors ) {
       alert('Proszę wprowadzić poprawne wartości we wszystkie pola formularza');
       return;
@@ -120,9 +127,6 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
     if(this.reservationHours.from == -1 || this.reservationHours.to == -1) {
       alert('Proszę zaznaczyć poprawne godziny rezerwacji')
       return;
-    }
-    for(let i = this.reservationHours.from; i <= this.reservationHours.to; i++) {
-      if(this.checkIfReservedHour(i)) return; //optimise this later
     }
     this.submitReservation$.next({
       deskID: this.deskID.value,
@@ -134,5 +138,9 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
     this.reservationHours.from = -1;
     this.reservationHours.to = -1;
     this.displayList = false;
+  }
+
+  clearSelectedHours(): void {
+    this.reservationHours = {from: -1, to: -1};
   }
 }

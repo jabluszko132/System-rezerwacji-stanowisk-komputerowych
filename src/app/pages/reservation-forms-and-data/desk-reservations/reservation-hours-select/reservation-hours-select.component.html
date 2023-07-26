@@ -27,36 +27,58 @@
       value="Sprawdź"
     />
   </form>
-  <div id="info" *ngIf="availableHours.length > 0 && displayList" class="mb-4">
-    <h1 class="subtitle">Godziny rezerwacji</h1>
-    <p>Kliknij godzinę rozpoczęcia rezerwacji, a następnie jej zakończenia</p>
-  </div>
-  <div *ngIf="availableHours.length > 0 && displayList" id="hoursContainer">
-    <div
-      *ngFor="let i of workHours"
-      class="tag is-center"
-      [ngClass]="
-        checkIfReservedHour(i) ? 'is-danger' : 'is-primary  is-clickable'
-      "
-      (click)="selectHour(i)"
-      [class.has-background-primary-dark]="
-        i == reservationHours.from || i == reservationHours.to
-      "
-    >
-      {{ i }}
-    </div>
-  </div>
-  <button
+  <div
+    id="afterFormPart"
+    class="is-flex is-flex-wrap-wrap is-justify-content-center"
     *ngIf="availableHours.length > 0 && displayList"
-    class="
-      button
-      has-text-weight-medium
-      is-rounded
-      has-background-info has-text-white
-      mt-4
-    "
-    (click)="reserve()"
   >
-    Rezerwuj
-  </button>
+    <div id="info" class="mb-4">
+      <h1 class="subtitle">
+        Godziny rezerwacji na dzień {{ reservationDate.value }}
+      </h1>
+      <p>
+        Wybierz przedział godzin który chcesz zarezerwować. <br />
+        Najpierw kliknij początek wybranego przedziału, a następnie jego koniec
+        <br />
+        Możesz zarezerwować stanowisko na 1h dwukrotnie klikając wybraną godzinę
+      </p>
+    </div>
+    <div id="hoursSelect" class="is-flex is-align-items-center">
+      <div id="hoursContainer">
+        <div
+          *ngFor="let i of workHours"
+          class="tag is-center is-unselectable"
+          [ngClass]="
+            checkIfReservedHour(i) ? 'is-danger' : 'is-primary  is-clickable'
+          "
+          (click)="selectHour(i)"
+          [class.has-background-primary-dark]="
+            i == reservationHours.from || i + 1 == reservationHours.to
+          "
+        >
+          {{ i }}
+        </div>
+        <br />
+      </div>
+
+      <button
+        class="button is-rounded has-background-info has-text-white is-small"
+        (click)="clearSelectedHours()"
+      >
+        Wyczyść
+      </button>
+    </div>
+    <button
+      class="
+        button
+        has-text-weight-medium
+        is-rounded
+        has-background-info has-text-white
+        mt-4
+      "
+      (click)="reserve()"
+    >
+      Rezerwuj
+    </button>
+  </div>
 </div>
