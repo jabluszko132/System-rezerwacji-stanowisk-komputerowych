@@ -96,6 +96,8 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
 
   reserve() {
     console.log(this.reservationHours);
+    console.log('available hours: ');
+    console.log(this.availableHours);
     if(this.reservationHours.from == -1 || this.reservationHours.to == -1) return;
     for(let i = this.reservationHours.from; i <= this.reservationHours.to; i++) {
       if(this.checkIfReservedHour(i)) return; //optimise this later
