@@ -147,10 +147,6 @@ export class LocalstorageDeskListService {
 }
 
 /** todo
->make a booking table - show all hours on given day (mark unavailable ones) and
-make user choose start and end of reservation (like nday tickets for peka or
-flight booking) @Done
-  +fix the bug with reservation being from x to x (eg. from 9 to 9) when user to books only 1 hour
 >learn angular coding style 
 >figure out when and where to complete() the subjects deskList$ and reservationList$
 >think of a better name for this service and apply it
@@ -158,5 +154,5 @@ flight booking) @Done
 */
 
 /**questions
->how to use action$ to handle 2 events
+>how to use action$ to handle 2 events (is double subscription necessary)
 >what should happen when user selects hours between which are any reserved hours*/
