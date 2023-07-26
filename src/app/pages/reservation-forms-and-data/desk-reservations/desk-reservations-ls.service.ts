@@ -13,60 +13,76 @@ export class DeskReservationsLsService {
     private lsDeskService: DeskManagementLSService,
     private mainService: LocalstorageDeskListService
   ) {
+    debugger;
     this.reservationList$.subscribe();
     this.forceReservationListRefresh();
   }
 
-  private currentDateString(): string {
-    return (
-      date.getFullYear().toString().padStart(4, '0') +
-      '-' +
-      (date.getMonth() + 1).toString().padStart(2, '0') +
-      '-' +
-      date.getDate().toString().padStart(2, '0')
-    );
-  }
-
-  reservationList$: BehaviorSubject<Reservation[]> =
+  //---------------------------- Private properties -------------------------------------------
+  private reservationList$: BehaviorSubject<Reservation[]> =
     this.mainService.getReservationList();
-  reservationList: Reservation[] = this.reservationList$.getValue();
-  value: any;
+  private reservationList: Reservation[] = this.reservationList$.getValue();
 
-  getReservationList(): Observable<Reservation[]> {
-    // this.deleteExpiredReservations();
-    return of(this.reservationList);
-  }
+  //----------------------------- Public methods ----------------------------------------------
 
   /**
-   * Forces this instance's local reservationList value to change to the one in localStorage
+   * Returns list of ranges of hours available for reservation on a given desk and day
+   *
    */
-  private forceReservationListRefresh(): void {
-    this.reservationList = this.reservationList$.getValue();
-  }
-
-  private sortReservationListByDateAndHour(list: Reservation[]): void {
-    list.sort((a, b) => {
-      if (a.reservationDate > b.reservationDate) return 2;
-      if (a.reservationDate < b.reservationDate) return -2;
-      return a.startHour > b.startHour ? 1 : -1;
-    });
-  }
-
-  /**
-   * Updates localStorage reservationList to local reservationList's value
-   */
-  private pushReservationListToLS(): void {
-    this.sortReservationListByDateAndHour(this.reservationList);
-    localStorage.setItem(
-      'reservationList',
-      JSON.stringify(this.reservationList)
+  availableReservationHoursOnDay(deskID: number, date: string): NumberRange[] {
+    if (!date.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
+      console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
+      return [];
+    }
+    if (!this.lsDeskService.deskExists(deskID)) {
+      console.error('The given desk doesnt exist on deskList');
+      return [];
+    }
+    let reservationsOnDesk: Reservation[] = this.deskReservationsOnDay(
+      deskID,
+      date
     );
-    this.reservationList$.next(this.reservationList);
+    if (reservationsOnDesk.length == 0)
+      return [
+        {
+          from: 6,
+          to: 18,
+        },
+      ];
+    this.sortReservationListByDateAndHour(reservationsOnDesk);
+    let availableHours: NumberRange[] = [];
+    let lastCheckedHour: number = 6;
+    let nextReservedHour: number;
+    let i: number;
+    for (i = 0; i < reservationsOnDesk.length; i++) {
+      nextReservedHour = reservationsOnDesk[i].startHour;
+      if (nextReservedHour > lastCheckedHour) {
+        //&& lastCheckedHour != 6
+        availableHours.push({
+          from: lastCheckedHour,
+          to: nextReservedHour,
+        });
+      }
+      lastCheckedHour = reservationsOnDesk[i].endHour;
+    }
+    if (lastCheckedHour < 18)
+      availableHours.push({
+        from: lastCheckedHour,
+        to: 18,
+      });
+    return availableHours;
   }
 
-  private addReservationOnNewDate(reserveObj: Reservation): void {
-    this.reservationList.push(reserveObj);
+  deleteReservation(reservation: Reservation): Observable<Boolean> {
+    let reservationToDeleteIndex: number =
+      this.reservationList.indexOf(reservation);
+    if (reservationToDeleteIndex == -1) {
+      alert('Nie ma takiej rezerwacji');
+      return of(false);
+    }
+    this.reservationList.splice(reservationToDeleteIndex, 1);
     this.pushReservationListToLS();
+    return of(true);
   }
 
   /**
@@ -84,6 +100,17 @@ export class DeskReservationsLsService {
       if (this.reservationList[i].reservationDate != date) break;
     }
     return reservations;
+  }
+
+  getReservationList(): Observable<Reservation[]> {
+    // this.deleteExpiredReservations();
+    return of(this.reservationList);
+  }
+
+  hasAnyReservations(desk: Desk): boolean {
+    return (
+      this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
+    );
   }
 
   /**
@@ -143,78 +170,47 @@ export class DeskReservationsLsService {
     return of(false);
   }
 
-  sortReservationListByHour(list: Reservation[]): void {
-    list.sort((a, b) => {
-      if (a.startHour > b.startHour) return 1;
-      if (a.startHour < b.startHour) return -1;
-      return 0;
-    });
+  //------------------------------------ Private methods ----------------------------------
+
+  private addReservationOnNewDate(reserveObj: Reservation): void {
+    this.reservationList.push(reserveObj);
+    this.pushReservationListToLS();
+  }
+
+  private currentDateString(): string {
+    return (
+      date.getFullYear().toString().padStart(4, '0') +
+      '-' +
+      (date.getMonth() + 1).toString().padStart(2, '0') +
+      '-' +
+      date.getDate().toString().padStart(2, '0')
+    );
   }
 
   /**
-   * Returns list of ranges of hours available for reservation on a given desk and day
-   *
+   * Forces this instance's local reservationList value to change to the one in localStorage
    */
-  availableReservationHoursOnDay(deskID: number, date: string): NumberRange[] {
-    //bugged
-    if (!date.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
-      console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
-      return [];
-    }
-    if (!this.lsDeskService.deskExists(deskID)) {
-      console.error('The given desk doesnt exist on deskList');
-      return [];
-    }
-    let reservationsOnDesk: Reservation[] = this.deskReservationsOnDay(
-      deskID,
-      date
-    );
-    if (reservationsOnDesk.length == 0)
-      return [
-        {
-          from: 6,
-          to: 18,
-        },
-      ];
-    this.sortReservationListByDateAndHour(reservationsOnDesk);
-    let availableHours: NumberRange[] = [];
-    let lastCheckedHour: number = 6;
-    let nextReservedHour: number;
-    let i: number;
-    for (i = 0; i < reservationsOnDesk.length; i++) {
-      nextReservedHour = reservationsOnDesk[i].startHour;
-      if (nextReservedHour > lastCheckedHour) {
-        //&& lastCheckedHour != 6
-        availableHours.push({
-          from: lastCheckedHour,
-          to: nextReservedHour,
-        });
-      }
-      lastCheckedHour = reservationsOnDesk[i].endHour;
-    }
-    if (lastCheckedHour < 18)
-      availableHours.push({
-        from: lastCheckedHour,
-        to: 18,
-      });
-    return availableHours;
+  private forceReservationListRefresh(): void {
+    this.reservationList = this.reservationList$.getValue();
   }
 
-  hasAnyReservations(desk: Desk): boolean {
-    return (
-      this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
+  /**
+   * Updates localStorage reservationList to local reservationList's value
+   */
+  private pushReservationListToLS(): void {
+    this.sortReservationListByDateAndHour(this.reservationList);
+    localStorage.setItem(
+      'reservationList',
+      JSON.stringify(this.reservationList)
     );
+    this.reservationList$.next(this.reservationList);
   }
 
-  deleteReservation(reservation: Reservation): Observable<Boolean> {
-    let reservationToDeleteIndex: number =
-      this.reservationList.indexOf(reservation);
-    if (reservationToDeleteIndex == -1) {
-      alert('Nie ma takiej rezerwacji');
-      return of(false);
-    }
-    this.reservationList.splice(reservationToDeleteIndex, 1);
-    this.pushReservationListToLS();
-    return of(true);
+  private sortReservationListByDateAndHour(list: Reservation[]): void {
+    list.sort((a, b) => {
+      if (a.reservationDate > b.reservationDate) return 2;
+      if (a.reservationDate < b.reservationDate) return -2;
+      return a.startHour > b.startHour ? 1 : -1;
+    });
   }
 }
