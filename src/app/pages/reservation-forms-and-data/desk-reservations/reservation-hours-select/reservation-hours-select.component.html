@@ -27,11 +27,11 @@
       value="Sprawdź"
     />
   </form>
-  <div id="info" *ngIf="availableHours.length > 0 || displayList" class="mb-4">
+  <div id="info" *ngIf="availableHours.length > 0 && displayList" class="mb-4">
     <h1 class="subtitle">Godziny rezerwacji</h1>
     <p>Kliknij godzinę rozpoczęcia rezerwacji, a następnie jej zakończenia</p>
   </div>
-  <div *ngIf="availableHours.length > 0 || displayList" id="hoursContainer">
+  <div *ngIf="availableHours.length > 0 && displayList" id="hoursContainer">
     <div
       *ngFor="let i of workHours"
       class="tag is-center"
@@ -47,7 +47,7 @@
     </div>
   </div>
   <button
-    *ngIf="availableHours.length > 0 || displayList"
+    *ngIf="availableHours.length > 0 && displayList"
     class="
       button
       has-text-weight-medium

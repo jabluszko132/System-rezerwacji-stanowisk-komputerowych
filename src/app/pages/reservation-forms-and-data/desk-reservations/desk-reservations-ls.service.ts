@@ -46,9 +46,9 @@ export class DeskReservationsLsService {
 
   private sortReservationListByDateAndHour(list: Reservation[]): void {
     list.sort((a, b) => {
-      if (a.reservationDate > b.reservationDate) return 1;
-      if (a.reservationDate < b.reservationDate) return -1;
-      return a.startHour - b.startHour;
+      if (a.reservationDate > b.reservationDate) return 2;
+      if (a.reservationDate < b.reservationDate) return -2;
+      return a.startHour > b.startHour ? 1 : -1;
     });
   }
 
