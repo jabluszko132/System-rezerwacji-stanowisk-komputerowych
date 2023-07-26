@@ -1,4 +1,4 @@
-<div>
+<div id="resHoursWrapper" class="card">
   <form (ngSubmit)="getAvailableHours()" [formGroup]="form">
     <label
       >ID stanowiska:
@@ -11,13 +11,13 @@
     <input type="submit" />
   </form>
   <h1>Godziny rezerwacji</h1>
-  <div *ngIf="availableHours.length > 0">
+  <div *ngIf="availableHours.length > 0" id="hoursContainer">
     <div
       *ngFor="let i of workHours"
-      [ngClass]="checkIfReservedHour(i) ? 'reserved' : 'available'"
+      class="tag"
+      [ngClass]="checkIfReservedHour(i) ? 'is-danger' : 'is-info'"
     >
       {{ i }}
     </div>
   </div>
 </div>
-<button (click)="checkIfReservedHour(2)">x</button>

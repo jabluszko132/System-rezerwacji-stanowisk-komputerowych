@@ -54,24 +54,13 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   }
 
   checkIfReservedHour(hour:number) :boolean {
-    let previousToIsHour: boolean = false;
-    // if(this.availableHours.length != 0) debugger;
-    if(hour == 18) {
-      if(this.availableHours[this.availableHours.length-1].to == 18) return false;
+    //special case - hour isnt in range <x.from,x.to) but still can be available
+    if(hour == this.workHours[this.workHours.length-1]) {  
+      if(this.availableHours[this.availableHours.length-1].to == hour) return false;
       else return true;
     }
     for(let x of this.availableHours) {
-
-      // if(previousToIsHour) {
-      //   if(x.from == hour) return true;
-      //   else return false;
-      // }
-
-      if(hour > x.from && hour < x.to) return false;
-      if(hour == x.from || hour == x.to) return false;
-
-      // previousToIsHour = hour == x.to;
-
+      if(hour >= x.from && hour < x.to) return false;
     }
     return true;
   }

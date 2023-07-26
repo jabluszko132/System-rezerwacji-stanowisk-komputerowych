@@ -5,3 +5,28 @@
 .available {
   color: green;
 }
+
+#hoursContainer {
+  max-width: 90%;
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+#hoursContainer > div {
+  margin: 0.25em;
+}
+
+/* #resHoursWrapper {
+  background: rgb(var(--mainRgbThemeColor));
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+} */
+
+h1 {
+  width: 100%;
+}

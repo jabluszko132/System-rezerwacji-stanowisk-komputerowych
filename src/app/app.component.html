@@ -1,28 +1,32 @@
 <header>
   <p class="bigTxtFont">Witaj na naszej stronie!</p>
-  <nav>
-    <a
-      routerLink="/home"
-      routerLinkActive="active"
-      ariaCurrentWhenActive="page"
-      class="button is-info"
-      >Strona główna</a
-    >
-    <a
-      routerLink="/reservation"
-      routerLinkActive="active"
-      ariaCurrentWhenActive="page"
-      class="button is-info"
-      >Rezerwacja</a
-    >
-    <a
-      routerLink="/reports"
-      routerLinkActive="active"
-      ariaCurrentWhenActive="page"
-      class="button is-info"
-      >Raporty</a
-    >
-  </nav>
+  <div class="tabs is-centered">
+    <ul>
+      <li>
+        <a
+          routerLink="/home"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          class="button is-info"
+          >Strona główna</a
+        >
+      </li>
+      <a
+        routerLink="/reservation"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        class="button is-info"
+        >Rezerwacja</a
+      >
+      <a
+        routerLink="/reports"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        class="button is-info"
+        >Raporty</a
+      >
+    </ul>
+  </div>
 </header>
 <article>
   <router-outlet></router-outlet>
