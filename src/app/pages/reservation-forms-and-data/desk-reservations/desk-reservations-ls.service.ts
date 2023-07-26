@@ -44,11 +44,11 @@ export class DeskReservationsLsService {
     this.reservationList = this.reservationList$.getValue();
   }
 
-  private sortReservationListByDate(list: Reservation[]): void {
+  private sortReservationListByDateAndHour(list: Reservation[]): void {
     list.sort((a, b) => {
       if (a.reservationDate > b.reservationDate) return 1;
       if (a.reservationDate < b.reservationDate) return -1;
-      return 0;
+      return a.startHour - b.startHour;
     });
   }
 
@@ -56,7 +56,7 @@ export class DeskReservationsLsService {
    * Updates localStorage reservationList to local reservationList's value
    */
   private pushReservationListToLS(): void {
-    this.sortReservationListByDate(this.reservationList);
+    this.sortReservationListByDateAndHour(this.reservationList);
     localStorage.setItem(
       'reservationList',
       JSON.stringify(this.reservationList)
@@ -147,6 +147,14 @@ export class DeskReservationsLsService {
     return of(false);
   }
 
+  sortReservationListByHour(list: Reservation[]): void {
+    list.sort((a, b) => {
+      if (a.startHour > b.startHour) return 1;
+      if (a.startHour < b.startHour) return -1;
+      return 0;
+    });
+  }
+
   /**
    * Returns list of ranges of hours available for reservation on a given desk and day
    *
@@ -171,14 +179,16 @@ export class DeskReservationsLsService {
           to: 18,
         },
       ];
-    this.sortReservationListByDate(reservationsOnDesk);
+    this.sortReservationListByDateAndHour(reservationsOnDesk);
     let availableHours: NumberRange[] = [];
     let lastCheckedHour: number = 6;
     let nextReservedHour: number;
     let i: number;
+    debugger;
     for (i = 0; i < reservationsOnDesk.length; i++) {
       nextReservedHour = reservationsOnDesk[i].startHour;
-      if (nextReservedHour > lastCheckedHour && lastCheckedHour != 6) {
+      if (nextReservedHour > lastCheckedHour) {
+        //&& lastCheckedHour != 6
         availableHours.push({
           from: lastCheckedHour,
           to: nextReservedHour,

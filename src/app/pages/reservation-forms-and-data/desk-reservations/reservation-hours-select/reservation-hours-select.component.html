@@ -2,10 +2,14 @@
   id="resHoursWrapper"
   class="tile is-child notification has-background-info-dark block p-6"
 >
-  <form class="block" (ngSubmit)="getAvailableHours()" [formGroup]="form">
-    <label class="control"
+  <form class="block form" (ngSubmit)="getAvailableHours()" [formGroup]="form">
+    <label
       ><p class="subtitle mt-">ID stanowiska:</p>
       <input type="number" class="input mb-6" formControlName="deskID" />
+    </label>
+    <label
+      ><p class="subtitle">Kto rezerwuje:</p>
+      <input type="text" class="input mb-6" formControlName="reservedBy" />
     </label>
     <label
       ><p class="subtitle">Dzień rezerwacji:</p>
@@ -35,6 +39,9 @@
         checkIfReservedHour(i) ? 'is-danger' : 'is-primary  is-clickable'
       "
       (click)="selectHour(i)"
+      [class.has-background-primary-dark]="
+        i == reservationHours.from || i == reservationHours.to
+      "
     >
       {{ i }}
     </div>

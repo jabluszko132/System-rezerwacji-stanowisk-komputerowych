@@ -155,4 +155,8 @@ export class LocalstorageDeskListService {
   //>figure out when and where to complete() the subjects deskList$ and reservationList$
   //>think of a better name for this service and apply it
   //>move unnesessary things from constructors to ngOnInits
+
+  //questions
+  //>how to use action$ to handle 2 events
+  //>what should happen when user selects hours between which are any reserved hours
 }
