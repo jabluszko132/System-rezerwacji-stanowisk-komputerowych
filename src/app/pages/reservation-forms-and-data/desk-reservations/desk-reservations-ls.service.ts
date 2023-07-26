@@ -78,14 +78,10 @@ export class DeskReservationsLsService {
     );
     if (startIndex == -1) return [];
     let reservations: Reservation[] = [];
-    for (
-      let i = startIndex;
-      i <= this.reservationList.length - startIndex &&
-      this.reservationList[i].reservationDate == date;
-      i++
-    ) {
+    for (let i = startIndex; i <= this.reservationList.length - 1; i++) {
       if (this.reservationList[i].deskID == deskID)
         reservations.push(this.reservationList[i]);
+      if (this.reservationList[i].reservationDate != date) break;
     }
     return reservations;
   }
@@ -160,6 +156,7 @@ export class DeskReservationsLsService {
    *
    */
   availableReservationHoursOnDay(deskID: number, date: string): NumberRange[] {
+    //bugged
     if (!date.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}/)) {
       console.error('Date was put in an incorrect format (not rrrr-mm-dd)');
       return [];
@@ -184,7 +181,6 @@ export class DeskReservationsLsService {
     let lastCheckedHour: number = 6;
     let nextReservedHour: number;
     let i: number;
-    debugger;
     for (i = 0; i < reservationsOnDesk.length; i++) {
       nextReservedHour = reservationsOnDesk[i].startHour;
       if (nextReservedHour > lastCheckedHour) {
