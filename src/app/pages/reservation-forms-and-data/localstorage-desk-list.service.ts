@@ -144,19 +144,21 @@ export class LocalstorageDeskListService {
     }
     return true;
   }
-
-  //todo
-  //>learn angular coding style
-  //>make a booking table - show all hours on given day (mark unavailable ones) and
-  //make user choose start and end of reservation (like nday tickets for peka or
-  //flight booking)
-  // +make that table use observable so if there is another reservation on given
-  // desk it changes too
-  //>figure out when and where to complete() the subjects deskList$ and reservationList$
-  //>think of a better name for this service and apply it
-  //>move unnesessary things from constructors to ngOnInits
-
-  //questions
-  //>how to use action$ to handle 2 events
-  //>what should happen when user selects hours between which are any reserved hours
 }
+
+/** todo
+>make reservation via the reservation hours select component not possible if desk isnt functional 
+>learn angular coding style 
+>make a booking table - show all hours on given day (mark unavailable ones) and
+make user choose start and end of reservation (like nday tickets for peka or
+flight booking)
++make that table use observable so if there is another reservation on given
+desk it changes too
+>figure out when and where to complete() the subjects deskList$ and reservationList$
+>think of a better name for this service and apply it
+>move unnesessary things from constructors to ngOnInits
+*/
+
+/**questions
+>how to use action$ to handle 2 events
+>what should happen when user selects hours between which are any reserved hours*/
