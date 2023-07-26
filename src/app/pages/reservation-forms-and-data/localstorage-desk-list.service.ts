@@ -9,6 +9,7 @@ const date = new Date();
 @Injectable()
 export class LocalstorageDeskListService {
   constructor() {
+    debugger;
     this.reservationList$
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushReservationListToLS());
@@ -16,18 +17,20 @@ export class LocalstorageDeskListService {
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushDeskListToLS());
   }
-
-  private reservationList$: BehaviorSubject<Reservation[]> =
-    new BehaviorSubject<Reservation[]>(this.lsGetReservationList());
-
-  private reservationList: Reservation[] = this.reservationList$.getValue();
+  //---------------------------- Private properties -----------------------------------------
 
   private deskList$: BehaviorSubject<Desk[]> = new BehaviorSubject<Desk[]>(
     this.lsGetDeskList()
   );
-
   private deskList: Desk[] = this.deskList$.getValue();
 
+  private reservationList$: BehaviorSubject<Reservation[]> =
+    new BehaviorSubject<Reservation[]>(this.lsGetReservationList());
+  private reservationList: Reservation[] = this.reservationList$.getValue();
+
+  //---------------------------- Public methods ---------------------------------------------
+
+  //---------------------------- Private methods --------------------------------------------
   private lsGetDeskList(): Desk[] {
     let value = localStorage.getItem('deskList');
     return value ? JSON.parse(value) : [];

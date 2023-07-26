@@ -13,7 +13,6 @@ export class DeskReservationsLsService {
     private lsDeskService: DeskManagementLSService,
     private mainService: LocalstorageDeskListService
   ) {
-    debugger;
     this.reservationList$.subscribe();
     this.forceReservationListRefresh();
   }
