@@ -7,8 +7,6 @@
 }
 
 #hoursContainer {
-  max-width: 90%;
-  width: fit-content;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -17,6 +15,12 @@
 
 #hoursContainer > div {
   margin: 0.25em;
+  width: 25px;
+  text-align: center;
+}
+
+#resHoursWrapper {
+  max-width: 600px;
 }
 
 /* #resHoursWrapper {
@@ -29,4 +33,14 @@
 
 h1 {
   width: 100%;
+}
+
+.input {
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+:host {
+  display: flex;
+  justify-content: center;
 }

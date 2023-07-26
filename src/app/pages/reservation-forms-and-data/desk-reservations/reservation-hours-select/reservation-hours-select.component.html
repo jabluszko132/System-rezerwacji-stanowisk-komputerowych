@@ -1,23 +1,55 @@
-<div id="resHoursWrapper" class="card">
-  <form (ngSubmit)="getAvailableHours()" [formGroup]="form">
-    <label
-      >ID stanowiska:
-      <input type="number" class="input" formControlName="deskID" />
+<div
+  id="resHoursWrapper"
+  class="tile is-child notification has-background-info-dark block p-6"
+>
+  <form class="block" (ngSubmit)="getAvailableHours()" [formGroup]="form">
+    <label class="control"
+      ><p class="subtitle mt-">ID stanowiska:</p>
+      <input type="number" class="input mb-6" formControlName="deskID" />
     </label>
     <label
-      >Dzień rezerwacji:
+      ><p class="subtitle">Dzień rezerwacji:</p>
       <input type="date" class="input" formControlName="reservationDate" />
     </label>
-    <input type="submit" />
+    <input
+      type="submit"
+      class="
+        button
+        has-text-weight-medium
+        is-rounded
+        has-background-info has-text-white
+        mt-4
+      "
+      value="Sprawdź"
+    />
   </form>
-  <h1>Godziny rezerwacji</h1>
-  <div *ngIf="availableHours.length > 0" id="hoursContainer">
+  <div id="info" *ngIf="availableHours.length > 0 || displayList" class="mb-4">
+    <h1 class="subtitle">Godziny rezerwacji</h1>
+    <p>Kliknij godzinę rozpoczęcia rezerwacji, a następnie jej zakończenia</p>
+  </div>
+  <div *ngIf="availableHours.length > 0 || displayList" id="hoursContainer">
     <div
       *ngFor="let i of workHours"
-      class="tag"
-      [ngClass]="checkIfReservedHour(i) ? 'is-danger' : 'is-info'"
+      class="tag is-center"
+      [ngClass]="
+        checkIfReservedHour(i) ? 'is-danger' : 'is-primary  is-clickable'
+      "
+      (click)="selectHour(i)"
     >
       {{ i }}
     </div>
   </div>
+  <button
+    *ngIf="availableHours.length > 0 || displayList"
+    class="
+      button
+      has-text-weight-medium
+      is-rounded
+      has-background-info has-text-white
+      mt-4
+    "
+    (click)="reserve()"
+  >
+    Rezerwuj
+  </button>
 </div>

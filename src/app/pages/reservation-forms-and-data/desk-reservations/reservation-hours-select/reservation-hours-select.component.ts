@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DeskReservationsLsService } from '../desk-reservations-ls.service';
 import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
 import {NumberRange} from '../../interfaces/number-range';
+import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ import {NumberRange} from '../../interfaces/number-range';
 export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   constructor(
     private service: DeskReservationsLsService,
+    private lsDeskListService: LocalstorageDeskListService,
     private fb: FormBuilder
   ) {}
 
@@ -23,6 +25,18 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
 
   availableHours: NumberRange[] = [];
   displayList = false;
+
+
+  /**
+   * Object holding range of hours to reserve
+   * 
+   * value equal -1 means that no hour is selected for that value
+   */
+  reservationHours: NumberRange = {
+    from: -1,
+    to: -1,
+  }
+
 
   form = this.fb.nonNullable.group({
     deskID: [1, [Validators.required]],
@@ -54,7 +68,8 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   }
 
   checkIfReservedHour(hour:number) :boolean {
-    //special case - hour isnt in range <x.from,x.to) but still can be available
+    if(this.availableHours.length == 0) return true;
+    //v special case - hour isnt in range <x.from,x.to) but still can be available
     if(hour == this.workHours[this.workHours.length-1]) {  
       if(this.availableHours[this.availableHours.length-1].to == hour) return false;
       else return true;
@@ -63,5 +78,27 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
       if(hour >= x.from && hour < x.to) return false;
     }
     return true;
+  }
+
+  selectHour(h: number): void {
+    if(this.checkIfReservedHour(h)) return;
+    if(this.reservationHours.from == -1) {
+      this.reservationHours.from = h; 
+      return;
+    }
+    if(this.reservationHours.from > h) {
+      this.reservationHours.from = h;
+      this.reservationHours.to = -1;
+    }else {
+      this.reservationHours.to = h;
+    }
+  }
+
+  reserve() {
+    console.log(this.reservationHours);
+    if(this.reservationHours.from == -1 || this.reservationHours.to == -1) return;
+    for(let i = this.reservationHours.from; i <= this.reservationHours.to; i++) {
+      if(this.checkIfReservedHour(i)) return; //optimise this later
+    }
   }
 }

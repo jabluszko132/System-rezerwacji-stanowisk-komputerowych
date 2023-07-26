@@ -147,10 +147,11 @@ export class LocalstorageDeskListService {
 
   //todo
   //>learn angular coding style
-  //>use bulma framework for css
   //>make a booking table - show all hours on given day (mark unavailable ones) and
   //make user choose start and end of reservation (like nday tickets for peka or
   //flight booking)
+  // +make that table use observable so if there is another reservation on given
+  // desk it changes too
   //>figure out when and where to complete() the subjects deskList$ and reservationList$
   //>think of a better name for this service and apply it
   //>move unnesessary things from constructors to ngOnInits
