@@ -80,7 +80,7 @@ export class DeskReservationsLsService {
     let reservations: Reservation[] = [];
     for (
       let i = startIndex;
-      i < this.reservationList.length - startIndex &&
+      i <= this.reservationList.length - startIndex &&
       this.reservationList[i].reservationDate == date;
       i++
     ) {
