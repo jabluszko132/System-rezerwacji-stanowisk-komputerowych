@@ -5,7 +5,7 @@ import { Desk } from './interfaces/desk';
 
 @Injectable({providedIn: 'root'})
 export class LocalstorageDeskListService implements OnDestroy {
-  //Rename ideas: DeskServicesCooperator,
+  //Rename ideas: DeskServicesCooperator, 
   constructor() {
     this.deskList$
       .pipe(takeUntil(this.endSubs$))
@@ -158,6 +158,19 @@ export class LocalstorageDeskListService implements OnDestroy {
 }
 
 /** todo
+>get the select reservation hours component block reserving desks that
+have just been deleted 
+  ideas{
+    Subject: use a subject as eventEmitter to make the component change on deletion
+
+    In&Out: use input and output decorators and make the desk list emit an 
+    event every time something is deleted and the select reservation hours to 
+    listen to it
+
+    Simple: make the 2nd submit also check if the desk exists (otherwise: alert)
+
+
+  }
 >learn angular coding style 
 >figure out when and where to complete() the subjects deskList$ and reservationList$
 >think of a better name for this service and apply it
