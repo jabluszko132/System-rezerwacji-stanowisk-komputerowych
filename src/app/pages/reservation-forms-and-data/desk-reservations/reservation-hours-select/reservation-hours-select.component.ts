@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { DeskReservationsLsService } from '../desk-reservations-ls.service';
+import { ReservatorService } from '../reservator.service';
 import { filter, Subject, switchMap, takeUntil } from 'rxjs';
 import {NumberRange} from '../../interfaces/number-range';
 import { Reservation } from '../../interfaces/reservation';
@@ -13,7 +13,7 @@ import { Reservation } from '../../interfaces/reservation';
 })
 export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   constructor(
-    private service: DeskReservationsLsService,
+    private service: ReservatorService,
     private fb: FormBuilder
   ) {}
 

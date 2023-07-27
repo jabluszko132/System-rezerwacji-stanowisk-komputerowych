@@ -8,7 +8,7 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 const date = new Date();
 
 @Injectable()
-export class DeskReservationsLsService {
+export class ReservatorService {
   constructor(
     private lsDeskService: DeskManagementLSService,
     private mainService: LocalstorageDeskListService

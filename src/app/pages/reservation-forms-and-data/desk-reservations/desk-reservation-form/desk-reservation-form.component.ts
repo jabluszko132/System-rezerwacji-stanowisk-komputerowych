@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {  FormBuilder, Validators } from '@angular/forms';
 import {filter, Subject, switchMap, takeUntil, of} from 'rxjs';
 import { Reservation } from '../../interfaces/reservation';
-import { DeskReservationsLsService } from '../desk-reservations-ls.service';
+import {  ReservatorService } from '../reservator.service';
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -11,7 +11,7 @@ import { DeskReservationsLsService } from '../desk-reservations-ls.service';
 })
 export class DeskReservationFormComponent implements OnInit, OnDestroy {
   constructor(
-    private service: DeskReservationsLsService,
+    private service: ReservatorService,
     private fb: FormBuilder,
   ) {}
 
@@ -49,7 +49,7 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
     }
     this.action$.next(this.reservationForm.value as Reservation);
   }
-  
+
   ngOnInit() {
     // this.deskList$.subscribe();
     this.action$.pipe(filter(d => {

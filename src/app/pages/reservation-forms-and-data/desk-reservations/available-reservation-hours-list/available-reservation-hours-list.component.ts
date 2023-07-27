@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
+import { filter, Subject, switchMap, takeUntil } from 'rxjs';
 import { NumberRange } from '../../interfaces/number-range';
-import { DeskReservationsLsService } from '../desk-reservations-ls.service';
+import { ReservatorService } from '../reservator.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { DeskReservationsLsService } from '../desk-reservations-ls.service';
   styleUrls: ['./available-reservation-hours-list.component.css'],
 })
 export class AvailableReservationHoursListComponent implements OnInit, OnDestroy {
-  constructor(private service: DeskReservationsLsService, private fb: FormBuilder) {}
+  constructor(private service: ReservatorService, private fb: FormBuilder) {}
 
   private action$: Subject<any> = new Subject<any>
   private endSubs$: Subject<void> = new Subject<void>;
@@ -33,7 +33,7 @@ export class AvailableReservationHoursListComponent implements OnInit, OnDestroy
     console.log(this.availableHours);
     this.displayList = true;
   }
-  
+
   ngOnInit() {
     this.action$.pipe(filter((m:any)=>m == this.form.value),switchMap((d:any)=>
       this.availableHours = this.service.availableReservationHoursOnDay(d.deskID,d.reservationDate)
