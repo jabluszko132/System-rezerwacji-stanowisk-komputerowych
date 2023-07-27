@@ -18,9 +18,6 @@ export class ReservatorService {
   ) {
     this.reservationList$.subscribe();
     this.forceReservationListRefresh();
-    this.mainService.testSubj
-      .pipe(takeUntilDestroyed(inject(DestroyRef)))
-      .subscribe(() => console.log('reservator got it'));
   }
 
   //---------------------------- Private properties -------------------------------------------
