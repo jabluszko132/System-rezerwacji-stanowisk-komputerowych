@@ -20,14 +20,10 @@
 }
 
 #resHoursWrapper {
-  max-width: 600px;
-}
-
-#resHoursWrapper {
   background: rgb(var(--mainRgbThemeColor));
   padding: 2em;
   min-width: min-content;
-  max-width: 60%;
+  max-width: 520px;
   border-radius: 10px;
 }
 
