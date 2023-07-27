@@ -14,13 +14,7 @@ export class LocalstorageDeskListService implements OnDestroy {
     this.reservationList$
       .pipe(takeUntil(this.endSubs$))
       .subscribe(() => this.pushReservationListToLS());
-    this.testSubj.pipe(takeUntil(this.testSubj)).subscribe((d)=>console.log(d))
-    this.testSubj.next(1);
-    setTimeout(() => this.testSubj.next(2),2000)
   }
-
-  testSubj = new Subject<any>;
-
 
   //---------------------------- Private properties -----------------------------------------
 
