@@ -4,8 +4,6 @@ import { Reservation } from './interfaces/reservation';
 import { Desk } from './interfaces/desk';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-const date = new Date();
-
 @Injectable()
 export class LocalstorageDeskListService {
   constructor() {
