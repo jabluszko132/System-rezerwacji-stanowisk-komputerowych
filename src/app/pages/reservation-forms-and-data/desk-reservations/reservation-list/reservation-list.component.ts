@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Reservation } from '../../interfaces/reservation';
 import { ReservatorService } from '../reservator.service';
 
