@@ -5,15 +5,30 @@
   <form class="block form" (ngSubmit)="getAvailableHours()" [formGroup]="form">
     <label
       ><p class="subtitle mt-">ID stanowiska:</p>
-      <input type="number" class="input mb-6" formControlName="deskID" />
+      <input
+        type="number"
+        class="input mb-6"
+        formControlName="deskID"
+        name="deskID"
+      />
     </label>
     <label
       ><p class="subtitle">Kto rezerwuje:</p>
-      <input type="text" class="input mb-6" formControlName="reservedBy" />
+      <input
+        type="text"
+        class="input mb-6"
+        formControlName="reservedBy"
+        name="reservedBy"
+      />
     </label>
     <label
       ><p class="subtitle">Dzień rezerwacji:</p>
-      <input type="date" class="input" formControlName="reservationDate" />
+      <input
+        type="date"
+        class="input"
+        formControlName="reservationDate"
+        name="reservationDate"
+      />
     </label>
     <input
       type="submit"

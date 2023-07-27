@@ -92,12 +92,12 @@ export class LocalstorageDeskListService {
   }
 
   private lsGetDeskList(): Desk[] {
-    let value = localStorage.getItem('deskList');
+    let value: string | null = localStorage.getItem('deskList'); //when throws an error that value is undefined clear ls
     return value ? JSON.parse(value) : [];
   }
 
   private lsGetReservationList(): Reservation[] {
-    let value = localStorage.getItem('reservationList');
+    let value: string | null = localStorage.getItem('reservationList');
     return value ? JSON.parse(value) : [];
   }
 
