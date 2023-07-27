@@ -35,11 +35,11 @@ nav > a {
 }
 
 nav > a:hover {
-  border: 2px solid rgba(64, 85, 92, 0.6);
+  outline: 2px solid rgba(64, 85, 92, 0.6);
 }
 nav > a:focus {
   background: #617c85;
-  border: 2px solid #6b8f9b;
+  outline: 2px solid #6b8f9b;
 }
 
 nav > a:focus-visible {
