@@ -166,10 +166,8 @@ have just been deleted
     In&Out: use input and output decorators and make the desk list emit an 
     event every time something is deleted and the select reservation hours to listen to it
 
-    Simple: make the 2nd submit also check if the desk exists (otherwise: alert) (but it will update even if theres nothing new)
-
-
-
+    Simple: make the 2nd submit also check if the desk exists - otherwise: alert (but it will update even if theres nothing new)
+    
   }
 >get the select reservation hours component to update if a reservation was cancelled
 >figure out when and where to complete() the subjects deskList$ and reservationList$
