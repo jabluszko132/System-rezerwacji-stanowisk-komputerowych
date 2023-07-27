@@ -1,21 +1,26 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { Reservation } from './interfaces/reservation';
 import { Desk } from './interfaces/desk';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable()
-export class LocalstorageDeskListService {
+export class LocalstorageDeskListService implements OnDestroy {
   //Rename ideas: DeskServicesCooperator,
   constructor() {
     this.deskList$
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntil(this.endSubs$))
       .subscribe(() => this.pushDeskListToLS());
     this.forceDeskListRefresh();
     this.reservationList$
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntil(this.endSubs$))
       .subscribe(() => this.pushReservationListToLS());
+    this.testSubj.pipe(takeUntil(this.testSubj)).subscribe((d)=>console.log(d))
+    this.testSubj.next(1);
+    setTimeout(() => this.testSubj.next(2),2000)
   }
+
+  testSubj = new Subject<any>;
+
 
   //---------------------------- Private properties -----------------------------------------
 
@@ -23,7 +28,7 @@ export class LocalstorageDeskListService {
     this.lsGetDeskList()
   );
   private deskList: Desk[] = this.deskList$.getValue();
-
+  private endSubs$: Subject<void> = new Subject<void>
   private reservationList$: BehaviorSubject<Reservation[]> =
     new BehaviorSubject<Reservation[]>(this.lsGetReservationList());
   private reservationList: Reservation[] = this.reservationList$.getValue();
@@ -74,6 +79,10 @@ export class LocalstorageDeskListService {
     );
   }
 
+  ngOnDestroy() {
+    this.endSubs$.next();
+    this.endSubs$.complete();
+  }
   //---------------------------- Private methods --------------------------------------------
 
   /**
