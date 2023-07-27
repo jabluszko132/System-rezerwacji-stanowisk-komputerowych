@@ -7,12 +7,12 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 @Injectable()
 export class DeskManagementLSService {
   constructor(private lsDeskService: LocalstorageDeskListService) {
+    debugger;
     this.deskList$.subscribe();
     this.forceDeskListRefresh();
   }
-  deskList$: BehaviorSubject<Desk[]> = this.lsDeskService.getDeskList();
-  deskList: Desk[] = [];
-  value: any;
+  private deskList$: BehaviorSubject<Desk[]> = this.lsDeskService.getDeskList();
+  private deskList: Desk[] = [];
 
   getDeskList(): Observable<Desk[]> {
     return of(this.deskList);
