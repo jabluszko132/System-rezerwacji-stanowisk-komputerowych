@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DeskMalfunctionReport } from '../../interfaces/desk-malfunction-report';
 import { DeskMalfunctionReporterService } from '../desk-malfunction-reporter.service';
 
