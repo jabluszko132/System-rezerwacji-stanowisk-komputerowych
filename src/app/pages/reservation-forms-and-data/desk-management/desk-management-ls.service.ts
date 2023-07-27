@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { DeskReservationsLsService } from '../desk-reservations/desk-reservations-ls.service';
 import { Desk } from '../interfaces/desk';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
@@ -11,27 +10,12 @@ export class DeskManagementLSService {
     this.deskList$.subscribe();
     this.forceDeskListRefresh();
   }
+
+  //---------------------- Private properties ------------------------------------
   private deskList$: BehaviorSubject<Desk[]> = this.lsDeskService.getDeskList();
   private deskList: Desk[] = [];
 
-  getDeskList(): Observable<Desk[]> {
-    return of(this.deskList);
-  }
-
-  /**
-   * Forces this instance's local deskList value to change to the one in localStorage
-   *
-   */
-  private forceDeskListRefresh(): void {
-    this.deskList = this.deskList$.getValue();
-  }
-
-  /**
-   * Updates localStorage deskList to local deskList's value
-   */
-  private pushDeskListToLS(): void {
-    this.deskList$.next(this.deskList);
-  }
+  //----------------------- Public methods -----------------------------------
 
   addDesk(newDesk: Desk): Observable<boolean> {
     /**@Issues
@@ -81,6 +65,10 @@ export class DeskManagementLSService {
     return this.deskList.findIndex((m: any) => m.deskID == deskID) != -1;
   }
 
+  getDeskList(): Observable<Desk[]> {
+    return of(this.deskList);
+  }
+
   updateDeskFunctionality(deskID: number, doesItFunction: boolean): void {
     let deskIndex = this.deskList.findIndex((m: any) => m.deskID == deskID);
     if (deskIndex == -1) {
@@ -90,5 +78,22 @@ export class DeskManagementLSService {
     console.log('Set functionality to ' + doesItFunction);
     this.deskList[deskIndex].functional = doesItFunction;
     this.pushDeskListToLS();
+  }
+
+  //----------------------- Private methods ----------------------------------
+
+  /**
+   * Forces this instance's local deskList value to change to the one in localStorage
+   *
+   */
+  private forceDeskListRefresh(): void {
+    this.deskList = this.deskList$.getValue();
+  }
+
+  /**
+   * Updates localStorage deskList to local deskList's value
+   */
+  private pushDeskListToLS(): void {
+    this.deskList$.next(this.deskList);
   }
 }
