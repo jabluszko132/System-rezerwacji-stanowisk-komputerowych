@@ -9,13 +9,12 @@ const date = new Date();
 @Injectable()
 export class LocalstorageDeskListService {
   constructor() {
-    debugger;
-    this.reservationList$
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.pushReservationListToLS());
     this.deskList$
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushDeskListToLS());
+    this.reservationList$
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.pushReservationListToLS());
   }
   //---------------------------- Private properties -----------------------------------------
 
@@ -30,78 +29,14 @@ export class LocalstorageDeskListService {
 
   //---------------------------- Public methods ---------------------------------------------
 
-  //---------------------------- Private methods --------------------------------------------
-  private lsGetDeskList(): Desk[] {
-    let value = localStorage.getItem('deskList');
-    return value ? JSON.parse(value) : [];
-  }
-  private lsGetReservationList(): Reservation[] {
-    let value = localStorage.getItem('reservationList');
-    return value ? JSON.parse(value) : [];
-  }
-
-  getReservationList(): BehaviorSubject<Reservation[]> {
-    return this.reservationList$;
-  }
-  getDeskList(): BehaviorSubject<Desk[]> {
-    return this.deskList$;
-  }
-
-  /**
-   * Forces this instance's local deskList value to change to the one in localStorage
-   *
-   */
-  private forceDeskListRefresh(): void {
-    this.deskList = this.deskList$.getValue();
-  }
-
-  /**
-   * Forces this instance's local reservationList value to change to the one in localStorage
-   */
-  private forceReservationListRefresh(): void {
-    this.reservationList = this.reservationList$.getValue();
-  }
-
-  /**
-   * Updates localStorage reservationList to local reservationList's value
-   */
-  private pushReservationListToLS(): void {
-    this.sortReservationListByDate(this.reservationList);
-    localStorage.setItem(
-      'reservationList',
-      JSON.stringify(this.reservationList)
-    );
-  }
-  /**
-   * Updates localStorage reservationList to local reservationList's value
-   */
-  private pushDeskListToLS(): void {
-    localStorage.setItem('deskList', JSON.stringify(this.deskList));
-  }
-  // private sortDeskList(): void {
-  //   this.deskList.sort((a, b) => a.deskID - b.deskID);
-  // }
-  private sortReservationListByDate(list: Reservation[]): void {
-    list.sort((a, b) => {
-      if (a.reservationDate > b.reservationDate) return 1;
-      if (a.reservationDate < b.reservationDate) return -1;
-      return 0;
-    });
-  }
-  /**
-   * This is an unsafe but faster version of deleteReservation method.
-   * It doesnt check if the reservation exists on the table. Dont use it
-   * unless you are absolutely sure that the element exists
-   */
-  private unsafeDeleteReservation(reservation: Reservation) {
-    try {
-      this.reservationList.splice(
-        this.reservationList.findIndex((m: any) => m == reservation),
-        1
-      );
-    } catch (e) {
-      console.error(e);
+  canDeskBeDeleted(desk: Desk): boolean {
+    if (this.hasAnyReservations(desk)) {
+      alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
+      if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
+        this.deleteReservationsOnDesk(desk);
+      else false;
     }
+    return true;
   }
 
   deleteReservationsOnDesk(desk: Desk): void {
@@ -123,6 +58,93 @@ export class LocalstorageDeskListService {
     this.reservationList$.next(this.reservationList);
   }
 
+  getDeskList(): BehaviorSubject<Desk[]> {
+    return this.deskList$;
+  }
+
+  getReservationList(): BehaviorSubject<Reservation[]> {
+    return this.reservationList$;
+  }
+
+  hasAnyReservations(desk: Desk): boolean {
+    this.forceReservationListRefresh();
+    return (
+      this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
+    );
+  }
+
+  //---------------------------- Private methods --------------------------------------------
+
+  /**
+   * Forces this instance's local deskList value to change to the one in localStorage
+   *
+   */
+  // private forceDeskListRefresh(): void {
+  //   this.deskList = this.deskList$.getValue();
+  // }
+
+  /**
+   * Forces this instance's local reservationList value to change to the one in localStorage
+   */
+  private forceReservationListRefresh(): void {
+    this.reservationList = this.reservationList$.getValue();
+  }
+
+  private lsGetDeskList(): Desk[] {
+    let value = localStorage.getItem('deskList');
+    return value ? JSON.parse(value) : [];
+  }
+
+  private lsGetReservationList(): Reservation[] {
+    let value = localStorage.getItem('reservationList');
+    return value ? JSON.parse(value) : [];
+  }
+
+  /**
+   * Updates localStorage reservationList to local reservationList's value
+   */
+  private pushDeskListToLS(): void {
+    localStorage.setItem('deskList', JSON.stringify(this.deskList));
+  }
+
+  /**
+   * Updates localStorage reservationList to local reservationList's value
+   */
+  private pushReservationListToLS(): void {
+    this.sortReservationListByDate(this.reservationList);
+    localStorage.setItem(
+      'reservationList',
+      JSON.stringify(this.reservationList)
+    );
+  }
+
+  // private sortDeskList(): void {
+  //   this.deskList.sort((a, b) => a.deskID - b.deskID);
+  // }
+  private sortReservationListByDate(list: Reservation[]): void {
+    list.sort((a, b) => {
+      if (a.reservationDate > b.reservationDate) return 1;
+      if (a.reservationDate < b.reservationDate) return -1;
+      return 0;
+    });
+  }
+
+  /**
+   * This is an unsafe but faster version of deleteReservation method.
+   * It doesnt check if the reservation exists on the table. Dont use it
+   * unless you are absolutely sure that the element exists
+   */
+  private unsafeDeleteReservation(reservation: Reservation) {
+    try {
+      this.reservationList.splice(
+        this.reservationList.findIndex((m: any) => m == reservation),
+        1
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   // deleteExpiredReservations(): void {
   //   let currentDate = this.currentDateString();
   //   for (let reservation of this.reservationList) {
@@ -131,22 +153,6 @@ export class LocalstorageDeskListService {
   //     } else return;
   //   }
   // }
-  hasAnyReservations(desk: Desk): boolean {
-    this.forceReservationListRefresh();
-    return (
-      this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
-    );
-  }
-
-  canDeskBeDeleted(desk: Desk): boolean {
-    if (this.hasAnyReservations(desk)) {
-      alert('Nie można usunąć stanowiska z powodu obecnych na nie rezerwacji');
-      if (confirm('Czy chcesz usunąć wszystkie rezerwacje na to stanowisko?'))
-        this.deleteReservationsOnDesk(desk);
-      else false;
-    }
-    return true;
-  }
 }
 
 /** todo
