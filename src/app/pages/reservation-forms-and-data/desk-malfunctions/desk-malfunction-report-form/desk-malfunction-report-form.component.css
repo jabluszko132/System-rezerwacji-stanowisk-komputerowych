@@ -7,76 +7,17 @@ label {
   width: 100%;
   line-height: 2em;
 }
-label:not(:last-of-type) {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-label > input {
-  width: 40%;
-  border: none;
-  padding: 2px;
-  max-height: 1.5em;
-  outline: 1px solid var(--secondaryThemeColor);
-}
 
 form {
   padding: 1em 3.5em 2.5em 3.5em;
   margin: 1em;
   background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
-  max-width: 260px;
-}
-
-h3 {
-  font-size: 2em;
-  margin-bottom: 2em;
 }
 
 :host {
   display: flex;
   justify-content: center;
-}
-
-input[type='submit'] {
-  border-radius: 15px;
-  font-size: 1em;
-  font-weight: 200;
-  font-family: 'Geologica';
-  background: transparent;
-  outline: 2px solid var(--secondaryThemeColor);
-  color: var(--secondaryThemeColor);
-  border: none;
-  padding: 0.4em;
-  user-select: none;
-  margin-top: 2em;
-}
-
-input[type='submit']:hover {
-  outline: 3px solid;
-  font-weight: 300;
-}
-
-input[type='submit']:focus-within {
-  background-color: var(--secondaryThemeColor);
-  color: rgb(var(--mainRgbThemeColor));
-}
-
-.inputErrors {
-  color: red;
-  user-select: none;
-  height: 0;
-  width: 100%;
-  text-align: end;
-  font-size: 0.7em;
-}
-
-textarea {
-  max-width: 80%;
-  min-width: 50%;
-  min-height: 3em;
-  max-height: 10em;
 }
 
 textarea::-webkit-scrollbar-track {

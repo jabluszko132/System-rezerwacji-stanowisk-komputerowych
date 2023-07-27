@@ -1,10 +1,13 @@
-<form [formGroup]="reportForm" (ngSubmit)="report()">
-  <!--(ngSubmit)="addDesk()">-->
-  <h3 class="bigTxtFont">Zgłoś awarię</h3>
+<form [formGroup]="reportForm" (ngSubmit)="report()" class="is-narrow">
+  <h3 class="subtitle has-text-white is-4">Zgłoś awarię</h3>
   <label>
     ID stanowiska:
-    <input name="deskID" type="number" formControlName="deskID" />
-    <!--[formControl]="newDeskID" -->
+    <input
+      class="input is-small"
+      name="deskID"
+      type="number"
+      formControlName="deskID"
+    />
   </label>
   <div *ngIf="deskID.touched && deskID.invalid" class="inputErrors">
     To pole nie może być puste
@@ -13,8 +16,8 @@
   <label>
     Opis:
     <br />
-    <!-- <input name="reportDesc" type="text" formControlName="description" /> -->
     <textarea
+      class="textarea is-small"
       name="reportDesc"
       formControlName="description"
       maxlength="600"
@@ -27,5 +30,5 @@
   >
     Maksymalna długość opisu to 500 znaków
   </div>
-  <input type="submit" value="Wyślij" />
+  <input class="button is-link" type="submit" value="Zgłoś" />
 </form>
