@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class LocalstorageDeskListService {
+  //Rename ideas: DeskServicesCooperator,
   constructor() {
     this.deskList$
       .pipe(takeUntilDestroyed())
@@ -15,6 +16,7 @@ export class LocalstorageDeskListService {
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushReservationListToLS());
   }
+
   //---------------------------- Private properties -----------------------------------------
 
   private deskList$: BehaviorSubject<Desk[]> = new BehaviorSubject<Desk[]>(

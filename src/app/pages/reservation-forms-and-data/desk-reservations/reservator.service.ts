@@ -8,6 +8,8 @@ import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 const date = new Date();
 
 @Injectable()
+//after renaming it came to me that i named it reservator instead of reserver
+//but now i think its funnier this way
 export class ReservatorService {
   constructor(
     private lsDeskService: DeskManagerService,
