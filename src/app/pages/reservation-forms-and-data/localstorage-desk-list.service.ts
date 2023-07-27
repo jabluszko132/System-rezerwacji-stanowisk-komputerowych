@@ -161,7 +161,6 @@ export class LocalstorageDeskListService implements OnDestroy {
 >learn angular coding style 
 >figure out when and where to complete() the subjects deskList$ and reservationList$
 >think of a better name for this service and apply it
->move unnesessary things from constructors to ngOnInits
 */
 
 /**questions
