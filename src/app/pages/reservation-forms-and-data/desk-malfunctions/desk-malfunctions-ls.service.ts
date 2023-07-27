@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { DeskMalfunctionReport } from '../interfaces/desk-malfunction-report';
-import { DeskManagementLSService } from '../desk-management/desk-management-ls.service';
+import { DeskManagerService } from '../desk-management/desk-manager.service';
 @Injectable()
 export class DeskMalfunctionsLSService {
-  constructor(private lsDeskService: DeskManagementLSService) {
+  constructor(private lsDeskService: DeskManagerService) {
     this.forceMalfunctionReportsRefresh();
   }
 

@@ -3,14 +3,14 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Reservation } from '../interfaces/reservation';
 import { Desk } from '../interfaces/desk';
 import { NumberRange } from '../interfaces/number-range';
-import { DeskManagementLSService } from '../desk-management/desk-management-ls.service';
+import { DeskManagerService } from '../desk-management/desk-manager.service';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 const date = new Date();
 
 @Injectable()
 export class ReservatorService {
   constructor(
-    private lsDeskService: DeskManagementLSService,
+    private lsDeskService: DeskManagerService,
     private mainService: LocalstorageDeskListService
   ) {
     this.reservationList$.subscribe();

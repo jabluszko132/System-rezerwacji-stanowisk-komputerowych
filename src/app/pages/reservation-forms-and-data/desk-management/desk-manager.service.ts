@@ -4,7 +4,7 @@ import { Desk } from '../interfaces/desk';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
 @Injectable()
-export class DeskManagementLSService {
+export class DeskManagerService {
   constructor(private lsDeskService: LocalstorageDeskListService) {
     this.deskList$.subscribe();
     this.forceDeskListRefresh();

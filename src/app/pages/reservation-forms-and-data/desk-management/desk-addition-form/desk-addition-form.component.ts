@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import {filter, Subject, switchMap, takeUntil} from 'rxjs';
-import { DeskManagementLSService } from '../desk-management-ls.service';
+import { DeskManagerService } from '../desk-manager.service';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { DeskManagementLSService } from '../desk-management-ls.service';
   styleUrls: ['./desk-addition-form.component.css'],
 })
 export class DeskAdditionFormComponent implements OnInit, OnDestroy {
-  constructor(private service: DeskManagementLSService) {}
+  constructor(private service: DeskManagerService) {}
 
   private action$: Subject<any> = new Subject<any>;
   private endSubs$: Subject<void> = new Subject<void>;
