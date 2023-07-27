@@ -34,35 +34,6 @@ tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
-/* v Didnt use border: because inheritance wouldnt work when both selectors apply 
-(that happens when the table is empty) */
-/* table > tr:first-of-type {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-} */
-
-table > tr:last-of-type {
-  border-end-start-radius: 10px;
-  border-end-end-radius: 10px;
-}
-
-/* tr:not(:first-of-type):hover {
-  transform: scale(1.02);
-  transition: 100ms;
-  outline: 2px solid;
-  background: var(--secondaryThemeColor);
-} */
-
-tr:not(:first-of-type) > td:last-of-type {
-  background: var(--pageBackgroundColor);
-  user-select: none;
-}
-
-tr:not(:first-of-type) > td:last-of-type:hover {
-  background-color: red;
-  cursor: pointer;
-}
-
 :host {
   height: fit-content;
   margin: 1em;
@@ -76,6 +47,37 @@ table {
   color: var(--secondaryThemeColor);
   /* border-radius: 10px 10px; */
 }
+
+/* v Didnt use border: because inheritance wouldnt work when both selectors apply 
+(that happens when the table is empty) */
+/* table > tr:first-of-type {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+} */
+
+/* table > tr:last-of-type {
+  border-end-start-radius: 10px;
+  border-end-end-radius: 10px;
+} */
+
+/* tr:not(:first-of-type):hover {
+  transform: scale(1.02);
+  transition: 100ms;
+  outline: 2px solid;
+  background: var(--secondaryThemeColor);
+} */
+
+/* tr:not(:first-of-type) > td:last-of-type {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  user-select: none;
+} */
+
+/* tr:not(:first-of-type) > td:last-of-type:hover {
+  background-color: red;
+  cursor: pointer;
+} */
 
 /* td border start */
 
