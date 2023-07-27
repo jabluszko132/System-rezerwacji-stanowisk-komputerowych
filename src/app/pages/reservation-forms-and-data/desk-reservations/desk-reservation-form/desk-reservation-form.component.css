@@ -1,9 +1,9 @@
-label {
+/* label {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5em;
-}
+} */
 /* label > input {
   width: 40%;
   margin-right: 1%;
@@ -18,16 +18,16 @@ form {
   margin: 1em;
   background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
-  max-width: 295px;
+  max-width: 395px;
   max-height: fit-content;
   display: grid;
   text-align: center;
 }
 
-h3 {
+/* h3 {
   font-size: 2em;
   margin-bottom: 2em;
-}
+} */
 
 :host {
   display: flex;
@@ -58,16 +58,8 @@ input[type='submit']:focus-within {
 } */
 
 div.inputErrors {
-  color: red;
-  height: 0;
   user-select: none;
-  font-family: 'Geologica';
-  font-weight: 400;
-  bottom: 1.5em;
-  width: 60%;
   position: relative;
-  font-size: 0.75em;
-  left: 50%;
 }
 
 hr {

@@ -1,14 +1,18 @@
 <form [formGroup]="reservationForm" (ngSubmit)="reserveDesk()">
   <h3 class="bigTxtFont">Zarezerwuj</h3>
 
-  <label class="block"
-    >Numer stanowiska:
+  <label class="block is-flex is-flex-wrap-wrap is-justify-content-center">
+    <p class="subtitle has-text-white">Numer stanowiska:</p>
     <input
+      [class.is-danger]="this.deskID.errors"
       name="deskID"
       type="number"
       formControlName="deskID"
       class="input is-small"
     />
+    <div *ngIf="deskID.touched && deskID.invalid" class="help is-danger">
+      To pole nie może być puste
+    </div>
     <!-- <select formControlName="deskID">
       <option selected></option>
       <option *ngFor="let desk of deskList$ | async" value="{{ desk.deskID }}">
@@ -16,45 +20,52 @@
       </option>
     </select> -->
   </label>
-  <div *ngIf="deskID.touched && deskID.invalid" class="inputErrors">
-    To pole nie może być puste
-  </div>
   <br />
-  <label class="block">
-    Kto rezerwuje:
+  <label class="block is-flex is-flex-wrap-wrap is-justify-content-center">
+    <p class="subtitle has-text-white">Kto rezerwuje:</p>
     <input
+      [class.is-danger]="this.reservedBy.errors && this.reservedBy.touched"
       name="reservedBy"
       type="text"
       formControlName="reservedBy"
       class="input is-small"
     />
+    <div
+      *ngIf="reservedBy.touched && reservedBy.invalid"
+      class="help is-danger"
+    >
+      To pole nie może być puste
+    </div>
   </label>
-  <div *ngIf="reservedBy.touched && reservedBy.invalid" class="inputErrors">
-    To pole nie może być puste
-  </div>
   <br />
-  <p>Dzień i godziny rezerwacji</p>
+  <p class="subtitle has-text-white">Dzień i godziny rezerwacji</p>
   <hr />
-  <label class="block">
-    Dzień rezerwacji:
+
+  <label class="block is-flex is-flex-wrap-wrap is-justify-content-center">
+    <p class="subtitle has-text-white">Dzień rezerwacji:</p>
     <input
+      [class.is-danger]="
+        this.reservationDate.errors && this.reservationDate.touched
+      "
       name="reservationDate"
       type="date"
       formControlName="reservationDate"
       class="input is-small"
     />
+    <div
+      *ngIf="reservationDate.touched && reservationDate.invalid"
+      class="help is-danger"
+    >
+      Podaj poprawną datę
+    </div>
   </label>
 
-  <div
-    *ngIf="reservationDate.touched && reservationDate.invalid"
-    class="inputErrors"
-  >
-    Podaj poprawną datę
-  </div>
   <br />
-  <label class="block">
-    Początek:
+
+  <label class="block is-flex is-flex-wrap-wrap is-justify-content-center">
+    <p class="subtitle has-text-white">Początek:</p>
     <input
+      [class.is-danger]="this.startHour.errors"
       type="number"
       name="startHour"
       formControlName="startHour"
@@ -62,16 +73,17 @@
       max="17"
       class="input is-small"
     />
+    <div *ngIf="startHour.touched && startHour.invalid" class="help is-danger">
+      Początek rezerwacji musi zawierać się w godzinach 6-17
+    </div>
   </label>
 
-  <div *ngIf="startHour.touched && startHour.invalid" class="inputErrors">
-    Początek rezerwacji musi zawierać się w godzinach 6-17
-  </div>
-
   <br />
-  <label class="block">
-    Koniec:
+
+  <label class="block is-flex is-flex-wrap-wrap is-justify-content-center">
+    <p class="subtitle has-text-white">Koniec:</p>
     <input
+      [class.is-danger]="this.endHour.errors"
       type="number"
       name="endHour"
       formControlName="endHour"
@@ -79,12 +91,11 @@
       max="18"
       class="input is-small"
     />
+    <div *ngIf="endHour.touched && endHour.invalid" class="help is-danger">
+      Koniec rezerwacji musi zawierać się w godzinach 7-18
+    </div>
   </label>
 
-  <div *ngIf="endHour.touched && endHour.invalid" class="inputErrors">
-    Koniec rezerwacji musi zawierać się w godzinach 7-18
-  </div>
-
   <br />
-  <input type="submit" value="Rezerwuj" class="button is-info block" />
+  <input type="submit" value="Rezerwuj" class="button is-link block" />
 </form>
