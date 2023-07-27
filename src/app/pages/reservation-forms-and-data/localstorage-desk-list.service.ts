@@ -12,6 +12,7 @@ export class LocalstorageDeskListService {
     this.deskList$
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushDeskListToLS());
+    this.forceDeskListRefresh();
     this.reservationList$
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushReservationListToLS());
@@ -79,9 +80,9 @@ export class LocalstorageDeskListService {
    * Forces this instance's local deskList value to change to the one in localStorage
    *
    */
-  // private forceDeskListRefresh(): void {
-  //   this.deskList = this.deskList$.getValue();
-  // }
+  private forceDeskListRefresh(): void {
+    this.deskList = this.deskList$.getValue();
+  }
 
   /**
    * Forces this instance's local reservationList value to change to the one in localStorage
