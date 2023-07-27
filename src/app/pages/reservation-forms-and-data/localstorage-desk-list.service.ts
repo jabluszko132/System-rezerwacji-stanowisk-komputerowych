@@ -1,4 +1,4 @@
-import {  Injectable } from '@angular/core';
+import {  DestroyRef, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Reservation } from './interfaces/reservation';
 import { Desk } from './interfaces/desk';
@@ -16,7 +16,7 @@ export class LocalstorageDeskListService {
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushReservationListToLS());
     this.testSubj
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(inject(DestroyRef)))
       .subscribe(() => console.log('ls service got it'));
     setInterval(()=>this.testSubj.next(1),2000)
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Reservation } from '../interfaces/reservation';
 import { Desk } from '../interfaces/desk';
@@ -19,7 +19,7 @@ export class ReservatorService {
     this.reservationList$.subscribe();
     this.forceReservationListRefresh();
     this.mainService.testSubj
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(inject(DestroyRef)))
       .subscribe(() => console.log('reservator got it'));
   }
 
