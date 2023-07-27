@@ -1,12 +1,27 @@
-<form (ngSubmit)="addDesk()">
-  <h3 class="bigTxtFont">Dodaj stanowisko</h3>
+<form
+  class="
+    form
+    is-align-items-space-around
+    is-flex
+    is-flex-wrap-wrap
+    is-justify-content-center
+  "
+  (ngSubmit)="addDesk()"
+>
+  <h3 class="subtitle is-3 has-text-white">Dodaj stanowisko</h3>
   <label
     >ID stanowiska:
-    <input name="deskID" type="number" [formControl]="newDeskID" />
+    <input
+      [class.is-danger]="newDeskID.touched && newDeskID.errors"
+      class="input is-small"
+      name="deskID"
+      type="number"
+      [formControl]="newDeskID"
+    />
+    <div *ngIf="newDeskID.touched && newDeskID.invalid" class="help is-danger">
+      To pole nie może być puste
+    </div>
   </label>
-  <div *ngIf="newDeskID.touched && newDeskID.invalid" class="inputErrors">
-    To pole nie może być puste
-  </div>
   <br />
-  <input type="submit" value="Dodaj" />
+  <input class="button is-link block is-bottom" type="submit" value="Dodaj" />
 </form>

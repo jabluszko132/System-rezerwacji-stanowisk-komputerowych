@@ -3,20 +3,6 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  line-height: 2em;
-}
-label > input {
-  width: 40%;
-  border: none;
-  padding: 2px;
-  max-height: 1.5em;
-  outline: 1px solid var(--secondaryThemeColor);
-}
 
 form {
   padding: 1em 3.5em 2.5em 3.5em;
@@ -24,51 +10,9 @@ form {
   background-color: rgb(var(--mainRgbThemeColor));
   border-radius: 10px;
   max-width: 310px;
-  display: grid;
+  height: 20em;
 }
 
-h3 {
-  font-size: 2em;
-  margin-bottom: 2em;
-}
-
-:host {
-  display: flex;
-  justify-content: center;
-}
-
-input[type='submit'] {
-  border-radius: 15px;
-  font-size: 1em;
-  font-weight: 200;
-  font-family: 'Geologica';
-  background: transparent;
-  outline: 2px solid var(--secondaryThemeColor);
-  color: var(--secondaryThemeColor);
-  border: none;
-  padding: 0.4em;
-  user-select: none;
-  margin-top: 1em;
-}
-
-input[type='submit']:hover {
-  outline: 3px solid;
-  font-weight: 300;
-}
-
-input[type='submit']:focus-within {
-  background-color: var(--secondaryThemeColor);
-  color: rgb(var(--mainRgbThemeColor));
-}
-
-div.inputErrors {
-  color: red;
-  height: 0;
-  user-select: none;
-  font-family: 'Geologica';
-  font-weight: 500;
-  width: 60%;
-  position: relative;
-  font-size: 0.75em;
-  left: 50%;
+label {
+  height: 6em;
 }
