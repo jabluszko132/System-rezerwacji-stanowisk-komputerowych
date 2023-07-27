@@ -1,11 +1,10 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Reservation } from '../interfaces/reservation';
 import { Desk } from '../interfaces/desk';
 import { NumberRange } from '../interfaces/number-range';
 import { DeskManagerService } from '../desk-management/desk-manager.service';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 const date = new Date();
 
 @Injectable()
