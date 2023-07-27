@@ -20,10 +20,17 @@
   }
 }
 
+td:nth-of-type(2) {
+  text-overflow: clip;
+  max-width: 40vw;
+}
+
 td {
   margin: 0;
   text-align: center;
   padding: 0.4em;
+  text-overflow: clip;
+  overflow: auto;
 }
 
 tr:first-of-type > td {

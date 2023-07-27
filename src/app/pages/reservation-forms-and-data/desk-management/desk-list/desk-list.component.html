@@ -9,16 +9,14 @@
       <ng-template [ngIf]="desk.functional">Tak</ng-template>
       <ng-template [ngIf]="!desk.functional">Nie</ng-template>
     </td>
-    <td
-      class="td"
-      (click)="deleteDesk(desk)"
-      tabindex="0"
-      (keydown.enter)="deleteDesk(desk)"
-      title="usuń stanowisko"
-      oncopy="return false"
-      ondrag="return false"
-    >
-      x
+    <td class="td" oncopy="return false" ondrag="return false">
+      <button
+        class="delete is-medium"
+        (click)="deleteDesk(desk)"
+        tabindex="0"
+        (keydown.enter)="deleteDesk(desk)"
+        title="usuń stanowisko"
+      ></button>
     </td>
   </tr>
 </table>

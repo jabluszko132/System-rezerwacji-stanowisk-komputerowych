@@ -10,16 +10,14 @@
     <td class="td">{{ desk.reservedBy }}</td>
     <td class="td">{{ desk.reservationDate }}</td>
     <td class="td">Od {{ desk.startHour }} do {{ desk.endHour }}</td>
-    <td
-      class="td"
-      (click)="deleteReservation(desk)"
-      tabindex="0"
-      (keydown.enter)="deleteReservation(desk)"
-      title="anuluj rezerwację"
-      oncopy="return false"
-      ondrag="return false"
-    >
-      x
+    <td class="td" oncopy="return false" ondrag="return false">
+      <button
+        class="delete is-medium"
+        (click)="deleteReservation(desk)"
+        tabindex="0"
+        (keydown.enter)="deleteReservation(desk)"
+        title="anuluj rezerwację"
+      ></button>
     </td>
   </tr>
 </table>
