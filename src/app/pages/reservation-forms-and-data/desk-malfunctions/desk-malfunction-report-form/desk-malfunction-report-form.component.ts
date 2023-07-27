@@ -26,6 +26,14 @@ export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
   deskID = this.reportForm.controls.deskID;
   description = this.reportForm.controls.description;
 
+  report(): void {
+    if(this.deskID.errors || this.description.errors)
+    {
+      alert('Podaj poprawne wartości we wszystkich polach formularza')
+      return;
+    }else this.action$.next(this.reportForm.value);
+  }
+  
   ngOnInit() {
     this.action$.pipe(filter(val => val === this.reportForm.value),switchMap(d => 
       this.service.reportMalfunctionOnDesk(d)), takeUntil(this.endSubs$)).subscribe();
@@ -35,11 +43,4 @@ export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
     this.endSubs$.complete();
   }
 
-  report(): void {
-    if(this.deskID.errors || this.description.errors)
-    {
-      alert('Podaj poprawne wartości we wszystkich polach formularza')
-      return;
-    }else this.action$.next(this.reportForm.value);
-  }
 }

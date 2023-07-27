@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
 import {filter, Subject, switchMap, takeUntil} from 'rxjs';
 import { DeskManagementLSService } from '../desk-management-ls.service';
 
@@ -17,6 +16,15 @@ export class DeskAdditionFormComponent implements OnInit, OnDestroy {
   private endSubs$: Subject<void> = new Subject<void>;
 
   newDeskID: FormControl = new FormControl(null,[Validators.required]);
+
+  addDesk(): void {
+    if(this.newDeskID.invalid) {
+      alert('Proszę podać ID nowego stanowiska')
+      return;
+    }
+    this.action$.next(this.newDeskID.value);
+  }
+
   ngOnInit() {
     this.action$.pipe(filter(val => val === this.newDeskID.value),switchMap(d => {
       return this.service.addDesk({deskID: d, functional: true})}), takeUntil(this.endSubs$)).subscribe();
@@ -26,11 +34,4 @@ export class DeskAdditionFormComponent implements OnInit, OnDestroy {
     this.endSubs$.complete();
   }
 
-  addDesk(): void {
-    if(this.newDeskID.invalid) {
-      alert('Proszę podać ID nowego stanowiska')
-      return;
-    }
-    this.action$.next(this.newDeskID.value);
-  }
 }

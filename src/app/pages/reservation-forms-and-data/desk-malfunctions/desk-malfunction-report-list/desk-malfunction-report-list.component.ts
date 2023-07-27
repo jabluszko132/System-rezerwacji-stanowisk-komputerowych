@@ -13,11 +13,11 @@ export class DeskMalfunctionReportListComponent implements OnInit {
   constructor(private service: DeskMalfunctionsLSService) {}
   reports$ = this.service.getMalfunctionReports();
 
-  ngOnInit() {
-    this.reports$.subscribe();
-  }
-
   dealtWithMalfunction(report: DeskMalfunctionReport) {
     this.service.dealtWithMalfunction(report);
+  }
+
+  ngOnInit() {
+    this.reports$.subscribe();
   }
 }
