@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { filter, Subject, switchMap, takeUntil } from 'rxjs';
-import { DeskMalfunctionsLSService } from '../desk-malfunctions-ls.service';
+import { DeskMalfunctionReporterService } from '../desk-malfunction-reporter.service';
 
 
 
@@ -12,7 +12,7 @@ import { DeskMalfunctionsLSService } from '../desk-malfunctions-ls.service';
   styleUrls: ['./desk-malfunction-report-form.component.css'],
 })
 export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
-  constructor(private service: DeskMalfunctionsLSService, private fb: FormBuilder ) {}
+  constructor(private service: DeskMalfunctionReporterService, private fb: FormBuilder ) {}
 
   private action$: Subject<any> = new Subject<any>;
   private endSubs$: Subject<void> = new Subject<void>;
@@ -33,7 +33,7 @@ export class DeskMalfunctionReportFormComponent implements OnInit, OnDestroy{
       return;
     }else this.action$.next(this.reportForm.value);
   }
-  
+
   ngOnInit() {
     this.action$.pipe(filter(val => val === this.reportForm.value),switchMap(d => 
       this.service.reportMalfunctionOnDesk(d)), takeUntil(this.endSubs$)).subscribe();

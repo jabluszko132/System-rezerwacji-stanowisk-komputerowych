@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DeskMalfunctionReportListComponent } from './desk-malfunction-report-list/desk-malfunction-report-list.component';
 import { DeskMalfunctionReportFormComponent } from './desk-malfunction-report-form/desk-malfunction-report-form.component';
-import { DeskMalfunctionsLSService } from './desk-malfunctions-ls.service';
+import { DeskMalfunctionReporterService } from './desk-malfunction-reporter.service';
 import { DeskManagerService } from '../desk-management/desk-manager.service';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
     DeskMalfunctionReportListComponent,
     DeskMalfunctionReportFormComponent,
   ],
-  providers: [DeskMalfunctionsLSService, DeskManagerService, Validators],
+  providers: [DeskMalfunctionReporterService, DeskManagerService, Validators],
   exports: [
     DeskMalfunctionReportListComponent,
     DeskMalfunctionReportFormComponent,

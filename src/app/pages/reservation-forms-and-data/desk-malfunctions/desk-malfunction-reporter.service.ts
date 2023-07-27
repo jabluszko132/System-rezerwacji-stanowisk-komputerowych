@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { DeskMalfunctionReport } from '../interfaces/desk-malfunction-report';
 import { DeskManagerService } from '../desk-management/desk-manager.service';
 @Injectable()
-export class DeskMalfunctionsLSService {
+export class DeskMalfunctionReporterService {
   constructor(private lsDeskService: DeskManagerService) {
     this.forceMalfunctionReportsRefresh();
   }
