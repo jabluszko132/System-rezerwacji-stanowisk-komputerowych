@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LocalstorageDeskListService } from './localstorage-desk-list.service';
-// import { DeskMalfunctionsModule } from './desk-malfunctions/desk-malfunctions.module';
 import { DeskManagementModule } from './desk-management/desk-management.module';
 import { DeskAdditionFormComponent } from './desk-management/desk-addition-form/desk-addition-form.component';
 import { DeskListComponent } from './desk-management/desk-list/desk-list.component';
