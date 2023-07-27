@@ -5,6 +5,7 @@ import { Desk } from '../interfaces/desk';
 import { NumberRange } from '../interfaces/number-range';
 import { DeskManagerService } from '../desk-management/desk-manager.service';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 const date = new Date();
 
 @Injectable()
@@ -17,6 +18,9 @@ export class ReservatorService {
   ) {
     this.reservationList$.subscribe();
     this.forceReservationListRefresh();
+    this.mainService.testSubj
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => console.log('reservator got it'));
   }
 
   //---------------------------- Private properties -------------------------------------------

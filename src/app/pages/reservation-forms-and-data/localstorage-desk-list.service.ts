@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {  Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Reservation } from './interfaces/reservation';
 import { Desk } from './interfaces/desk';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -15,7 +15,13 @@ export class LocalstorageDeskListService {
     this.reservationList$
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.pushReservationListToLS());
+    this.testSubj
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => console.log('ls service got it'));
+    setInterval(()=>this.testSubj.next(1),2000)
   }
+
+  testSubj = new Subject<any>;
 
   //---------------------------- Private properties -----------------------------------------
 
