@@ -3,7 +3,7 @@ import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { Reservation } from './interfaces/reservation';
 import { Desk } from './interfaces/desk';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class LocalstorageDeskListService implements OnDestroy {
   //Rename ideas: DeskServicesCooperator,
   constructor() {
@@ -51,9 +51,7 @@ export class LocalstorageDeskListService implements OnDestroy {
     );
     while (reservationIndex != -1) {
       this.unsafeDeleteReservation(this.reservationList[reservationIndex]);
-      reservationIndex = this.reservationList.findIndex((m: any) => {
-        m.deskID == desk.deskID;
-      });
+      reservationIndex = this.reservationList.findIndex((m: any) =>m.deskID == desk.deskID);
     }
     this.reservationList$.next(this.reservationList);
   }
