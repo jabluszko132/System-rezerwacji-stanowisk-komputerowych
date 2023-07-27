@@ -45,16 +45,15 @@ tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
-tr:not(:first-of-type):hover {
+/* tr:not(:first-of-type):hover {
   transform: scale(1.06);
-  transition: 100ms;
+  transition: 100ms; 
   outline: 2px solid;
-  background: var(--secondaryThemeColor);
-}
+   background: var(--secondaryThemeColor); 
+} */
 
-td:hover {
+tr:not(:first-of-type) > td:hover {
   outline: 2px solid;
-  z-index: 1;
 }
 
 :host {

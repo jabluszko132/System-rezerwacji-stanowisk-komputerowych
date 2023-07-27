@@ -7,7 +7,7 @@
   <tr class="tr" *ngFor="let report of reports$ | async">
     <td class="td">{{ report.deskID }}</td>
     <td class="td">
-      <p class="bulma-scroll-mixin" *ngIf="report.description != ''">
+      <p *ngIf="report.description != ''">
         {{ report.description }}
       </p>
       <ng-template [ngIf]="report.description == ''">[Brak]</ng-template>
