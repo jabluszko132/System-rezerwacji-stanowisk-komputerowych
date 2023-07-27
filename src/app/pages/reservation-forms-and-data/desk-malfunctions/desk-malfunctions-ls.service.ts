@@ -1,43 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Reservation } from '../interfaces/reservation';
-import { Desk } from '../interfaces/desk';
 import { DeskMalfunctionReport } from '../interfaces/desk-malfunction-report';
-import { NumberRange } from '../interfaces/number-range';
 import { DeskManagementLSService } from '../desk-management/desk-management-ls.service';
 @Injectable()
 export class DeskMalfunctionsLSService {
   constructor(private lsDeskService: DeskManagementLSService) {
     this.forceMalfunctionReportsRefresh();
   }
-  malfunctionReports: DeskMalfunctionReport[] = [];
-  value: any;
 
-  getMalfunctionReports(): Observable<DeskMalfunctionReport[]> {
-    return of(this.malfunctionReports);
-  }
+  //------------------------ Private properties -------------------------------
 
-  private forceMalfunctionReportsRefresh(): void {
-    this.value = localStorage.getItem('malfunctionReports');
-    this.malfunctionReports = this.value ? JSON.parse(this.value) : [];
-  }
+  private malfunctionReports: DeskMalfunctionReport[] = [];
+  private value: any;
 
-  private pushMalfunctionReportsToLS(): void {
-    localStorage.setItem(
-      'malfunctionReports',
-      JSON.stringify(this.malfunctionReports)
+  //-------------------------- Public methods -----------------------------------
+
+  areMalfunctionsOnDesk(deskID: number): boolean {
+    return (
+      this.malfunctionReports.findIndex(
+        (m: any) => m.deskID == deskID && m.dealtWith == false
+      ) != -1
     );
-  }
-
-  reportMalfunctionOnDesk(report: DeskMalfunctionReport): Observable<boolean> {
-    if (this.lsDeskService.deskExists(report.deskID)) {
-      this.lsDeskService.updateDeskFunctionality(report.deskID, false);
-      this.malfunctionReports.push(report);
-      this.pushMalfunctionReportsToLS();
-      return of(true);
-    }
-    alert('Nie ma takiego stanowiska');
-    return of(false);
   }
 
   dealtWithMalfunction(report: DeskMalfunctionReport): Observable<boolean> {
@@ -63,13 +46,32 @@ export class DeskMalfunctionsLSService {
     return of(true);
   }
 
-  areMalfunctionsOnDesk(deskID: number): boolean {
-    return (
-      this.malfunctionReports.findIndex(
-        (m: any) => m.deskID == deskID && m.dealtWith == false
-      ) != -1
-    );
+  getMalfunctionReports(): Observable<DeskMalfunctionReport[]> {
+    return of(this.malfunctionReports);
   }
 
-  // things regarding malfunctions from localstorage-desk-list service will be here
+  reportMalfunctionOnDesk(report: DeskMalfunctionReport): Observable<boolean> {
+    if (this.lsDeskService.deskExists(report.deskID)) {
+      this.lsDeskService.updateDeskFunctionality(report.deskID, false);
+      this.malfunctionReports.push(report);
+      this.pushMalfunctionReportsToLS();
+      return of(true);
+    }
+    alert('Nie ma takiego stanowiska');
+    return of(false);
+  }
+
+  //-------------------------- Private methods ----------------------------------
+
+  private forceMalfunctionReportsRefresh(): void {
+    this.value = localStorage.getItem('malfunctionReports');
+    this.malfunctionReports = this.value ? JSON.parse(this.value) : [];
+  }
+
+  private pushMalfunctionReportsToLS(): void {
+    localStorage.setItem(
+      'malfunctionReports',
+      JSON.stringify(this.malfunctionReports)
+    );
+  }
 }
