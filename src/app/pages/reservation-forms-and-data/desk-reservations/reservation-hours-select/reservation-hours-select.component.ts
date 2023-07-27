@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DeskReservationsLsService } from '../desk-reservations-ls.service';
-import { filter, Subject, switchMap, takeUntil, of } from 'rxjs';
+import { filter, Subject, switchMap, takeUntil } from 'rxjs';
 import {NumberRange} from '../../interfaces/number-range';
-import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
 import { Reservation } from '../../interfaces/reservation';
 
 
@@ -15,9 +14,33 @@ import { Reservation } from '../../interfaces/reservation';
 export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   constructor(
     private service: DeskReservationsLsService,
-    private lsDeskListService: LocalstorageDeskListService,
     private fb: FormBuilder
   ) {}
+
+  //------------------- Public properties ------------------------------
+  availableHours: NumberRange[] = [];
+  displayList = false;
+
+
+  form = this.fb.nonNullable.group({
+    deskID: [1,Validators.required],
+    reservedBy: ['', Validators.required],
+    reservationDate: ['', [Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),Validators.required]],
+  })
+
+  deskID: FormControl<number> = this.form.controls.deskID;
+  reservationDate: FormControl<string> = this.form.controls.reservationDate;
+  reservedBy: FormControl<string> = this.form.controls.reservedBy;
+
+  /**
+   * Object holding range of hours to reserve
+   * 
+   * Value equal -1 means that no hour is selected for that value
+   */
+   reservationHours: NumberRange = {
+    from: -1,
+    to: -1,
+  }
 
   /** 
    * List of hours during which people work in the office
@@ -28,37 +51,38 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
    */
   workHours: number[] = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]; 
 
+  //--------------------- Private properties ----------------------------------
+
   private action$: Subject<any> = new Subject<any>;
-  private submitReservation$: Subject<Reservation> = new Subject<Reservation>;
   private endSubs$: Subject<void> = new Subject<void>;
+  private submitReservation$: Subject<Reservation> = new Subject<Reservation>;
 
-  availableHours: NumberRange[] = [];
-  displayList = false;
-
-
-  /**
-   * Object holding range of hours to reserve
-   * 
-   * Value equal -1 means that no hour is selected for that value
-   */
-  reservationHours: NumberRange = {
-    from: -1,
-    to: -1,
+ //----------------------- Public methods ------------------------------------
+  checkIfReservedHour(hour:number) :boolean {
+    if(this.availableHours.length == 0) return true;
+    //v special case - hour isnt in range <x.from,x.to) but still can be available
+    if(hour == this.workHours[this.workHours.length-1]) {  
+      if(this.availableHours[this.availableHours.length-1].to == hour + 1) return false;
+      else return true;
+    }
+    for(let x of this.availableHours) {
+      if(hour >= x.from && hour < x.to) return false;
+    }
+    return true;
   }
 
+  clearSelectedHours(): void {
+    this.reservationHours = {from: -1, to: -1};
+  }
 
-  form = this.fb.nonNullable.group({
-    deskID: [1,Validators.required],
-    reservedBy: ['', Validators.required],
-    reservationDate: ['', [Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}'),Validators.required]],
-  })
-
-  deskID: FormControl<number> = this.form.controls.deskID;
-  reservedBy: FormControl<string> = this.form.controls.reservedBy;
-  reservationDate: FormControl<string> = this.form.controls.reservationDate;
+  getAvailableHours(): void {
+    if(this.deskID.errors || this.reservationDate.errors) return;
+    this.action$.next(this.form.value);
+    console.log(this.availableHours)
+    this.displayList = true;
+  }
 
   ngOnInit() {
-    this.checkIfReservedHour(2);
     this.action$.pipe(filter((m:any)=>m == this.form.value),switchMap((d:any)=>
       this.availableHours = this.service.availableReservationHoursOnDay(d.deskID,d.reservationDate)
     ),takeUntil(this.endSubs$)).subscribe();
@@ -72,24 +96,25 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
     this.endSubs$.complete();
   }
   
-  getAvailableHours(): void {
-    if(this.deskID.errors || this.reservationDate.errors) return;
-    this.action$.next(this.form.value);
-    console.log(this.availableHours)
-    this.displayList = true;
-  }
-
-  checkIfReservedHour(hour:number) :boolean {
-    if(this.availableHours.length == 0) return true;
-    //v special case - hour isnt in range <x.from,x.to) but still can be available
-    if(hour == this.workHours[this.workHours.length-1]) {  
-      if(this.availableHours[this.availableHours.length-1].to == hour + 1) return false;
-      else return true;
+  reserve(): void {
+    if(this.deskID.errors || this.reservationDate.errors || this.deskID.errors ) {
+      alert('Proszę wprowadzić poprawne wartości we wszystkie pola formularza');
+      return;
     }
-    for(let x of this.availableHours) {
-      if(hour >= x.from && hour < x.to) return false;
+    if(this.reservationHours.from == -1 || this.reservationHours.to == -1) {
+      alert('Proszę zaznaczyć poprawne godziny rezerwacji')
+      return;
     }
-    return true;
+    this.submitReservation$.next({
+      deskID: this.deskID.value,
+      reservedBy: this.reservedBy.value,
+      reservationDate: this.reservationDate.value,
+      startHour: this.reservationHours.from,
+      endHour: this.reservationHours.to,
+    })
+    this.reservationHours.from = -1;
+    this.reservationHours.to = -1;
+    this.displayList = false;
   }
 
   selectHour(h: number): void {
@@ -117,30 +142,5 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
       this.reservationHours.to = -1;
       this.reservationHours.from = h;
     }
-  }
-
-  reserve(): void {
-    if(this.deskID.errors || this.reservationDate.errors || this.deskID.errors ) {
-      alert('Proszę wprowadzić poprawne wartości we wszystkie pola formularza');
-      return;
-    }
-    if(this.reservationHours.from == -1 || this.reservationHours.to == -1) {
-      alert('Proszę zaznaczyć poprawne godziny rezerwacji')
-      return;
-    }
-    this.submitReservation$.next({
-      deskID: this.deskID.value,
-      reservedBy: this.reservedBy.value,
-      reservationDate: this.reservationDate.value,
-      startHour: this.reservationHours.from,
-      endHour: this.reservationHours.to,
-    })
-    this.reservationHours.from = -1;
-    this.reservationHours.to = -1;
-    this.displayList = false;
-  }
-
-  clearSelectedHours(): void {
-    this.reservationHours = {from: -1, to: -1};
   }
 }

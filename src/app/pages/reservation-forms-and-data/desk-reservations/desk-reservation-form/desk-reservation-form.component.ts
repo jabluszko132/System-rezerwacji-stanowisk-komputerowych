@@ -1,12 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LocalstorageDeskListService } from '../../localstorage-desk-list.service';
 import {  FormBuilder, Validators } from '@angular/forms';
 import {filter, Subject, switchMap, takeUntil, of} from 'rxjs';
 import { Reservation } from '../../interfaces/reservation';
 import { DeskReservationsLsService } from '../desk-reservations-ls.service';
-// import { WorkHoursValidatorDirective } from '../work-hours-validator.directive';
-
-// const hoursValidator = new WorkHoursValidatorDirective;
 
 @Component({
   selector: 'app-desk-reservation-form',
@@ -18,10 +14,10 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
     private service: DeskReservationsLsService,
     private fb: FormBuilder,
   ) {}
+
   private action$: Subject<any> = new Subject<any>;
   private endSubs$: Subject<void> = new Subject<void>;
   
-  // deskList$ :Observable<any> = this.service.getDeskList();
   reservationForm = this.fb.nonNullable.group({
     deskID: [1,Validators.required],
     reservedBy: ['', Validators.required],
@@ -31,22 +27,11 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
   });
 
   deskID = this.reservationForm.controls.deskID;
-  reservedBy = this.reservationForm.controls.reservedBy;
-  reservationDate = this.reservationForm.controls.reservationDate;
-  startHour  = this.reservationForm.controls.startHour;
   endHour = this.reservationForm.controls.endHour;
+  reservationDate = this.reservationForm.controls.reservationDate;
+  reservedBy = this.reservationForm.controls.reservedBy;
+  startHour  = this.reservationForm.controls.startHour;
 
-  ngOnInit() {
-    // this.deskList$.subscribe();
-    this.action$.pipe(filter(d => {
-      return d == this.reservationForm.value
-    }),switchMap(d => {this.service.reserveDesk(d);return of(null)}),takeUntil(this.endSubs$)).subscribe();
-  }
-
-  ngOnDestroy() {
-    this.endSubs$.next();
-    this.endSubs$.complete();
-  }
 
   reserveDesk(): void {
     if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors || this.startHour.errors || this.endHour.errors)
@@ -63,5 +48,17 @@ export class DeskReservationFormComponent implements OnInit, OnDestroy {
       return;
     }
     this.action$.next(this.reservationForm.value as Reservation);
+  }
+  
+  ngOnInit() {
+    // this.deskList$.subscribe();
+    this.action$.pipe(filter(d => {
+      return d == this.reservationForm.value
+    }),switchMap(d => {this.service.reserveDesk(d);return of(null)}),takeUntil(this.endSubs$)).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
 }
