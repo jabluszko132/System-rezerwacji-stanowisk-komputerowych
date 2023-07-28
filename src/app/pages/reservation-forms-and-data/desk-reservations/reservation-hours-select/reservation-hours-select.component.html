@@ -11,30 +11,48 @@
       ><p class="subtitle has-text-white">ID stanowiska:</p>
       <input
         type="number"
-        class="input mb-6"
+        class="input"
         formControlName="deskID"
         name="deskID"
       />
+      <div
+        *ngIf="this.deskID.errors && this.deskID.touched"
+        class="help is-danger"
+      >
+        To pole nie może być puste
+      </div>
     </label>
     <label
-      ><p class="subtitle has-text-white">Kto rezerwuje:</p>
+      ><p class="subtitle has-text-white mt-6">Kto rezerwuje:</p>
       <input
         type="text"
-        class="input mb-6"
+        class="input"
         formControlName="reservedBy"
         name="reservedBy"
       />
+      <div
+        *ngIf="this.reservedBy.errors && this.reservedBy.touched"
+        class="help is-danger"
+      >
+        To pole nie może być puste
+      </div>
     </label>
     <label
-      ><p class="subtitle has-text-white">Dzień rezerwacji:</p>
+      ><p class="subtitle has-text-white mt-6">Dzień rezerwacji:</p>
       <input
         type="date"
         class="input"
         formControlName="reservationDate"
         name="reservationDate"
       />
+      <div
+        *ngIf="this.reservationDate.errors && this.reservationDate.touched"
+        class="help is-danger"
+      >
+        Proszę podać poprawną datę rezerwacji
+      </div>
     </label>
-    <input type="submit" class="block button is-link mt-4" value="Sprawdź" />
+    <input type="submit" class="block button is-link mt-5" value="Sprawdź" />
   </form>
   <div
     id="afterFormPart"
