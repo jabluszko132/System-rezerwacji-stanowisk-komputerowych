@@ -159,6 +159,9 @@ export class LocalstorageDeskListService implements OnDestroy {
 
 /** todo
 >figure out when and where to complete() the subjects deskList$ and reservationList$
+>make a nav on the side of the page that contains hooks to each element on the view
+>learn how to write tests for angular apps and make them
+>make a fade-in animation on routing (like on angular docs website)
 >think of a better name for this service and apply it
 */
 
