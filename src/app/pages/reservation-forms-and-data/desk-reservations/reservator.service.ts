@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Observable, of, BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { Reservation } from '../interfaces/reservation';
 import { Desk } from '../interfaces/desk';
 import { NumberRange } from '../interfaces/number-range';
@@ -10,12 +10,12 @@ const date = new Date();
 @Injectable()
 //after renaming it came to me that i named it reservator instead of reserver
 //but now i think its funnier this way
-export class ReservatorService {
+export class ReservatorService implements OnDestroy {
   constructor(
     private lsDeskService: DeskManagerService,
     private mainService: LocalstorageDeskListService
   ) {
-    this.reservationList$.subscribe(()=> this.reservationListChanged$.next());
+    this.reservationList$.pipe(takeUntil(this.endSubs$)).subscribe(()=> this.reservationListChanged$.next());
     this.forceReservationListRefresh();
   }
 
@@ -24,6 +24,8 @@ export class ReservatorService {
     this.mainService.getReservationList();
   private reservationList: Reservation[] = this.reservationList$.getValue();
   private reservationListChanged$: Subject<void> = new Subject<void>;
+  private endSubs$: Subject<void> = new Subject<void>;
+
 
   //----------------------------- Public methods ----------------------------------------------
 
@@ -118,6 +120,12 @@ export class ReservatorService {
       this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
     );
   }
+
+  ngOnDestroy() {
+    this.endSubs$.next();
+    this.endSubs$.complete();
+  }
+
 
   /**
    * Return true if a reservation data and time collids with any on the reservationList
