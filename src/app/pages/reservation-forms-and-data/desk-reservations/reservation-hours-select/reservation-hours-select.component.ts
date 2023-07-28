@@ -78,7 +78,6 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   getAvailableHours(): void {
     if(this.deskID.errors || this.reservationDate.errors) return;
     this.action$.next(this.form.value);
-    console.log(this.availableHours)
     this.displayList = true;
   }
 
