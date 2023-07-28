@@ -96,7 +96,7 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   }
   
   reserve(): void {
-    if(this.deskID.errors || this.reservationDate.errors || this.deskID.errors ) {
+    if(this.deskID.errors || this.reservationDate.errors || this.deskID.errors || this.reservedBy.errors) {
       alert('Proszę wprowadzić poprawne wartości we wszystkie pola formularza');
       return;
     }
