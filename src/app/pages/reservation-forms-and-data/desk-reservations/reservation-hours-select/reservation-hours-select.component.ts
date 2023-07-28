@@ -141,6 +141,5 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
       this.reservationHours.to = -1;
       this.reservationHours.from = h;
     }
-    console.log(this.reservationHours);
   }
 }
