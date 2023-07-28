@@ -5,7 +5,7 @@ import { Desk } from './interfaces/desk';
 
 @Injectable({providedIn: 'root'})
 export class LocalstorageDeskListService implements OnDestroy {
-  //Rename ideas: DeskServicesCooperator, 
+  //Rename ideas: DeskServicesCooperator, DeskCommon
   constructor() {
     this.deskList$
       .pipe(takeUntil(this.endSubs$))

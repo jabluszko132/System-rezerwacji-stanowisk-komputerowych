@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
 import { Reservation } from '../interfaces/reservation';
 import { Desk } from '../interfaces/desk';
 import { NumberRange } from '../interfaces/number-range';
@@ -15,7 +15,7 @@ export class ReservatorService {
     private lsDeskService: DeskManagerService,
     private mainService: LocalstorageDeskListService
   ) {
-    this.reservationList$.subscribe();
+    this.reservationList$.subscribe(()=> this.reservationListChanged$.next());
     this.forceReservationListRefresh();
   }
 
@@ -23,6 +23,7 @@ export class ReservatorService {
   private reservationList$: BehaviorSubject<Reservation[]> =
     this.mainService.getReservationList();
   private reservationList: Reservation[] = this.reservationList$.getValue();
+  private reservationListChanged$: Subject<void> = new Subject<void>;
 
   //----------------------------- Public methods ----------------------------------------------
 
