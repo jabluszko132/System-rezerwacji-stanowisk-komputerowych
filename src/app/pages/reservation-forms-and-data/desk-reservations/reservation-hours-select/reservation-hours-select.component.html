@@ -83,7 +83,9 @@
           [ngClass]="
             checkIfReservedHour(i) ? 'is-danger' : 'is-primary  is-clickable'
           "
+          tabindex="0"
           (click)="selectHour(i)"
+          (keydown.enter)="selectHour(i)"
           [class.has-background-primary-dark]="
             i == reservationHours.from || i + 1 == reservationHours.to
           "
