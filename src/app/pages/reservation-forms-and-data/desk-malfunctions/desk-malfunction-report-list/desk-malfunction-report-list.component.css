@@ -45,16 +45,16 @@ tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
-/* tr:not(:first-of-type):hover {
+tr:not(:first-of-type):hover {
   transform: scale(1.06);
-  transition: 100ms; 
+  transition: 100ms;
   outline: 2px solid;
-   background: var(--secondaryThemeColor); 
-} */
-
-tr:not(:first-of-type) > td:hover {
-  outline: 2px solid;
+  background: var(--secondaryThemeColor);
 }
+
+/* tr:not(:first-of-type) > td:hover {
+  outline: 2px solid;
+} */
 
 :host {
   display: flex;
@@ -71,10 +71,6 @@ table {
   color: var(--secondaryThemeColor);
 }
 
-a {
-  user-select: none;
-}
-
 tr:not(:first-of-type) > td:last-of-type {
   width: 18%;
   background: var(--pageBackgroundColor);
@@ -82,7 +78,7 @@ tr:not(:first-of-type) > td:last-of-type {
 }
 
 tr:not(:first-of-type) > td:last-of-type:hover {
-  background: #f00;
+  /* background: #f00; */
   cursor: pointer;
 }
 /* td border start */
