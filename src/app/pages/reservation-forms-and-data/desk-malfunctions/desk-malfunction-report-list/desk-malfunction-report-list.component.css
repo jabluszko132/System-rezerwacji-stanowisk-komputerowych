@@ -45,7 +45,7 @@ tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
 }
 
-tr:not(:first-of-type):hover {
+tr:not(:first-of-type):focus-within:hover {
   transform: scale(1.06);
   transition: 100ms;
   outline: 2px solid;
