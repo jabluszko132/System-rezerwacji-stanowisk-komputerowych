@@ -85,6 +85,9 @@
           [class.has-background-primary-dark]="
             i == reservationHours.from || i + 1 == reservationHours.to
           "
+          [class.has-background-success]="
+            i > reservationHours.from && reservationHours.to > i + 1
+          "
         >
           {{ i }}
         </div>
