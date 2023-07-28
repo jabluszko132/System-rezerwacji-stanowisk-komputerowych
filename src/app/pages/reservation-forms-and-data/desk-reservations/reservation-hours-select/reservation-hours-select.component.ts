@@ -20,7 +20,7 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   //------------------- Public properties ------------------------------
   availableHours: NumberRange[] = [];
   displayList = false;
-
+  reservationsChangeEvent = this.service.getReservationChangesNotification();
 
   form = this.fb.nonNullable.group({
     deskID: [1,Validators.required],
@@ -78,6 +78,10 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   getAvailableHours(): void {
     if(this.deskID.errors || this.reservationDate.errors) return;
     this.action$.next(this.form.value);
+  }
+
+  getList():void {
+    this.getAvailableHours();
     this.displayList = true;
   }
 
@@ -88,6 +92,8 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
     
     this.submitReservation$.pipe(switchMap((d:Reservation)=>this.service.reserveDesk(d)
     ),takeUntil(this.endSubs$)).subscribe();
+
+    this.reservationsChangeEvent.pipe(takeUntil(this.endSubs$)).subscribe(()=>this.getAvailableHours())
   }
 
   ngOnDestroy() {
@@ -113,7 +119,6 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
     })
     this.reservationHours.from = -1;
     this.reservationHours.to = -1;
-    this.getAvailableHours()
   }
 
   selectHour(h: number): void {
