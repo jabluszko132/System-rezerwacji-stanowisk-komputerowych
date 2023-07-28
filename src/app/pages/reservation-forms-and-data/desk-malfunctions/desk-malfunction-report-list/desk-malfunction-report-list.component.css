@@ -37,9 +37,9 @@ tr:first-of-type > td {
   background: rgb(var(--mainRgbThemeColor));
 }
 
-tr:last-of-type {
+/* tr:last-of-type {
   border-radius: 0 0 10px 10px;
-}
+} */
 
 tr:not(:first-of-type) > td {
   background: rgba(var(--mainRgbThemeColor), 0.85);
@@ -67,7 +67,7 @@ tr:not(:first-of-type):hover {
 
 table {
   background: var(--secondaryThemeColor);
-  border-radius: 10px 10px;
+  /* border-radius: 10px 10px; */
   max-width: 135px;
   color: var(--secondaryThemeColor);
 }
