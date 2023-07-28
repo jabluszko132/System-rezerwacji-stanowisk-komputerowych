@@ -96,9 +96,9 @@ export class ReservatorService {
     if (startIndex == -1) return [];
     let reservations: Reservation[] = [];
     for (let i = startIndex; i <= this.reservationList.length - 1; i++) {
+      if (this.reservationList[i].reservationDate != date) break;
       if (this.reservationList[i].deskID == deskID)
         reservations.push(this.reservationList[i]);
-      if (this.reservationList[i].reservationDate != date) break;
     }
     return reservations;
   }
