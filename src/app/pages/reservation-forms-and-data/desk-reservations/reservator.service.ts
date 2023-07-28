@@ -109,6 +109,10 @@ export class ReservatorService {
     return of(this.reservationList);
   }
 
+  getReservationChangesNotification(): Subject<void> {
+    return this.reservationListChanged$;
+  }
+
   hasAnyReservations(desk: Desk): boolean {
     return (
       this.reservationList.findIndex((m: any) => m.deskID == desk.deskID) != -1
