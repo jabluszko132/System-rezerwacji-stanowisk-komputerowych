@@ -41,7 +41,7 @@ form {
 }
 
 #list {
-  height: fit-content;
+  height: -moz-fit-content;
   display: grid;
   justify-items: center;
   padding-bottom: 2em;
@@ -59,7 +59,7 @@ table {
 tr,
 td {
   border: none;
-  width: fit-content;
+  width: -moz-fit-content;
 }
 
 tr:not(:last-of-type) {

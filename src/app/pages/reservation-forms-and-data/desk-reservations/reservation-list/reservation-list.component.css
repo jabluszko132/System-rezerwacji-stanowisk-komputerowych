@@ -42,7 +42,7 @@ tr:not(:first-of-type) > td {
 }
 
 :host {
-  height: fit-content;
+  height: -moz-fit-content;
   margin: 1em;
   display: flex;
   justify-content: center;

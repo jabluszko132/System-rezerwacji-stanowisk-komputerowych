@@ -3,7 +3,7 @@ header {
   align-items: center;
   justify-content: space-around;
   background: rgb(var(--headerRgbColor));
-  min-height: fit-content;
+  min-height: -moz-fit-content;
   max-height: 15vmax;
 }
 
@@ -15,7 +15,7 @@ header > p {
 
 nav {
   max-width: 50%;
-  min-width: fit-content;
+  min-width: -moz-fit-content;
 }
 
 nav > a {

@@ -61,7 +61,7 @@ tr:not(:first-of-type) > td:hover {
   justify-content: center;
   flex-wrap: wrap;
   margin: 1em;
-  height: fit-content;
+  height: -moz-fit-content;
 }
 
 table {

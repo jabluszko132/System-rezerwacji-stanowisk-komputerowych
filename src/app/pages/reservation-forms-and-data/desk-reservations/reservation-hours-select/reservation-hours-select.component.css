@@ -22,7 +22,7 @@
 #resHoursWrapper {
   background: rgb(var(--mainRgbThemeColor));
   padding: 2em;
-  min-width: min-content;
+  min-width: -moz-min-content;
   max-width: 520px;
   border-radius: 10px;
 }
