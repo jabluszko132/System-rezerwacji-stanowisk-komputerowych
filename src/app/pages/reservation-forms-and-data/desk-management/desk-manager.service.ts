@@ -1,18 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Observable, of, BehaviorSubject, takeUntil, Subject } from 'rxjs';
 import { Desk } from '../interfaces/desk';
 import { LocalstorageDeskListService } from '../localstorage-desk-list.service';
 
 @Injectable()
-export class DeskManagerService {
+export class DeskManagerService implements OnDestroy {
   constructor(private lsDeskService: LocalstorageDeskListService) {
-    this.deskList$.subscribe();
+    this.deskList$.pipe(takeUntil(this.endSubs$)).subscribe();
     this.forceDeskListRefresh();
   }
 
   //---------------------- Private properties ------------------------------------
   private deskList$: BehaviorSubject<Desk[]> = this.lsDeskService.getDeskList();
   private deskList: Desk[] = [];
+  private endSubs$: Subject<void> = new Subject<void>
 
   //----------------------- Public methods -----------------------------------
 
@@ -66,6 +67,11 @@ export class DeskManagerService {
 
   getDeskList(): Observable<Desk[]> {
     return of(this.deskList);
+  }
+
+  ngOnDestroy() {
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
 
   updateDeskFunctionality(deskID: number, doesItFunction: boolean): void {

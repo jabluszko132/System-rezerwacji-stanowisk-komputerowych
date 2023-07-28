@@ -20,11 +20,12 @@ export class ReservatorService implements OnDestroy {
   }
 
   //---------------------------- Private properties -------------------------------------------
+  
+  private endSubs$: Subject<void> = new Subject<void>;
   private reservationList$: BehaviorSubject<Reservation[]> =
     this.mainService.getReservationList();
   private reservationList: Reservation[] = this.reservationList$.getValue();
   private reservationListChanged$: Subject<void> = new Subject<void>;
-  private endSubs$: Subject<void> = new Subject<void>;
 
 
   //----------------------------- Public methods ----------------------------------------------
