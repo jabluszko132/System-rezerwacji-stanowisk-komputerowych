@@ -45,6 +45,7 @@
         class="input"
         formControlName="reservationDate"
         name="reservationDate"
+        (change)="displayList ? getAvailableHours() : ''"
       />
       <div
         *ngIf="this.reservationDate.errors && this.reservationDate.touched"
