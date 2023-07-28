@@ -7,7 +7,7 @@
   <tr class="tr" *ngFor="let report of reports$ | async">
     <td class="td">{{ report.deskID }}</td>
     <td class="td">
-      <p *ngIf="report.description != ''">
+      <p *ngIf="report.description != ''" tabindex="0">
         {{ report.description }}
       </p>
       <ng-template [ngIf]="report.description == ''">[Brak]</ng-template>
@@ -16,7 +16,14 @@
       <ng-template [ngIf]="report.dealtWith">Nie</ng-template>
       <ng-template [ngIf]="!report.dealtWith">Tak</ng-template>
     </td>
-    <td class="td" (click)="dealtWithMalfunction(report)">0</td>
+    <td
+      class="td"
+      (click)="dealtWithMalfunction(report)"
+      tabindex="0"
+      (keydown.enter)="dealtWithMalfunction(report)"
+    >
+      0
+    </td>
     <!--placeholder-->
   </tr>
 </table>
