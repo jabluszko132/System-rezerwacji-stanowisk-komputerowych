@@ -81,6 +81,10 @@ export class ReservationHoursSelectComponent implements OnInit, OnDestroy {
   }
 
   getList():void {
+    if(this.deskID.errors || this.reservedBy.errors || this.reservationDate.errors) {
+      alert('Proszę wprowadzić poprawne wartości we wszystkie pola formularza');
+      return;
+    }
     this.getAvailableHours();
     this.displayList = true;
   }

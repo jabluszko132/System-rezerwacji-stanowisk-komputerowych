@@ -37,7 +37,7 @@ export class ReservatorService {
       return [];
     }
     if (!this.lsDeskService.deskExists(deskID)) {
-      console.error('The given desk doesnt exist on deskList');
+      alert('Nie ma takiego stanowiska');
       return [];
     }
     let reservationsOnDesk: Reservation[] = this.deskReservationsOnDay(
