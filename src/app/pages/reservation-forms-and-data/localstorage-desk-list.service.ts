@@ -136,7 +136,7 @@ export class LocalstorageDeskListService implements OnDestroy {
    * It doesnt check if the reservation exists on the table. Dont use it
    * unless you are absolutely sure that the element exists
    */
-  private unsafeDeleteReservation(reservation: Reservation) {
+  private unsafeDeleteReservation(reservation: Reservation): void {
     try {
       this.reservationList.splice(
         this.reservationList.findIndex((m: any) => m == reservation),
