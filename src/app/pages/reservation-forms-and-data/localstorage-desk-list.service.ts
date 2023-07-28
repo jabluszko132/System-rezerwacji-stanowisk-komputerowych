@@ -158,18 +158,6 @@ export class LocalstorageDeskListService implements OnDestroy {
 }
 
 /** todo
->get the select reservation hours component block reserving desks that
-have just been deleted
-  ideas{
-    Subject: use a subject as eventEmitter to make the component change on deleteReservation and at the end of deleteReservationsOnDesk (solves this problem and the problem below + dont have to worry about emmiting events after possibly adding another way of deleting a reservation/desk)
-
-    In&Out: use input and output decorators and make the desk list emit an 
-    event every time something is deleted and the select reservation hours to listen to it
-
-    Simple: make the 2nd submit also check if the desk exists - otherwise: alert (but it will update even if theres nothing new)
-    
-  }
->get the select reservation hours component to update if a reservation was cancelled
 >figure out when and where to complete() the subjects deskList$ and reservationList$
 >think of a better name for this service and apply it
 */
